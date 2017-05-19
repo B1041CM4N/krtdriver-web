@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  store_id: 1
+  sale: 1
+  user_id: 1
+  date: 2017-05-18 18:53:07
+  payment_type_id: 1
+
+two:
+  store_id: 1
+  sale: 1
+  user_id: 1
+  date: 2017-05-18 18:53:07
+  payment_type_id: 1

@@ -1,0 +1,36 @@
+<%= form_for :driver, method: :post, url: url do |f| %>
+  <div class="form-group">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :rut %>
+    <%= f.text_field :rut, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :nickname %>
+    <%= f.text_field :nickname, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :contact_number %>
+    <%= f.text_field :contact_number, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :email %>
+    <%= f.email_field :email, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :web %>
+    <%= f.text_field :web, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :sector %>
+    <%= f.text_field :sector, class: "form-control" %>
+  </div>
+  <%= f.submit "Enviar", class: "btn btn-primary" %>
+  <%= link_to "Volver", drivers_url, class: "btn btn-default" %>
+<% end %>

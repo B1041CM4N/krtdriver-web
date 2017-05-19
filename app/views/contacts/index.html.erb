@@ -1,0 +1,15 @@
+<% if @contact.errors.any? %>
+  <span>Se han encontrado los siguientes errores:</span>
+  <% @contact.errors.each do |error| %>
+    <span><%= error.to_s %></span>
+  <% end %>
+<% end %>
+<h3>
+  Contacto / KRT-DRIVER
+</h3>
+<%= render 'form' %>
+<%# if flash[:success] %>
+  <!-- <span class="label label-success"><%= flash[:success] %></span>
+<%# elsif flash[:alert] %>
+  <span class="label label-danger"><%= flash[:alert] %></span> -->
+<%# end %>

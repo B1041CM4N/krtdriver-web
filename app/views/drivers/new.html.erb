@@ -1,0 +1,8 @@
+<% if @driver.errors.any? %>
+  <span>Se han encontrado los siguientes errores:</span>
+  <% @driver.errors.each do |error| %>
+    <span><%= error.to_s %></span>
+  <% end %>
+<% end %>
+<h3>Nuevo Conductor</h3>
+<%= render partial: "form", locals: {url: drivers_url} %>

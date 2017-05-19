@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>KRT-DRIVER</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <ul class="nav nav-tabs">
+          <li role="presentation">
+            <%= link_to drivers_url do %>
+              <%= fa_stacked_icon "truck", base: "square-o", text: "Conductores" %>
+            <% end %>
+          </li>
+          <li role="presentation">
+            <%= link_to contacts_url do %>
+              <%= fa_stacked_icon "paper-plane", base: "square-o", text: "Contacto" %>
+            <% end %>
+          </li>
+          <li role="presentation">
+            <%= link_to products_url do %>
+              <%= fa_stacked_icon "beer", base: "square-o", text: "Productos" %>
+            <% end %>
+          </li>
+          <li role="presentation" class="pull-right">
+            <% unless user_signed_in? %>
+              <%= link_to 'Iniciar Sesión', new_user_session_url, class: "btn btn-primary navbar-btn" %>
+            <% else %>
+              <%= link_to destroy_user_session_url, method: :delete do %>
+                <%= fa_stacked_icon "user", base: "square-o", text: current_user.email.to_s %>
+              <% end %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <section>
+        <div class="row">
+          <div class="col-md-12">
+            <%= yield %>
+          </div>
+        </div>
+      </section>
+    </div>
+    <section class="footer navbar-fixed-bottom">
+      <%= render partial: 'layouts/footer' %>
+    </section>
+  </body>
+</html>

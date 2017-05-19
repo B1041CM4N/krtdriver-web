@@ -1,0 +1,38 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  padding-top: 70px;
+  padding-bottom: 70px;
+  background-color: whitesmoke !important;
+}
+
+.align-center{
+  display: block;
+  text-align: center;
+}
+
+.jumbotron{
+  background: url("traffic-dis.gif") no-repeat;
+  background-blend-mode: luminosity;
+  background-size: cover !important;
+  color: whitesmoke !important;
+  text-shadow: 4px 4px 5px black !important;
+}
+
+.login{
+  padding: 100px !important;
+  background: url("JxYOG4QI7kCpa.gif");
+  background-blend-mode: luminosity;
+  background-size: cover !important;
+  border-radius: 8px;
+}
+
+.wt{
+  color: white !important;
+}
+
+//section{
+//  border: 1px solid #000;
+//}
