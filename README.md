@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -22,3 +23,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+=======
+# krtdriver-web
+Tesis
+>>>>>>> 28599dfa2df16881b4914901f289d2b787b160e8
