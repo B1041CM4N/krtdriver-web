@@ -12,7 +12,6 @@ class ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
     if @contact.save
       flash[:success] = 'Correo Electrónico enviado exitosamente!'
-      
     else
       flash[:alert] = 'Ha ocurrido un problema!'
     end

@@ -38,8 +38,13 @@ Rails.application.routes.draw do
 #}
 
   namespace :api do
-    resources :orders
-    resources :users
+    resources :orders, path: 'pedidos' do
+      get 'index'
+    end
+
+    resources :users, path: 'login' do
+      get 'show'
+    end
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
