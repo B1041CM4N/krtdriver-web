@@ -13,12 +13,12 @@
         <ul class="nav nav-tabs">
           <li role="presentation">
             <%= link_to drivers_url do %>
-              <%= fa_stacked_icon "truck", base: "square-o", text: "Conductores" %>
+              <%= fa_stacked_icon "car", base: "square-o", text: "Conductores" %>
             <% end %>
           </li>
           <li role="presentation">
             <%= link_to contacts_url do %>
-              <%= fa_stacked_icon "paper-plane", base: "square-o", text: "Contacto" %>
+              <%= fa_stacked_icon "vcard", base: "square-o", text: "Contacto" %>
             <% end %>
           </li>
           <li role="presentation">
@@ -26,12 +26,22 @@
               <%= fa_stacked_icon "beer", base: "square-o", text: "Productos" %>
             <% end %>
           </li>
+          <li role="presentation">
+            <%= link_to stores_url do %>
+              <%= fa_stacked_icon "home", base: "square-o", text: "Tiendas" %>
+            <% end %>
+          </li>
+          <li role="presentation">
+            <%= link_to orders_path do %>
+              <%= fa_stacked_icon "refresh spin", base: "square-o", text: "Compras" %>
+            <% end %>
+          </li>
           <li role="presentation" class="pull-right">
             <% unless user_signed_in? %>
               <%= link_to 'Iniciar Sesión', new_user_session_url, class: "btn btn-primary navbar-btn" %>
             <% else %>
               <%= link_to destroy_user_session_url, method: :delete do %>
-                <%= fa_stacked_icon "user", base: "square-o", text: current_user.email.to_s %>
+                <%= fa_stacked_icon "user", base: "square-o", text: current_user.email.truncate(10).to_s + " (Cerrar Sesión)" %>
               <% end %>
             <% end %>
           </li>
