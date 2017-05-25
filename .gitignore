@@ -13,7 +13,6 @@
 !/log/.keep
 !/tmp/.keep
 .vscode
-Gemfile.lock
 
 # Ignore Byebug command history file.
 .byebug_history
