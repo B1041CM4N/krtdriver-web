@@ -50,6 +50,10 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# == JSON
+gem 'oj', require: false # JSON optimizado. https://github.com/ohler55/oj
+gem 'rabl' # Templates para JSON, XML, etc. https://github.com/nesquena/rabl
+
 gem 'faker', '~> 1.7', '>= 1.7.3'
 
 group :development, :test do

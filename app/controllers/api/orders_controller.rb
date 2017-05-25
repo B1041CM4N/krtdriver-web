@@ -1,9 +1,18 @@
 class Api::OrdersController < ApiController
+
+  respond_to :json
+  
   def index
     if params[:id_user].present?
       rand_id = Random.rand(50)
-      @user = User.find(1)
+      #@user = User.find(1)
+      Rails.logger.info 'RANDOM NUMBER: ' + rand_id.to_s + ' ************'
+      @users = User.all
+    else
+      render json: { errors: @users.errors.full_messages }, status: 422
     end
+    #render json: { errors: @users.errors.full_messages }, status: 422
+    return @users
   end
   private
 

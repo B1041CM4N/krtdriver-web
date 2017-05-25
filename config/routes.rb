@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'store/index'
+
   devise_for :users
   root to: 'home#index'
   resources :contacts
@@ -43,7 +45,7 @@ Rails.application.routes.draw do
     end
 
     resources :users, path: 'login' do
-      get 'show'
+      get 'index'
     end
   end
 

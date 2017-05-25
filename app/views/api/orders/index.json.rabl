@@ -1,2 +1,2 @@
-collection @orders
-attributes :id, :status, :data
+collection @users
+attributes :id, :email
