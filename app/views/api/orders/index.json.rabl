@@ -1,2 +1,2 @@
 collection @users
-attributes :id, :email
+attributes :id, :email, :status
