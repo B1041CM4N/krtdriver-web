@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_locale
+  before_action :set_active
 
   def current_locale
     I18n.locale

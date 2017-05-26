@@ -10,6 +10,15 @@ Rails.application.routes.draw do
   resources :orders
   resources :stores
 
+###BD MYSQL PARA TESTING API
+=begin
+
+  user: inacap
+  pass: inacap123
+  
+=end
+
+
 # http://138.197.40.153/apiKrt/pedidos.php?id_user=1
 #{
 #  "status": 1,
