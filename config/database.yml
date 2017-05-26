@@ -15,7 +15,7 @@ default: &default
   pool: 5
   username: inacap
   password: inacap123
-  socket: http://138.197.40.153:3306/
+  socket: 138.197.40.153:3306
 
 development:
   <<: *default
