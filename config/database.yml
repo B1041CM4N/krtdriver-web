@@ -50,4 +50,6 @@ test:
 #
 production:
   <<: *default
+  adapter: mysql2
+  encoding: utf8
   database: <%= ENV['DATABASE_URL'] %>
