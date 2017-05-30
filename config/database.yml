@@ -50,7 +50,4 @@ test:
 #
 production:
   <<: *default
-  database: <%= ENV['KRTDRIVER_DB'] %>
-  username: <%= ENV['KRTDRIVER_USER'] %>
-  password: <%= ENV['KRTDRIVER_PSS'] %>
-  socket: <%= ENV['KRTDRIVER_SOCKET'] %>
+  database: <%= ENV['DATABASE_URL'] %>
