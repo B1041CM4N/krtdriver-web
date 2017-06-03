@@ -12,7 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-.vscode
+/.vscode/*
 
 # Ignore Byebug command history file.
 .byebug_history

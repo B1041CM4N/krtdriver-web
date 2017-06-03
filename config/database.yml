@@ -13,9 +13,9 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  #username: root
-  #password: root
-  #socket: /Applications/MAMP/tmp/mysql/mysql.sock
+  username: root
+  password: root
+  socket: /Applications/MAMP/tmp/mysql/mysql.sock
 
 development:
   <<: *default
