@@ -1,36 +1,38 @@
-<%= form_for :driver, method: :post, url: url do |f| %>
-  <div class="form-group">
-    <%= f.label :first_name %>
+<%= form_for :driver, method: method, url: url do |f| %>
+  <div class="form-group col-xs-12 col-md-6">
+    <%= f.label :first_name, "Nombre" %>
     <%= f.text_field :first_name, class: "form-control" %>
   </div>
-  <div class="form-group">
-    <%= f.label :last_name %>
+  <div class="form-group col-xs-12 col-md-6">
+    <%= f.label :last_name, "Apellido" %>
     <%= f.text_field :last_name, class: "form-control" %>
   </div>
-  <div class="form-group">
-    <%= f.label :rut %>
+  <div class="form-group col-xs-12 col-md-6">
+    <%= f.label :rut, "RUT" %>
     <%= f.text_field :rut, class: "form-control" %>
   </div>
-  <div class="form-group">
-    <%= f.label :nickname %>
+  <div class="form-group col-xs-12 col-md-6">
+    <%= f.label :nickname, "Nickname" %>
     <%= f.text_field :nickname, class: "form-control" %>
   </div>
-  <div class="form-group">
-    <%= f.label :contact_number %>
+  <div class="form-group col-xs-12 col-md-6">
+    <%= f.label :contact_number, "Teléfono de contacto" %>
     <%= f.text_field :contact_number, class: "form-control" %>
   </div>
-  <div class="form-group">
-    <%= f.label :email %>
+  <div class="form-group col-xs-12 col-md-6">
+    <%= f.label :email, "Correo Electrónico" %>
     <%= f.email_field :email, class: "form-control" %>
   </div>
-  <div class="form-group">
-    <%= f.label :web %>
+  <div class="form-group col-xs-12 col-md-6">
+    <%= f.label :web, "Sitio Web" %>
     <%= f.text_field :web, class: "form-control" %>
   </div>
-  <div class="form-group">
-    <%= f.label :sector %>
+  <div class="form-group col-xs-12 col-md-6">
+    <%= f.label :sector, "Sector de distribución" %>
     <%= f.text_field :sector, class: "form-control" %>
   </div>
-  <%= f.submit "Enviar", class: "btn btn-primary" %>
-  <%= link_to "Volver", drivers_url, class: "btn btn-default" %>
+  <div class="col-xs-12 col-md-12">
+    <%= f.submit "Enviar", class: "btn btn-primary" %>
+    <%= link_to "Volver", drivers_url, class: "btn btn-default" %>
+  </div>
 <% end %>

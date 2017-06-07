@@ -1,38 +1,46 @@
 // Place all the styles related to the Home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
 body {
-  padding-top: 70px;
-  padding-bottom: 70px;
-  background-color: whitesmoke !important;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    background-color: whitesmoke !important;
 }
 
-.align-center{
-  display: block;
-  text-align: center;
+.align-center {
+    display: block;
+    text-align: center;
 }
 
-.jumbotron{
-  background: url("traffic-dis.gif") no-repeat;
-  background-blend-mode: luminosity;
-  background-size: cover !important;
-  color: whitesmoke !important;
-  text-shadow: 4px 4px 5px black !important;
+.jumbotron {
+    background: url("traffic-dis.gif") no-repeat;
+    background-blend-mode: luminosity;
+    background-size: cover !important;
+    color: whitesmoke !important;
+    text-shadow: 4px 4px 5px black !important;
 }
 
-.login{
-  padding: 100px !important;
-  background: url("JxYOG4QI7kCpa.gif");
-  background-blend-mode: luminosity;
-  background-size: cover !important;
-  border-radius: 8px;
+.login {
+    padding: 100px !important;
+    background: url("JxYOG4QI7kCpa.gif");
+    background-blend-mode: luminosity;
+    background-size: cover !important;
+    border-radius: 8px;
 }
 
-.wt{
-  color: white !important;
+.wt {
+    color: white !important;
 }
 
-//section{
-//  border: 1px solid #000;
+//section {
+//    border: 1px solid #000;
 //}
+#footer {
+    padding: 10px;
+    color: rgba(77, 208, 225, 0.784);
+    background-color: rgba(17, 3, 0, 0.745);
+}
+
+#navbar {
+    background-color: rgba(17, 3, 0, 0.1);
+}

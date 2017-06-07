@@ -47,9 +47,7 @@ Rails.application.configure do
 
   ##DEFAULT URL FOR DEVISE
   config.action_mailer.default_url_options = { host: 'localhost', port: 5000 }
-
   config.action_mailer.delivery_method = :smtp
-  
   config.action_mailer.smtp_settings = {
     :user_name => 'a7e4f61aa8844f',
     :password => '4aa64641901e3f',

@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 User.destroy_all
+Driver.destroy_all
 
 User.create(
     email: "ignacio@krt.cl",
@@ -28,3 +29,16 @@ User.create(
     status: 1
 
 )
+
+50.times do
+    Driver.create(
+        first_name: Faker::Name.first_name,
+        last_name: Faker::Name.last_name,
+        rut: Faker::Code.isbn,
+        nickname: Faker::Ancient.titan,
+        contact_number: Faker::PhoneNumber.cell_phone,
+        email: Faker::Internet.email,
+        web: Faker::Internet.url,
+        sector: Faker::Address.street_address
+    )
+end

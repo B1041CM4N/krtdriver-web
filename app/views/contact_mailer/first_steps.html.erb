@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Te quieres comunicar con KRT Driver, ¡te escuchamos <%= @contact.first_name %>!</h1>
+    <p>
+      Hemos creado una cuenta para que puedas probar por ti mismo si nuestro sistema cumple con las necesidades de <%= @contact.store_name %> <br>
+      Tu nombre de usuario es: <strong><%= @contact.email %></strong><br>
+      Tu contraseña es: <strong><%= @contact.store_name %></strong>
+    </p>
+    <p>
+      la url es: <%= link_to @url.to_s, "#" %>
+    </p>
+    <p>¡Muchas gracias por tu interés, esperamos que KRT Driver sea lo que buscas!</p>
+  </body>
+</html>

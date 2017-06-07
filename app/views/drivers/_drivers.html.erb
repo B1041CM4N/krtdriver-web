@@ -1,0 +1,5 @@
+<% drivers.each do |driver| %>
+  <tr id="driver_<%= driver.id.to_s %>">
+    <%= render partial: "driver", locals: { driver: driver } %>
+  </tr>
+<% end %>

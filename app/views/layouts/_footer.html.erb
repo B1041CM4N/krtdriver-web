@@ -1,5 +1,12 @@
-<div class="row">
-  <h6 class="align-center">
-    KRT-Driver © - Todos los derechos reservados, <%= Time.now.year %>
-  </h6>
+<div class="row" id="footer">
+  <div class="col-md-6 col-xs-12 align-center">
+    <h6>
+      KRT-Driver © - Todos los derechos reservados, <%= Time.now.year %>
+    </h6>
+  </div>
+  <div class="col-md-6 col-xs-12 align-center">
+    <%= link_to contacts_url, class: "btn btn-default btn-md pull-center" do %>
+      <%= fa_stacked_icon "vcard", base: "square-o", text: "Contacto" %>
+    <% end %>
+  </div>
 </div>

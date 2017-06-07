@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="alert alert-danger alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+        <%= fa_icon "fw times-circle" %>
+      </button>
+
+      <%= message %>
+
+      <% if errors && errors.any? %>
+        <ul>
+          <% other = "" %>
+          <% errors.each do |field, msg| %>
+            <% if other != msg %>
+              <% other = msg %>
+              <li><%= msg %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>

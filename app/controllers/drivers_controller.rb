@@ -1,7 +1,10 @@
 class DriversController < ApplicationController
   before_action :authenticate_user!
+
+  respond_to :js, :html
+
   def index
-    @drivers = Driver.all
+    @drivers = Driver.all.order(id: :asc).page params[:page]
   end
 
   def new
@@ -12,10 +15,10 @@ class DriversController < ApplicationController
     @driver = Driver.new(driver_params)
     if @driver.save
       flash[:success] = 'Conductor creado exitosamente!'
-      redirect_to :back
+      redirect_to drivers_url
     else
       flash[:alert] = 'Ha ocurrido un problema al intentar crear al conductor'
-      redirect_to @driver
+      render :new
     end
   end
 
@@ -27,10 +30,10 @@ class DriversController < ApplicationController
     @driver = Driver.find(params[:id])
     if @driver.update(driver_params)
       flash[:success] = 'Conductor modificado exitosamente'
-      render :index
+      redirect_to drivers_url
     else
       flash[:alert] = 'Ha ocurrido un problema al tratar de modificar al conductor'
-      redirect_to @driver
+      render :edit
     end
   end
 
@@ -42,10 +45,8 @@ class DriversController < ApplicationController
     @driver = Driver.find(params[:id])
     if @driver.destroy
       flash[:success] = 'Conductor eliminado exitosamente!'
-    else
-      flash[:alert] = 'Ocurrió un problema al tratar de eliminar al conductor'
     end
-    redirect_to @driver
+    redirect_to drivers_url
   end
 
   private

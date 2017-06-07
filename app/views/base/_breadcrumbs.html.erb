@@ -1,0 +1,19 @@
+<%= content_for(:breadcrumbs) do %>
+  <% if links.any? %>
+    <ol class="breadcrumb">
+      <% links.each_with_index do |link, index| %>
+        <li class="<%= index == (links.size - 1) ? 'active' : '' %>">
+          <%= link_to link[1] do %>
+            <% if link[2] %>
+              <%= fa_icon "fw #{link[2]}" %>
+            <% else %>
+              <%= fa_icon "fw home" %>
+            <% end %>
+
+            <%= link[0] %>
+          <% end %>
+        </li>
+      <% end %>
+    </ol>
+  <% end %>
+<% end %>

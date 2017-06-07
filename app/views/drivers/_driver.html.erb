@@ -1,0 +1,12 @@
+<td><%= driver.first_name.capitalize %></td>
+<td><%= driver.last_name.capitalize %></td>
+<td><%= driver.rut %></td>
+<td><%= driver.nickname.capitalize %></td>
+<td><%= driver.contact_number %></td>
+<td><%= driver.email %></td>
+<td><%= link_to driver.web.to_s, driver.web.to_s, target: "_blank", rel: "nofollow" %></td>
+<td><%= driver.sector.capitalize %></td>
+<td class="table-actions">
+  <%= link_to "Editar", edit_driver_url(driver) %>
+  <%= link_to "Eliminar", driver_url(driver), method: :delete, data: { confirm: "¿Está seguro?" } %>
+</td>
