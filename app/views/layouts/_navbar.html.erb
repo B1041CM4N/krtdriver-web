@@ -23,12 +23,12 @@
       </li>
       <li role="presentation">
         <%= link_to orders_path do %>
-          <%= fa_stacked_icon "refresh spin", base: "square-o", text: "Compras" %>
+          <%= fa_stacked_icon "shopping-cart fw", base: "square-o", text: "Compras" %>
         <% end %>
       </li>
       <li role="presentation" class="pull-right">
         <% unless user_signed_in? %>
-          <%= link_to 'Iniciar Sesión', new_user_session_url, class: "btn btn-primary navbar-btn" %>
+          <%= link_to 'Iniciar Sesión', new_user_session_url, class: "btn btn-default navbar-btn" %>
         <% else %>
           <%= link_to destroy_user_session_url, method: :delete do %>
             <%= fa_stacked_icon "user", base: "square-o", text: current_user.email.truncate(10).to_s + " (Cerrar Sesión)" %>

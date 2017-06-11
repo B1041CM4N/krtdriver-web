@@ -18,9 +18,13 @@
     </div>
 
     <% if devise_mapping.rememberable? -%>
-      <div class="form-group">
-        <%= f.label :remember_me, class: "wt", value: "No volver a preguntar" %>
-        <%= f.check_box :remember_me, class: "form-control" %>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="input-group">
+            <%= f.check_box :remember_me%>
+            <%= f.label :remember_me, class: "wt", value: "No cerrar sesión" %>
+          </div>
+        </div>
       </div>
     <% end -%>
 
