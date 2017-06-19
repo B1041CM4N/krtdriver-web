@@ -48,8 +48,24 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+#production:
+#  <<: *default
+#  adapter: mysql2
+#  encoding: utf8
+#  database: <%= ENV['DATABASE_URL'] %>
+#
+
 production:
-  <<: *default
-  adapter: mysql2
-  encoding: utf8
-  database: <%= ENV['DATABASE_URL'] %>
+<<: *default
+adapter: mysql2
+encoding: utf8
+database: krtdriver_web_production
+username: gabo
+password: inacap123
+host: 138.197.40.153
+port: 3306
+flags:
+  - -COMPRESS
+  - FOUND_ROWS
+  - MULTI_STATEMENTS
+secure_auth: false
