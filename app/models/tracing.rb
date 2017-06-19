@@ -1,0 +1,2 @@
+class Tracing < ApplicationRecord
+end

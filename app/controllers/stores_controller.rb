@@ -45,6 +45,10 @@ class StoresController < ApplicationController
 
   private
 
+  def set_module
+    @module = "Store"
+  end
+
   def store_params
     params.require(:store).permit(:name, :address, :phone)
   end

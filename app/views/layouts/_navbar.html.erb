@@ -6,22 +6,22 @@
           <%= fa_stacked_icon "home", base: "square-o", text: "KRT DRIVER" %>
         <% end %>
       </li>
-      <li role="presentation">
+      <li role="presentation", class="<%= set_active(@module) %>">
         <%= link_to drivers_url do %>
           <%= fa_stacked_icon "car", base: "square-o", text: "Conductores" %>
         <% end %>
       </li>
-      <li role="presentation">
+      <li role="presentation", class="<%= set_active(@module) %>">
         <%= link_to products_url do %>
           <%= fa_stacked_icon "beer", base: "square-o", text: "Productos" %>
         <% end %>
       </li>
-      <li role="presentation">
+      <li role="presentation", class="<%= set_active(@module) %>">
         <%= link_to stores_url do %>
           <%= fa_stacked_icon "home", base: "square-o", text: "Tiendas" %>
         <% end %>
       </li>
-      <li role="presentation">
+      <li role="presentation", class="<%= set_active(@module) %>">
         <%= link_to orders_path do %>
           <%= fa_stacked_icon "shopping-cart fw", base: "square-o", text: "Compras" %>
         <% end %>

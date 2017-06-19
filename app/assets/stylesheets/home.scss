@@ -14,7 +14,7 @@ body {
 
 .jumbotron {
     background: url("traffic-dis.gif") no-repeat;
-    background-blend-mode: luminosity;
+    background-blend-mode: luminosity !important;
     background-size: cover !important;
     color: whitesmoke !important;
     text-shadow: 4px 4px 5px black !important;

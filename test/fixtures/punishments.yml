@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  reason: MyString
+  duration: 1
+  denegate_service: 1
+  count: 1
+
+two:
+  reason: MyString
+  duration: 1
+  denegate_service: 1
+  count: 1

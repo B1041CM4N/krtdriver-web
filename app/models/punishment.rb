@@ -1,0 +1,2 @@
+class Punishment < ApplicationRecord
+end

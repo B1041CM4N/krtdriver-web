@@ -1,0 +1,2 @@
+class VehicleBrand < ApplicationRecord
+end

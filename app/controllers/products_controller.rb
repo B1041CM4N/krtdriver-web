@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
     @product = Product.create(product_params)
     if @product.save
       flash[:success] = "Producto creado correctamente!"
-      redirect_to :back
+      redirect_to products_url
     else
       flash[:alert] = "Error al intentar crear el producto"
       redirect_to @product
@@ -20,7 +20,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
+    @product = Product.find(params[:ids ])
   end
 
   def edit
@@ -45,6 +45,10 @@ class ProductsController < ApplicationController
   end
 
   private
+
+  def set_module
+    @module = "Product"
+  end
 
   def product_params
     params.require(:product).permit(:name, :description, :price, :image)

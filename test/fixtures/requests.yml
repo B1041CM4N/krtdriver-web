@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  request_category_id: 1
+  consumer_id: 1
+  provider_id: 1
+  message: MyString
+
+two:
+  request_category_id: 1
+  consumer_id: 1
+  provider_id: 1
+  message: MyString

@@ -16,6 +16,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_module
-    @module = ""
+    @module = ''
   end
 end

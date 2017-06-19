@@ -1,0 +1,2 @@
+class RequestCategory < ApplicationRecord
+end

@@ -1,5 +1,5 @@
 class DriversController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :set_module
 
   respond_to :js, :html
 
@@ -28,7 +28,7 @@ class DriversController < ApplicationController
 
   def update
     @driver = Driver.find(params[:id])
-    if @driver.update(driver_params)
+    if @driver.update_attributes(driver_params)
       flash[:success] = 'Conductor modificado exitosamente'
       redirect_to drivers_url
     else
@@ -50,6 +50,10 @@ class DriversController < ApplicationController
   end
 
   private
+
+  def set_module
+    @module = "Driver"
+  end
 
   def driver_params
     params.require(:driver).permit(:first_name, :last_name, :rut, :nickname, :contact_number, :email, :web, :sector)
