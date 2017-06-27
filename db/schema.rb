@@ -10,18 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170616233246) do
-
-  create_table "addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "commune_id"
-    t.string   "street_name"
-    t.integer  "street_number"
-    t.integer  "block_number"
-    t.string   "town_name"
-    t.string   "location_coordenates"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
+ActiveRecord::Schema.define(version: 20170627054453) do
 
   create_table "bank_accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "bank_id"
@@ -82,20 +71,6 @@ ActiveRecord::Schema.define(version: 20170616233246) do
     t.integer  "card_number"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-  end
-
-  create_table "drivers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "rut"
-    t.string   "nickname"
-    t.string   "contact_number"
-    t.string   "email"
-    t.string   "web"
-    t.string   "sector"
-    t.integer  "sex"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
   end
 
   create_table "inventories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -217,7 +192,7 @@ ActiveRecord::Schema.define(version: 20170616233246) do
     t.string   "phone"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "address_id"
+    t.integer  "address"
     t.string   "description"
   end
 
@@ -245,6 +220,7 @@ ActiveRecord::Schema.define(version: 20170616233246) do
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
     t.boolean  "status",                 default: true
+    t.integer  "role"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

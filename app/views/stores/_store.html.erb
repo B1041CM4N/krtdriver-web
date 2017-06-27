@@ -1,13 +1,7 @@
-<div class="col-sm-6 col-md-4" id="<%= store.id.to_s %>">
-  <div class="thumbnail">
-    <%#= image_tag(product.try(:image), height: 250, width: 250) %>
-    <div class="caption">
-      <h3><%= store.name[0..20] %></h3>
-      <p><%#= product.description[0..20] %></p>
-      <p>
-        <%#= link_to "Editar", edit_product_url(product) %>
-        <%#= link_to "Eliminar", product_path(product), data: { confirm: "Está seguro?" }, method: :delete %>
-      </p>
-    </div>
-  </div>
-</div>
+<td><%= f.name %></td>
+<td><%= f.address %></td>
+<td><%= f.description %></td>
+<td class="table-actions">
+  <%= link_to "Editar", edit_store_url(f), data: {toggle: "tooltip", title: "Editar Tienda"} %>
+  <%= link_to "Eliminar", store_url(f), method: :delete, data: { confirm: "¿Está seguro?", toggle: "tooltip", title: "Eliminar Tienda" } %>
+</td>

@@ -60,6 +60,8 @@ production:
 adapter: mysql2
 encoding: utf8
 database: krtdriver_web_production
+database_url: "mysql2://gabo:inacap123@138.197.40.153:3306/krtdriver_web_production"
+
 username: gabo
 password: inacap123
 host: 138.197.40.153

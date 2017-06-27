@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'home#index'
   resources :contacts
-  resources :drivers
+  resources :providers
   resources :products
   resources :orders
   resources :stores

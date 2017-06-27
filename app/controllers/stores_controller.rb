@@ -1,6 +1,7 @@
 class StoresController < ApplicationController
   before_action :authenticate_user!
   def index
+    @store = Store.new
     @stores = Store.all.order(id: :asc).page params[:page]
   end
 
@@ -12,10 +13,11 @@ class StoresController < ApplicationController
     @store = Store.new(store_params)
     if @store.save
       flash[:success] = "Tienda creada exitosamente"
-      redirect_to root_url
+      redirect_to stores_url
     else
       flash[:alert] = "Ha ocurrido un problema al tratar de crear la tienda"
-      render :new
+      @stores = Store.all
+      redirect_to action: :index
     end
   end
 
@@ -25,10 +27,10 @@ class StoresController < ApplicationController
 
   def update
     @store = Store.find(params[:id])
-    @store.update_attributes(store_params)
-    if @store.save
+    Rails.logger.info "PARAMS: " + params.inspect + " *************"
+    if @store.update_attributes(store_params)
       flash[:success] = "Tienda actualizada exitosamente"
-      redirect_to root_url
+      redirect_to stores_url
     else
       flash[:alert] = "Ha ocurrido un problema al tratar de modificar la tienda"
       render :edit
@@ -39,7 +41,7 @@ class StoresController < ApplicationController
     @store = Store.find(params[:id])
     if @store.destroy
       flash[:success] = "Tienda eliminada exitosamente"
-      redirect_to root_url
+      redirect_to stores_url
     end
   end
 
@@ -50,6 +52,6 @@ class StoresController < ApplicationController
   end
 
   def store_params
-    params.require(:store).permit(:name, :address, :phone)
+    params.require(:store).permit(:name, :address, :description)
   end
 end
