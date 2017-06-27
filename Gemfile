@@ -29,13 +29,13 @@ gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
 # #LOGIN, REGISTRO, Y MANEJO DE PASSWORD
 gem 'devise', '~> 4.3'
 
-#SIDEKIQ PARA WORKERS Y TAREAS EN MULTIPLES HILOS
+# SIDEKIQ PARA WORKERS Y TAREAS EN MULTIPLES HILOS
 gem 'sidekiq', '~> 5.0'
 
-#Retina tag para las imagenes en mayor resolución
+# Retina tag para las imagenes en mayor resolución
 gem 'retina_tag', '~> 1.4', '>= 1.4.1'
 
-##SUBIDA DE ARCHIVOS
+# SUBIDA DE ARCHIVOS
 gem 'carrierwave', '~> 1.1'
 
 # Use jquery as the JavaScript library
@@ -49,7 +49,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-###TRADUCCIONES
+# TRADUCCIONES
 
 gem 'i18n', '~> 0.8.1'
 
@@ -62,7 +62,7 @@ gem 'rabl' # Templates para JSON, XML, etc. https://github.com/nesquena/rabl
 
 gem 'faker', '~> 1.7', '>= 1.7.3'
 
-#Paginación
+# Paginación
 gem 'kaminari', '~> 1.0', '>= 1.0.1'
 
 group :development, :test do
@@ -72,16 +72,17 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'web-console', '>= 3.3.0'
 end
 
 group :production do
-  gem "rails_12factor"
-  gem "rails_serve_static_assets"
+  gem 'rails_12factor'
+  gem 'rails_serve_static_assets'
+  gem 'sprockets_better_errors'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

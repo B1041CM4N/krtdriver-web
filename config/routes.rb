@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
   user: inacap
   pass: inacap123
+
+  user: gabo
+  pass: inacap123
   
 =end
 

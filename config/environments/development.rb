@@ -56,7 +56,8 @@ Rails.application.configure do
     :port => '2525',
     :authentication => :cram_md5
   }
-  
+
+  config.assets.raise_production_errors = true
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
