@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
 
-  get 'store/index'
-
-  devise_for :users
   root to: 'home#index'
-  resources :contacts
+  devise_for :users
   resources :providers
   resources :products
   resources :orders
   resources :stores
+  resources :contacts
 
 ###BD MYSQL PARA TESTING API
 =begin
