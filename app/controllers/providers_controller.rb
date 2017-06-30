@@ -16,10 +16,10 @@ class ProvidersController < ApplicationController
     @provider = Provider.new(provider_params)
     if @provider.save
       flash[:success] = 'Proveedor creado exitosamente!'
-      redirect_to providers_url
+      redirect_to root_url
     else
       @providers = Provider.all.order(id: :asc)
-      render :index
+      redirect_to action: :index
     end
   end
 
@@ -31,10 +31,10 @@ class ProvidersController < ApplicationController
     @provider = Provider.find(params[:id])
     if @provider.update_attributes(provider_params)
       flash[:success] = 'Proveedor modificado exitosamente'
-      redirect_to providers_url
+      redirect_to root_url
     else
       @providers = Provider.all.order(id: :asc)
-      render :index
+      redirect_to action: :index
     end
   end
 
@@ -45,10 +45,14 @@ class ProvidersController < ApplicationController
   def destroy
     @provider = Driver.find(params[:id])
     @provider.destroy
-    redirect_to providers_url
+    redirect_to root_url
   end
 
   private
+
+  def root_url
+    return providers_url
+  end
 
   def set_module
     @module = "Driver"
