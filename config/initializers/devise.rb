@@ -12,7 +12,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'no-reply@krt.cl'
+  config.mailer_sender = 'no-reply@krtdriver.cl'
   config.secret_key = '25126dc0445f269d2226be62fee4eb337497f750d4ef89cc4cc4e1c203c4847faad9ccff29fd6adfe9ecfebb36bb4e0e4b8e12e018a5367641e8de490322cdd4'
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

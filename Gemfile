@@ -53,6 +53,9 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'i18n', '~> 0.8.1'
 
+# GENERACION DE REPORTES - XLSX
+gem 'axlsx', '~> 2.0', '>= 2.0.1'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
