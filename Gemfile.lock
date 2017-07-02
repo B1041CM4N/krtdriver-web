@@ -220,6 +220,7 @@ PLATFORMS
 
 DEPENDENCIES
   axlsx (~> 2.0, >= 2.0.1)
+  bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.3, >= 3.3.7)
   byebug
   carrierwave (~> 1.1)
