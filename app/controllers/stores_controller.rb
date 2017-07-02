@@ -12,10 +12,10 @@ class StoresController < ApplicationController
   def create
     @store = Store.new(store_params)
     if @store.save
-      flash[:success] = "Tienda creada exitosamente"
+      flash[:success] = 'Tienda creada exitosamente'
       redirect_to stores_url
     else
-      flash[:alert] = "Ha ocurrido un problema al tratar de crear la tienda"
+      flash[:alert] = 'Ha ocurrido un problema al tratar de crear la tienda'
       @stores = Store.all
       redirect_to action: :index
     end
@@ -27,28 +27,30 @@ class StoresController < ApplicationController
 
   def update
     @store = Store.find(params[:id])
-    Rails.logger.info "PARAMS: " + params.inspect + " *************"
     if @store.update_attributes(store_params)
-      flash[:success] = "Tienda actualizada exitosamente"
+      flash[:success] = 'Tienda actualizada exitosamente'
       redirect_to stores_url
     else
-      flash[:alert] = "Ha ocurrido un problema al tratar de modificar la tienda"
+      flash[:alert] = 'Ha ocurrido un problema al tratar de modificar la tienda'
       render :edit
     end
   end
 
   def destroy
     @store = Store.find(params[:id])
-    if @store.destroy
-      flash[:success] = "Tienda eliminada exitosamente"
-      redirect_to stores_url
-    end
+    return if @store.destroy
+    flash[:success] = 'Tienda eliminada exitosamente'
+    redirect_to root_url
   end
 
   private
 
+  def root_url
+    stores_url
+  end
+
   def set_module
-    @module = "Store"
+    @module = 'Store'
   end
 
   def store_params
