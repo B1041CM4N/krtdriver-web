@@ -3,10 +3,10 @@ class ProductsController < ApplicationController
   respond_to :js, :html, :xlsx
   def index
     respond_to do |format|
-      format.html{
+      format.html {
         @products = Product.where(store_id: params[:store_id]).all.page params[:page]
       }
-      format.xlsx{
+      format.xlsx {
         @products = Product.where(store_id: params[:store_id]).all
       }
     end
@@ -19,16 +19,16 @@ class ProductsController < ApplicationController
   def create
     @product = Product.create(product_params)
     if @product.save
-      flash[:success] = 'Producto creado correctamente!''
+      flash[:success] = 'Producto creado correctamente!'
       redirect_to products_url
     else
-      flash[:alert] = "Error al intentar crear el producto"
+      flash[:alert] = 'Error al intentar crear el producto'
       redirect_to @product
     end
   end
 
   def show
-    @product = Product.find(params[:ids ])
+    @product = Product.find(params[:id])
   end
 
   def edit
@@ -38,10 +38,10 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     if @product.update(product_params)
-      flash[:success] = "Producto modificado exitosamente!"
+      flash[:success] = 'Producto modificado exitosamente!'
       redirect_to :back
     else
-      flash[:alert] = "Error al tratar de modificar el producto"
+      flash[:alert] = 'Error al tratar de modificar el producto'
       redirect_to @product
     end
   end
@@ -55,7 +55,7 @@ class ProductsController < ApplicationController
   private
 
   def set_module
-    @module = "Product"
+    @module = 'Product'
   end
 
   def product_params
