@@ -51,16 +51,21 @@
         </li> -->
         <!-- <li class="<%#= @module == 'reports' ? 'active' : '' %>"><%#= link_to "Reportes", admin_reports_sales_url %></li>
       </ul> -->
-      <% if current_user %>
-        <li role="presentation", class="pull-right">
-          <%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete %>
-        </li>
+      <% if user_signed_in? %>
         <ul class="nav navbar-nav pull-right">
+          <li role="presentation", class="pull-right">
+            <%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete %>
+          </li>
+          <li role="presentation">
+            <% link_to edit_user_password_url(current_user) do %>
+              <%= current_user.email %>              
+            <% end %>
+          </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle dropdown-toggle-profile" data-toggle="dropdown" role="button" aria-expanded="false">
               <%= current_user.email %>
               <%#= image_tag current_admin.avatar.url(:thumb), class: 'img-circle' %>
-              <%= fa_icon "fw angle-down" %>
+              <%#= fa_icon "fw angle-down" %>
             </a>
             <ul class="dropdown-menu" role="menu">
               <li class="<%= @active == 'profiles' ? 'active' : '' %>"><%= link_to "Perfil", edit_user_password_url %></li>
