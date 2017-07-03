@@ -35,6 +35,17 @@
               <%= fa_stacked_icon "shopping-cart fw", base: "square-o", text: "Compras" %>
             <% end %>
           </li>
+        <% elsif user_signed_in? && current_user.owner? %>
+          <li role="presentation", class="<%= set_active(@module) %>">
+            <%= link_to providers_url do %>
+              <%= fa_stacked_icon "car", base: "square-o", text: "Proveedores" %>
+            <% end %>
+          </li>
+          <li role="presentation", class="<%= set_active(@module) %>">
+            <%= link_to products_url do %>
+              <%= fa_stacked_icon "beer", base: "square-o", text: "Productos" %>
+            <% end %>
+          </li>
         <% elsif current_user %>
           <li role="presentation", class="<%= set_active(@module) %>">
             <%= link_to "#", "Comprar" %>

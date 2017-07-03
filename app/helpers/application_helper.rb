@@ -10,8 +10,10 @@ module ApplicationHelper
       return 'Administrador'
     elsif opt == 'provider'
       return 'Proveedor'
+    elsif opt == 'owner'
+      return 'Tienda'
     else
-      return 'Cliente'
+      return 'Hacker'
     end
   end
 end

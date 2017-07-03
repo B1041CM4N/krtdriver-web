@@ -1,7 +1,15 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
+  respond_to :js, :html, :xlsx
   def index
-    @products = Product.all.page params[:page]
+    respond_to do |format|
+      format.html{
+        @products = Product.where(store_id: params[:store_id]).all.page params[:page]
+      }
+      format.xlsx{
+        @products = Product.where(store_id: params[:store_id]).all
+      }
+    end
   end
 
   def new
@@ -11,7 +19,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.create(product_params)
     if @product.save
-      flash[:success] = "Producto creado correctamente!"
+      flash[:success] = 'Producto creado correctamente!''
       redirect_to products_url
     else
       flash[:alert] = "Error al intentar crear el producto"
