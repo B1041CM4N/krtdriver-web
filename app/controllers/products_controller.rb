@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
-  respond_to :js, :html, :xlsx
+  respond_to :js, :html
   def index
     respond_to do |format|
       format.html {
