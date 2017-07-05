@@ -24,11 +24,10 @@ class Product < ApplicationRecord
 
   self.table_name = 'Product'
   self.primary_key = 'Product_id'
-
+  paginates_per 10
   belongs_to :Category, foreign_key: :Category_id
   belongs_to :Store, foreign_key: :Store_id
   # has_and_belongs_to_many :Inventory
-  paginates_per 10
   mount_uploader :Image, ProductUploader
 
   # validates :Name, :Description, :Category_id, :Image, presence: true
