@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: Category
+#
+#  Category_id :integer          not null, primary key
+#  Name        :string(35)
+#  Description :string(500)
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:

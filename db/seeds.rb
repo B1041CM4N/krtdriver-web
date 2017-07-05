@@ -10,6 +10,8 @@ User.destroy_all
 
 # ADMINS
 
+# enum role: [:admin, :provider, :owner]
+
 User.create(
   email: 'ignacio@krt.cl',
   password: '123123123',
@@ -36,27 +38,29 @@ User.create(
 
 # TIENDAS
 
-30.times do
-  User.create(
-    email: Faker::Internet.email,
-    password: 'tienda123',
-    password_confirmation: 'tienda123',
-    status: 1,
-    role: 1
-  )
-end
+# 30.times do
+#   User.create(
+#     email: Faker::Internet.email,
+#     password: 'tienda123',
+#     password_confirmation: 'tienda123',
+#     status: 1,
+#     role: 2
+#   )
+# end
+
+
 
 ## Proveedores
 
-30.times do
-  User.create(
-    email: Faker::Internet.email,
-    password: 'driver123',
-    password_confirmation: 'driver123',
-    status: 1,
-    role: 2
-  )
-end
+# 30.times do
+#   User.create(
+#     email: Faker::Internet.email,
+#     password: 'driver123',
+#     password_confirmation: 'driver123',
+#     status: 1,
+#     role: 1
+#   )
+# end
 
 # 50.times do
 #   Provider.create(

@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
-
   root to: 'home#index'
-  devise_for :users
-  resources :providers
-  resources :products
-  resources :orders
-  resources :stores
-  resources :contacts
+  devise_for :user
+  resources :provider
+  resources :product
+  resources :order
+  resources :store
+  resources :contact
 
 ###BD MYSQL PARA TESTING API
 =begin
@@ -50,11 +49,11 @@ Rails.application.routes.draw do
 #}
 
   namespace :api do
-    resources :orders, path: 'pedidos' do
+    resources :order, path: 'pedidos' do
       get 'index'
     end
 
-    resources :users, path: 'login' do
+    resources :user, path: 'login' do
       get 'index'
     end
   end

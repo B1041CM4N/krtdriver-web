@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-left">
+      <h3>Productos (<%= @products.count.to_s %>)</h3> 
+    </div>
+    <div class="pull-right">
+      <%= link_to "Crear Producto",  new_product_url, class: "btn btn-primary btn-md" %>
+    </div>
+  </div>
+</div>
+<%= render partial: 'products', locals: {products: @products} %>
+<div class="col-md-6 col-md-offset-3">
+  <%= paginate @products %>
+  <%#= link_to "Volver", root_url, class: "btn btn-primary btn-md center-block" %>
+</div>

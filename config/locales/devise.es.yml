@@ -14,7 +14,7 @@ es:
       last_attempt: "You have one more attempt before your account is locked."
       not_found_in_database: "Los datos ingresados no corresponden a ningún usuario registrado"
       timeout: "Your session expired. Please sign in again to continue."
-      unauthenticated: "You need to sign in or sign up before continuing."
+      unauthenticated: "Inicie sesión o regístrese para acceder"
       unconfirmed: "You have to confirm your email address before continuing."
     mailer:
       confirmation_instructions:
@@ -52,6 +52,9 @@ es:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
       unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+  models:
+    users:
+      email: "Correo Electrónico"
   errors:
     messages:
       already_confirmed: "was already confirmed, please try signing in"
@@ -60,5 +63,6 @@ es:
       not_found: "not found"
       not_locked: "was not locked"
       not_saved:
-        one: "1 error prohibited this %{resource} from being saved:"
+        one: "Se ha detectado un error:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
+        other: "Se han detectado %{count} errores a revisar:"

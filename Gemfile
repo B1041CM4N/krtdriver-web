@@ -54,7 +54,10 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'i18n', '~> 0.8.1'
 
 # GENERACION DE REPORTES - XLSX
-gem 'axlsx', '~> 2.0', '>= 2.0.1'
+gem 'axlsx'
+gem 'axlsx_rails'
+
+gem 'annotate'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -67,6 +70,7 @@ gem 'faker', '~> 1.7', '>= 1.7.3'
 
 # Paginación
 gem 'kaminari', '~> 1.0', '>= 1.0.1'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -83,6 +87,7 @@ group :development do
 end
 
 group :production do
+  gem 'heroku-deflater'
   gem 'rails_12factor'
   gem 'rails_serve_static_assets'
   gem 'sprockets_better_errors'
