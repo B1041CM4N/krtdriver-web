@@ -7,6 +7,7 @@
 #  Name        :string(30)
 #  Description :string(500)
 #  Image       :string(100)
+#  Store_id    :integer
 #
 # Indexes
 #
