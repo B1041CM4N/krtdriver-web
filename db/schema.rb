@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170705075836) do
+ActiveRecord::Schema.define(version: 20170705212547) do
 
   create_table "Address", primary_key: "Address_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información correspondiente a dirección, comprende la entida" do |t|
     t.integer "Commune_id",               comment: "Codigo unico de comunas"
@@ -106,11 +106,12 @@ ActiveRecord::Schema.define(version: 20170705075836) do
   end
 
   create_table "Product", primary_key: "Product_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Tabla de entidad producto, referente a la instancia de objet" do |t|
-    t.integer "Category_id",             comment: "Codigo unico de la categoría de los productos."
-    t.string  "Name",        limit: 30,  comment: "Nombre del producto."
-    t.string  "Description", limit: 500, comment: "Descripción del producto."
-    t.string  "Image",       limit: 100, comment: "Imagen del producto definido."
+    t.integer "Category_id",                comment: "Codigo unico de la categoría de los productos."
+    t.string  "Name",           limit: 30,  comment: "Nombre del producto."
+    t.string  "Description",    limit: 500, comment: "Descripción del producto."
+    t.string  "Image",          limit: 100, comment: "Imagen del producto definido."
     t.integer "Store_id"
+    t.string  "File_in_server"
     t.index ["Category_id"], name: "FK_Product_Category", using: :btree
   end
 

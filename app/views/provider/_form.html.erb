@@ -1,14 +1,5 @@
 <%= form_for :provider, method: method, url: url do |f| %>
 
-Provider.create(
-    store_id: Store.all.sample,
-    address_id: Address.all.sample,
-    email: Faker::Internet.email,
-    vehicle_id: Vehicle.all.sample,
-    segment_id: Segment.all.sample,
-    password: "provider123",
-    bank_account_id: BankAccount.all.sample
-  )
   <div class="form-group col-xs-12 col-md-6">
     <%= f.label :first_name, "Nombre" %>
     <%= f.text_field :first_name, class: "form-control" %>

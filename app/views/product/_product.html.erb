@@ -1,6 +1,6 @@
 <div class="col-sm-6 col-md-4" id="<%= product.Product_id.to_s %>">
   <div class="thumbnail">
-    <%= image_tag(product.try(:Image), height: 250, width: 250) %>
+    <%= image_tag(product.try(:Image), height: 100, width: 100) %>
     <div class="caption">
       <h3><%= product.Name[0..50] %></h3>
       <p><%= product.Description[0..100] %></p>
