@@ -6,17 +6,17 @@
 #  Address_id  :integer
 #  Name        :string(35)
 #  Description :string(200)
-#  User_id     :integer
+#  users_id    :integer
 #
 # Indexes
 #
-#  FK_Store_Adress         (Address_id)
-#  index_Store_on_User_id  (User_id)
+#  FK_Store_Adress          (Address_id)
+#  index_Store_on_users_id  (users_id)
 #
 # Foreign Keys
 #
 #  FK_Store_Adress  (Address_id => Address.Address_id)
-#  fk_rails_...     (User_id => Users.id)
+#  fk_rails_...     (users_id => users.id)
 #
 
 class Store < ApplicationRecord
@@ -25,7 +25,7 @@ class Store < ApplicationRecord
   self.primary_key = 'Store_id'
   paginates_per 10
 
-  belongs_to :User, foreign_key: 'User_id'
+  belongs_to :user
   belongs_to :Address, foreign_key: 'Address_id'
   has_many :orders, dependent: :destroy
   has_many :products, dependent: :destroy

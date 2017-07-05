@@ -2,8 +2,8 @@
   <div class="thumbnail">
     <%#= image_tag(product.try(:image), height: 250, width: 250) %>
     <div class="caption">
-      <h3><%#= product.name[0..20] %></h3>
-      <p><%#= product.description[0..20] %></p>
+      <h3><%= product.name[0..50] %></h3>
+      <p><%= product.description[0..100] %></p>
       <p>
         <%= link_to "Editar", edit_product_url(product) %>
         <%= link_to "Eliminar", product_url(product), data: { confirm: "Está seguro?" }, method: :delete %>

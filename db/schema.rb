@@ -110,9 +110,7 @@ ActiveRecord::Schema.define(version: 20170705053113) do
     t.string  "Name",        limit: 30,  comment: "Nombre del producto."
     t.string  "Description", limit: 500, comment: "Descripción del producto."
     t.string  "Image",       limit: 100, comment: "Imagen del producto definido."
-    t.integer "Store_id"
     t.index ["Category_id"], name: "FK_Product_Category", using: :btree
-    t.index ["Store_id"], name: "index_Product_on_Store_id", using: :btree
   end
 
   create_table "ProductQuantifier", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Contador relacional m a m de las entidades de pedido y produ" do |t|
@@ -201,9 +199,9 @@ ActiveRecord::Schema.define(version: 20170705053113) do
     t.integer "Address_id",              comment: "Codigo unico de direccion"
     t.string  "Name",        limit: 35,  comment: "Nombre de local"
     t.string  "Description", limit: 200, comment: "Descripcion de local"
-    t.integer "User_id"
+    t.integer "users_id"
     t.index ["Address_id"], name: "FK_Store_Adress", using: :btree
-    t.index ["User_id"], name: "index_Store_on_User_id", using: :btree
+    t.index ["users_id"], name: "index_Store_on_users_id", using: :btree
   end
 
   create_table "Tracing", primary_key: "Sesion", id: :string, limit: 10, comment: "Sesión de perfil", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Referencia a entidad de seguimiento, en la cual se estructur" do |t|
@@ -296,7 +294,7 @@ ActiveRecord::Schema.define(version: 20170705053113) do
   add_foreign_key "Score", "Punishment", primary_key: "Punishment_id", name: "FK_Score_Punishment"
   add_foreign_key "Score", "consumer", column: "Consumer_id", primary_key: "Consumer_id", name: "FK_Score_Consumer"
   add_foreign_key "Store", "Address", primary_key: "Address_id", name: "FK_Store_Adress"
-  add_foreign_key "Store", "Users"
+  add_foreign_key "Store", "users", column: "users_id"
   add_foreign_key "Tracing", "Provider", primary_key: "Provider_id", name: "FK_Tracing_Provider"
   add_foreign_key "Tracing", "consumer", column: "Consumer_id", primary_key: "Consumer_id", name: "FK_Tracing_Consumer"
   add_foreign_key "Vehicle", "VehicleBrand", column: "Vehicle_brand_id", primary_key: "Vehicle_brand_id", name: "FK_Vehiclebrand_Vehicle"

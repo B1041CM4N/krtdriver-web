@@ -7,12 +7,10 @@
 #  Name        :string(30)
 #  Description :string(500)
 #  Image       :string(100)
-#  Store_id    :integer
 #
 # Indexes
 #
-#  FK_Product_Category        (Category_id)
-#  index_Product_on_Store_id  (Store_id)
+#  FK_Product_Category  (Category_id)
 #
 # Foreign Keys
 #

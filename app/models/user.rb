@@ -38,6 +38,8 @@ class User < ApplicationRecord
   enum role: [:admin, :provider, :owner]
   after_initialize :set_default_role, if: :new_record?
 
+  has_many :Store, dependent: :destroy
+
   # alias_attribute "Name", "name"
 
   # def set_default_role

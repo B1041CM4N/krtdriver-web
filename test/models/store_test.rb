@@ -6,17 +6,17 @@
 #  Address_id  :integer
 #  Name        :string(35)
 #  Description :string(200)
-#  User_id     :integer
+#  users_id    :integer
 #
 # Indexes
 #
-#  FK_Store_Adress         (Address_id)
-#  index_Store_on_User_id  (User_id)
+#  FK_Store_Adress          (Address_id)
+#  index_Store_on_users_id  (users_id)
 #
 # Foreign Keys
 #
 #  FK_Store_Adress  (Address_id => Address.Address_id)
-#  fk_rails_...     (User_id => Users.id)
+#  fk_rails_...     (users_id => users.id)
 #
 
 require 'test_helper'

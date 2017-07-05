@@ -24,11 +24,11 @@ class ProviderController < ApplicationController
   end
 
   def edit
-    @provider = Provider.find(params[:Provider_id])
+    @provider = Provider.find(params[:id])
   end
 
   def update
-    @provider = Provider.find(params[:Provider_id])
+    @provider = Provider.find(params[:id])
     if @provider.update_attributes(provider_params)
       flash[:success] = 'Proveedor modificado exitosamente'
       redirect_to root_url
@@ -39,7 +39,7 @@ class ProviderController < ApplicationController
   end
 
   def show
-    @provider = Provider.find(params[:Provider_id])
+    @provider = Provider.find(params[:id])
   end
 
   def destroy

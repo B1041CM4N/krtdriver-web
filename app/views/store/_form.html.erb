@@ -1,5 +1,6 @@
 <%= form_for :store, method: method, url: url do |f| %>
   <div class="col-xs-12 col-md-6">
+    <%= f.hidden_field :User_id, value: current_user.id %>
     <div class="form-group">
       <%= f.label "Nombre" %>
       <%= f.text_field :Name, class: "form-control" %>

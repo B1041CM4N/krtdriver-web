@@ -11,9 +11,10 @@ class StoreController < ApplicationController
 
   def create
     @store = Store.new(store_params)
+    @store.user_id = params[:User_id]
     if @store.save
       flash[:success] = 'Tienda creada exitosamente'
-      redirect_to stores_url
+      redirect_to store_index_url
     else
       flash[:alert] = 'Ha ocurrido un problema al tratar de crear la tienda'
       @stores = Store.all
@@ -22,11 +23,11 @@ class StoreController < ApplicationController
   end
 
   def edit
-    @store = Store.find(params[:Store_id])
+    @store = Store.find(params[:id])
   end
 
   def update
-    @store = Store.find(params[:Store_id])
+    @store = Store.find(params[:id])
     if @store.update_attributes(store_params)
       flash[:success] = 'Tienda actualizada exitosamente'
       redirect_to stores_url
@@ -37,7 +38,7 @@ class StoreController < ApplicationController
   end
 
   def destroy
-    @store = Store.find(params[:Store_id])
+    @store = Store.find(params[:id])
     @store.destroy
   end
 
