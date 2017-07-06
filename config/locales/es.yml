@@ -21,10 +21,13 @@
 
 es:
   models:
+    product:
+      Store: "Tienda"
     users:
       email: "Correo Electrónico"
   errors:
     taken: " está en uso"
+    
   users:
     email: "Correo Electrónico"
     password: "Contraseña"

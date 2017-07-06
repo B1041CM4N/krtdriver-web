@@ -1,3 +1,8 @@
+<% if @product && @product.errors.any? %>
+  <%= render partial: "base/message_error", locals: {
+        message: "No se puede guardar el producto debido a los siguientes errores:", model: @product
+  } %>
+<% end %>
 <div class="row">
   <div class="col-md-12">
     <div class="pull-left">
@@ -8,8 +13,11 @@
     </div>
   </div>
 </div>
-<%= render partial: 'products', locals: {products: @products} %>
-<div class="col-md-6 col-md-offset-3">
+<div class="row">
+  <div class="col-md-12">
+    <%= render partial: 'products', locals: {products: @products} %>
+  </div>
+</div>
+<div class="col-md-6 col-md-offset-3 align-center">
   <%= paginate @products %>
-  <%#= link_to "Volver", root_url, class: "btn btn-primary btn-md center-block" %>
 </div>

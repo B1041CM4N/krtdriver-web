@@ -5,6 +5,7 @@ class ProductUploader < CarrierWave::Uploader::Base
   #include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
+  # storage :activerecord_store_in_model
   storage :file
   # storage :fog
 

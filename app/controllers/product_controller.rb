@@ -17,13 +17,11 @@ class ProductController < ApplicationController
   end
 
   def create
-    Rails.logger.info "PARAMS::::: " + params.inspect + " *********************"
+    Rails.logger.info 'PARAMS::::: ' + params.inspect + ' *********************'
     @product = Product.new(product_params)
-    @product.Store_id = params[:Store_id]
-    @product.Category_id = params[:Category_id]
     if @product.save
       flash[:success] = 'Producto creado correctamente!'
-      redirect_to product_index_url
+      redirect_to root_url
     else
       flash[:alert] = 'Error al intentar crear el producto'
       @products = Product.all.page
@@ -43,7 +41,7 @@ class ProductController < ApplicationController
     @product = Product.find(params[:id])
     if @product.update(product_params)
       flash[:success] = 'Producto modificado exitosamente!'
-      redirect_to :back
+      redirect_to root_url
     else
       flash[:alert] = 'Error al tratar de modificar el producto'
       redirect_to @product
@@ -56,6 +54,10 @@ class ProductController < ApplicationController
   end
 
   private
+
+  def root_url
+    product_index_url
+  end
 
   def set_module
     @module = 'Product'

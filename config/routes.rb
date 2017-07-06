@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   root to: 'home#index'
-  devise_for :user
+  devise_for :user, controllers: { registrations: "registrations" }
   resources :provider
-  resources :product
+  resources :product do
+    member { get 'File_in_server' }
+  end
   resources :order
   resources :store
   resources :contact

@@ -21,5 +21,9 @@
 class Address < ApplicationRecord
   self.table_name = "Address"
   self.primary_key = "Address_id"
+  
+  attr_accessor :Address_id
+  attr_accessor :address_id
+  
   has_many :Stores
 end

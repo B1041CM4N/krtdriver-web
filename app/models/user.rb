@@ -17,6 +17,10 @@
 #  updated_at             :datetime         not null
 #  status                 :boolean          default(TRUE)
 #  role                   :integer
+#  store_name             :string(255)
+#  street_name            :string(255)
+#  store_description      :string(255)
+#  owner_name             :string(255)
 #
 # Indexes
 #
@@ -37,8 +41,10 @@ class User < ApplicationRecord
 
   enum role: [:admin, :provider, :owner]
   after_initialize :set_default_role, if: :new_record?
+  # before_create :create_store
 
-  has_many :Store, dependent: :destroy
+  has_many :Store, foreign_key: :Store_id
+  has_many :Address, foreign_key: :Address_id
 
   # alias_attribute "Name", "name"
 
@@ -48,9 +54,37 @@ class User < ApplicationRecord
 
   ## CALLBACK QUE PERMITE LA CREACIÓN SOLO DE USUARIOS DE TIPO TIENDA - FORMULARIO REGISTRO SESSIONS/NEW
 
+  # Table name: Store
+  #
+  #  Store_id    :integer          not null, primary key
+  #  Address_id  :integer
+  #  Name        :string(35)
+  #  Description :string(200)
+  #  users_id    :integer
+
   def set_default_role
     self.role ||= :owner
   end
 
-  validates :email, :password, :password_confirmation, presence: true
+#   Address_id    :integer          not null, primary key
+#  Commune_id    :integer
+#  Street_name   :string(35)
+#  Street_number :string(7)
+#  Block_number  :string(5)
+#  Town_name     :string(20)
+
+  # def create_store
+  #   address = Address.create(
+  #     Street_name: self.street_name
+  #   )
+# 
+  #   Store.create(
+  #     Address_id: address.Address_id,
+  #     Name: self.store_name,
+  #     Description: self.store_description,
+  #     users_id: self.id
+  #   )
+  # end
+# 
+  validates :email, :password, :store_name, :street_name, :password_confirmation, presence: true
 end

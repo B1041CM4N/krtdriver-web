@@ -36,7 +36,8 @@ gem 'sidekiq', '~> 5.0'
 gem 'retina_tag', '~> 1.4', '>= 1.4.1'
 
 # SUBIDA DE ARCHIVOS
-gem 'carrierwave', '~> 1.1'
+gem 'carrierwave'
+# gem 'carrierwave-activerecord-store-in-model'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

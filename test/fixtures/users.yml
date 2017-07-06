@@ -17,6 +17,10 @@
 #  updated_at             :datetime         not null
 #  status                 :boolean          default(TRUE)
 #  role                   :integer
+#  store_name             :string(255)
+#  street_name            :string(255)
+#  store_description      :string(255)
+#  owner_name             :string(255)
 #
 # Indexes
 #

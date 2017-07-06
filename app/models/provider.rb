@@ -35,11 +35,18 @@ class Provider < ApplicationRecord
   self.table_name = "Provider"
   self.primary_key = "Provider_id"
 
+  after_initialize :set_default_payment_method, if: :new_record?
+
   belongs_to :Vehicle, foreign_key: :Vehicle_id
   belongs_to :Store, foreign_key: :Store_id
   belongs_to :Address, foreign_key: :Address_id
   belongs_to :PaymentMethod, foreign_key: :PaymentMethod_id
   belongs_to :BankAccount, foreign_key: :Bank_account_id
+
+  
+  def set_default_payment_method
+    self.PaymentMethod_id ||= 7
+  end
   # self.class.primary_key = "Provider_id"
   def self.fetch(params = {})
     collection = super params

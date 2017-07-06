@@ -18,8 +18,8 @@
       <%= f.collection_select :Category_id, Category.all.order(Category_id: :asc), :Category_id, :Name, {}, class: "form-control" %>
     </div>
     <div class="form-group col-xs-12">
-      <%= f.label :Image, "Imagen del producto" %>
-      <%= f.file_field :Image, class: 'form-control form-control-sm'%>
+      <%= f.label :File_in_server, "Imagen del producto" %>
+      <%= f.file_field :File_in_server, class: 'form-control form-control-sm'%>
     </div>
     <div class="actions col-xs-12">
       <%= f.submit 'Crear', class: 'btn btn-primary btn-md' %>

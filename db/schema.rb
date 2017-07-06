@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170705212547) do
+ActiveRecord::Schema.define(version: 20170705235028) do
 
   create_table "Address", primary_key: "Address_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información correspondiente a dirección, comprende la entida" do |t|
     t.integer "Commune_id",               comment: "Codigo unico de comunas"
@@ -259,6 +259,10 @@ ActiveRecord::Schema.define(version: 20170705212547) do
     t.datetime "updated_at",                            null: false
     t.boolean  "status",                 default: true
     t.integer  "role"
+    t.string   "store_name"
+    t.string   "street_name"
+    t.string   "store_description"
+    t.string   "owner_name"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

@@ -46,6 +46,10 @@
               <%= fa_stacked_icon "beer", base: "square-o", text: "Productos" %>
             <% end %>
           </li>
+          <li role="presentation", class="<%= set_active(@module) %>">
+            <%= link_to store_index_url do %>
+            <% end %>
+          </li>
         <% elsif current_user %>
           <li role="presentation", class="<%= set_active(@module) %>">
             <%#= link_to "#", "Comprar" %>
