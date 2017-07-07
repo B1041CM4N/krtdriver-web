@@ -2,28 +2,24 @@
 #
 # Table name: Inventory
 #
-#  Product_id  :integer
-#  Provider_id :integer
-#  Quantity    :integer
-#  Price       :integer
+#  product_id  :integer
+#  provider_id :integer
+#  quantity    :integer
+#  price       :integer
 #
 # Indexes
 #
-#  FK_Inventory_Product   (Product_id)
-#  FK_Inventory_Provider  (Provider_id)
+#  FK_Inventory_Product   (product_id)
+#  FK_Inventory_Provider  (provider_id)
 #
 # Foreign Keys
 #
-#  FK_Inventory_Product   (Product_id => Product.Product_id)
-#  FK_Inventory_Provider  (Provider_id => Provider.Provider_id)
+#  FK_Inventory_Product   (product_id => product.id)
+#  FK_Inventory_Provider  (provider_id => provider.id)
 #
 
 class Inventory < ApplicationRecord
-
-  self.table_name = "Inventory"
-
-  belongs_to :Product, foreign_key: :Product_id
-  belongs_to :Provider, foreign_key: :Provider_id
-
-  
+  self.table_name = 'inventory'
+  belongs_to :product, foreign_key: :product_id
+  belongs_to :provider, foreign_key: :provider_id
 end

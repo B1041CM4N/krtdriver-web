@@ -1,3 +1,11 @@
+# == Schema Information
+#
+# Table name: vehicle_brand
+#
+#  id   :integer          not null, primary key
+#  name :string(15)
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:

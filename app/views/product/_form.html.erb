@@ -1,25 +1,24 @@
 <%= form_for :product, method: method, url: url do |f| %>
-  <%= f.hidden_field :Store_id, value: current_user.id %>
   <div class="col-md-6">
     <div class="form-group col-xs-12">
-      <%= f.label :Name, "Nombre del producto" %>
-      <%= f.text_field :Name, class: 'form-control form-control-sm', required: true %>
+      <%= f.label :name, "Nombre del producto" %>
+      <%= f.text_field :name, class: 'form-control form-control-sm', required: true %>
     </div>
     <div class="form-group col-xs-12">
-      <%= f.label :Description, "Descripción del producto" %>
-      <%= f.text_area :Description, class: 'form-control form-control-sm', min: 100, max: 1000, required: true %>
+      <%= f.label :description, "Descripción del producto" %>
+      <%= f.text_area :description, class: 'form-control form-control-sm', min: 100, max: 1000, required: true %>
     </div>
     <!-- <div class="form-group col-xs-12 col-md-6">
       <%#= f.label :price, "Precio de venta" %>
       <%#= f.number_field :price, class: 'form-control form-control-sm', min: 0, max: 99999, required: true %>
     </div> -->
     <div class="form-group col-xs-12">
-      <%= f.label :Category, "Seleccione la categoría" %>
-      <%= f.collection_select :Category_id, Category.all.order(Category_id: :asc), :Category_id, :Name, {}, class: "form-control" %>
+      <%= f.label :category_id, "Seleccione la categoría" %>
+      <%= f.collection_select :category_id, Category.all.order(id: :asc), :id, :name, {}, class: "form-control" %>
     </div>
     <div class="form-group col-xs-12">
-      <%= f.label :File_in_server, "Imagen del producto" %>
-      <%= f.file_field :File_in_server, class: 'form-control form-control-sm'%>
+      <%= f.label :file_in_server, "Imagen del producto" %>
+      <%= f.file_field :file_in_server, class: 'form-control form-control-sm'%>
     </div>
     <div class="actions col-xs-12">
       <%= f.submit 'Crear', class: 'btn btn-primary btn-md' %>

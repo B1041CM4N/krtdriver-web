@@ -27,7 +27,7 @@
     </theader>
     <tbody>
       <% @stores.each do |store| %>
-        <tr id="store_<%= store.Store_id.to_s %>">
+        <tr id="store_<%= store.id.to_s %>">
           <%= render partial: "store", locals: { f: store } %>
         </tr>
       <% end %>

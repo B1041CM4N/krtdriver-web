@@ -1,22 +1,22 @@
 # == Schema Information
 #
-# Table name: Store
+# Table name: store
 #
-#  Store_id    :integer          not null, primary key
-#  Address_id  :integer
-#  Name        :string(35)
-#  Description :string(200)
-#  users_id    :integer
+#  id          :integer          not null, primary key
+#  address_id  :integer
+#  name        :string(35)
+#  description :string(200)
+#  user_id     :integer
 #
 # Indexes
 #
-#  FK_Store_Adress          (Address_id)
-#  index_Store_on_users_id  (users_id)
+#  FK_Store_Adress         (address_id)
+#  index_store_on_user_id  (user_id)
 #
 # Foreign Keys
 #
-#  FK_Store_Adress  (Address_id => Address.Address_id)
-#  fk_rails_...     (users_id => users.id)
+#  FK_Store_Adress  (address_id => address.id)
+#  fk_rails_...     (user_id => user.id)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

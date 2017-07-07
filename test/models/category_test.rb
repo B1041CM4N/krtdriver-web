@@ -1,10 +1,10 @@
 # == Schema Information
 #
-# Table name: Category
+# Table name: category
 #
-#  Category_id :integer          not null, primary key
-#  Name        :string(35)
-#  Description :string(500)
+#  id          :integer          not null, primary key
+#  name        :string(35)
+#  description :string(500)
 #
 
 require 'test_helper'

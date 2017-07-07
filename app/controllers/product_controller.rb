@@ -1,13 +1,15 @@
 class ProductController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_module
   respond_to :js, :html
   def index
     respond_to do |format|
       format.html {
-        @products = Product.where(Store_id: params[:Store_id]).all.page params[:page]
+        @products = Product.all.order(id: :asc).page params[:page]
+        # @products = Product.where(store_id: params[:store_id]).all.page params[:page]
       }
       format.xlsx {
-        @products = Product.where(Store_id: params[:Store_id]).all
+        @products = Product.where(store_id: params[:store_id]).all
       }
     end
   end
@@ -18,6 +20,7 @@ class ProductController < ApplicationController
 
   def create
     Rails.logger.info 'PARAMS::::: ' + params.inspect + ' *********************'
+    Rails.logger.info 'usuario loggeado: ' + current_user.inspect + " **********"
     @product = Product.new(product_params)
     if @product.save
       flash[:success] = 'Producto creado correctamente!'
@@ -60,7 +63,7 @@ class ProductController < ApplicationController
   end
 
   def set_module
-    @module = 'Product'
+    @module = 'product'
   end
 
   def product_params

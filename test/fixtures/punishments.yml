@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: punishment
+#
+#  id               :integer          not null, primary key
+#  reason           :string(100)
+#  duration         :integer
+#  denegate_service :integer
+#  count            :integer
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:

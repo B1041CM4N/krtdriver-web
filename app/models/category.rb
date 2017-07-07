@@ -1,17 +1,17 @@
 # == Schema Information
 #
-# Table name: Category
+# Table name: category
 #
-#  Category_id :integer          not null, primary key
-#  Name        :string(35)
-#  Description :string(500)
+#  id          :integer          not null, primary key
+#  name        :string(35)
+#  description :string(500)
 #
 
 class Category < ApplicationRecord
-  self.table_name = 'Category'
-  self.primary_key = 'Category_id'
+  self.table_name = 'category'
+  self.primary_key = 'category_id'
 
-  has_many :Product, dependent: :destroy
+  has_many :product, dependent: :destroy
 
   # has_many :categories, dependent: destroy
 end

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: users
+# Table name: user
 #
 #  id                     :integer          not null, primary key
 #  email                  :string(255)      default(""), not null
@@ -24,11 +24,13 @@
 #
 # Indexes
 #
-#  index_users_on_email                 (email) UNIQUE
-#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_user_on_email                 (email) UNIQUE
+#  index_user_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
 class User < ApplicationRecord
+  self.table_name = 'user'
+  self.primary_key = 'user_id'
   # class User < ActiveRecord::Base
   # self.table_name = 'User'
   # Include default devise modules. Others available are:
@@ -43,8 +45,8 @@ class User < ApplicationRecord
   after_initialize :set_default_role, if: :new_record?
   # before_create :create_store
 
-  has_many :Store, foreign_key: :Store_id
-  has_many :Address, foreign_key: :Address_id
+  has_many :store, foreign_key: :store_id
+  has_many :address, foreign_key: :address_id
 
   # alias_attribute "Name", "name"
 

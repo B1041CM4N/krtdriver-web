@@ -2,7 +2,7 @@ class StoreController < ApplicationController
   before_action :authenticate_user!
   def index
     @store = Store.new
-    @stores = Store.all.order(Store_id: :asc).page params[:page]
+    @stores = Store.all.order(id: :asc).page params[:page]
   end
 
   def new
@@ -10,15 +10,16 @@ class StoreController < ApplicationController
   end
 
   def create
+    Rails.logger.info 'PARAMS: ' + params.inspect + ' **********'
     @store = Store.new(store_params)
-    @store.user_id = params[:User_id]
+    @store.user_id = current_user.id
     if @store.save
       flash[:success] = 'Tienda creada exitosamente'
-      redirect_to store_index_url
+      redirect_to root_path
     else
+      Rails.logger.info 'STORE DATA:::: ' + @store.inspect + ' ****'
       flash[:alert] = 'Ha ocurrido un problema al tratar de crear la tienda'
-      @stores = Store.all
-      redirect_to action: :index
+      redirect_to action: :new
     end
   end
 

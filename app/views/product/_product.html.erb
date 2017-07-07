@@ -1,26 +1,26 @@
-<div class="col-sm-6 col-md-4" id="<%= product.Product_id.to_s %>">
-  <% unless product.File_in_server == nil %>
-    <div class="thumbnail">
-      <%= image_tag(product.try(:File_in_server), height: 100, width: 100) %>
+<div class="col-sm-6 col-md-4" id="<%= product.id.to_s %>">
+  <div class="thumbnail">
+    <% unless product.file_in_server == nil %>
+      <%= image_tag(product.try(:file_in_server), height: 100, width: 100) %>
       <div class="caption">
-        <h3><%= product.Name[0..50] %></h3>
-        <p><%= product.Description[0..100] %></p>
+        <h3><%= product.name[0..50] %></h3>
+        <p><%= product.description[0..100] %></p>
         <p>
           <%= link_to "Editar", edit_product_url(product) %>
           <%= link_to "Eliminar", product_url(product), data: { confirm: "Está seguro?" }, method: :delete %>
         </p>
       </div><!-- caption -->
     </div><!-- thumbnail -->
-  <% else %>
-    <span>Producto Sin imagen</span>
-    <div class="caption">
-      <h3><%= product.Name[0..50] %></h3>
-      <p><%= product.Description[0..100] %></p>
-      <p>
-        <%= link_to "Editar", edit_product_url(product) %>
-        <%= link_to "Eliminar", product_url(product), data: { confirm: "Está seguro?" }, method: :delete %>
-      </p>
-    </div>
+    <% else %>
+      <span>Producto Sin imagen</span>
+      <div class="caption">
+        <h3><%= product.name[0..50] %></h3>
+        <p><%= product.description[0..100] %></p>
+        <p>
+          <%= link_to "Editar", edit_product_url(product) %>
+          <%= link_to "Eliminar", product_url(product), data: { confirm: "Está seguro?" }, method: :delete %>
+        </p>
+      </div>
+    <% end %>
   </div>
-  <% end %>
 </div>

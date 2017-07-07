@@ -12,239 +12,227 @@
 
 ActiveRecord::Schema.define(version: 20170705235028) do
 
-  create_table "Address", primary_key: "Address_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información correspondiente a dirección, comprende la entida" do |t|
-    t.integer "Commune_id",               comment: "Codigo unico de comunas"
-    t.string  "Street_name",   limit: 35, comment: "Calle de direccion"
-    t.string  "Street_number", limit: 7,  comment: "Numero de casa de direccion"
-    t.string  "Block_number",  limit: 5,  comment: "Block opcional de vivienda"
-    t.string  "Town_name",     limit: 20, comment: "Villa o poblacion"
-    t.index ["Commune_id"], name: "FK_Address_Comune", using: :btree
+  create_table "address", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información correspondiente a dirección, comprende la entida" do |t|
+    t.integer "commune_id",               comment: "Codigo unico de comunas"
+    t.string  "street_name",   limit: 35, comment: "Calle de direccion"
+    t.string  "street_number", limit: 7,  comment: "Numero de casa de direccion"
+    t.string  "block_number",  limit: 5,  comment: "Block opcional de vivienda"
+    t.string  "town_name",     limit: 20, comment: "Villa o poblacion"
+    t.index ["commune_id"], name: "FK_Address_Comune", using: :btree
   end
 
-  create_table "Bank", primary_key: "Bank_id", id: :integer, comment: "Codigo unico del banco.", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Entidad bancaria, información comercial establecida y defini" do |t|
-    t.string "Name",        limit: 50,  comment: "Nombre de banco."
-    t.string "Description", limit: 500, comment: "Descripcion del banco"
+  create_table "bank", id: :integer, comment: "Codigo unico del banco.", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Entidad bancaria, información comercial establecida y defini" do |t|
+    t.string "name",        limit: 50,  comment: "Nombre de banco."
+    t.string "description", limit: 500, comment: "Descripcion del banco"
   end
 
-  create_table "BankAccount", primary_key: "Bank_account_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información comercial de la entidad cuenta bancaria la cual " do |t|
-    t.integer "Bank_id",                      comment: "Codigo unico del banco."
-    t.integer "Ta_id",                        comment: "Codigo unico para el tipo de cuenta"
-    t.integer "Account_number",               comment: "Numero de cuenta bancaria"
-    t.string  "Bank_account_type", limit: 20, comment: "Tipo de cuenta bancaria"
-    t.index ["Bank_id"], name: "FK_Bankaccount_Bank", using: :btree
-    t.index ["Ta_id"], name: "FK_taccount_Bankaccount", using: :btree
+  create_table "bank_account", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información comercial de la entidad cuenta bancaria la cual " do |t|
+    t.integer "bank_id",                      comment: "Codigo unico del banco."
+    t.integer "type_account_id",              comment: "Codigo unico para el tipo de cuenta"
+    t.integer "account_number",               comment: "Numero de cuenta bancaria"
+    t.string  "bank_account_type", limit: 20, comment: "Tipo de cuenta bancaria"
+    t.index ["bank_id"], name: "FK_Bankaccount_Bank", using: :btree
+    t.index ["type_account_id"], name: "FK_taccount_Bankaccount", using: :btree
   end
 
-  create_table "Brand_ct", primary_key: "Btc_id", id: :integer, comment: "Codigo unico para la marca de la tarjeta de credito", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Marca de la tarjeta de credito con la cual operan los perfil" do |t|
-    t.string "Name", limit: 35, comment: "Nombre de la marca para la tarjeta de credito"
+  create_table "category", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Entidad referente a la categorización de los productos ofert" do |t|
+    t.string "name",        limit: 35,  comment: "Nombre de la categoría de los productos."
+    t.string "description", limit: 500, comment: "Descripcion de la categoria de los productos ofertados."
   end
 
-  create_table "Category", primary_key: "Category_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Entidad referente a la categorización de los productos ofert" do |t|
-    t.string "Name",        limit: 35,  comment: "Nombre de la categoría de los productos."
-    t.string "Description", limit: 500, comment: "Descripcion de la categoria de los productos ofertados."
+  create_table "commune", id: :integer, comment: "Codigo unico de comunas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información de localización, comprensión de las entidades co" do |t|
+    t.integer "province_id",            comment: "Codigo de provincia"
+    t.string  "name",        limit: 20, comment: "Nombre de comuna"
+    t.index ["province_id"], name: "FK_Commune_Province", using: :btree
   end
 
-  create_table "Commune", primary_key: "Commune_id", id: :integer, comment: "Codigo unico de comunas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información de localización, comprensión de las entidades co" do |t|
-    t.integer "Province_id",            comment: "Codigo de provincia"
-    t.string  "Name",        limit: 20, comment: "Nombre de comuna"
-    t.index ["Province_id"], name: "FK_Commune_Province", using: :btree
+  create_table "consumer", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Perfil consumidor ejecutor de las compras, entidad relaciona" do |t|
+    t.integer "address_id",                comment: "Codigo unico de direccion"
+    t.string  "rut",            limit: 10, comment: "Rut del consumidor."
+    t.string  "email",          limit: 40, comment: "Direccion del correo electronico del consumidor."
+    t.string  "password",       limit: 50, comment: "clave unica de acceso log in para ingreso a KRT Driver"
+    t.string  "facebook_Token",            comment: "Token de facebook para acceso a KRT Driver."
+    t.string  "google_Token",              comment: "Token de google para acceso a KRT Driver."
+    t.string  "first_name",     limit: 30, comment: "Nombre de consumidor."
+    t.string  "last_name",      limit: 30, comment: "Apellido de consumidor."
+    t.index ["address_id"], name: "FK_Consumer_Address", using: :btree
   end
 
-  create_table "CreditCard", primary_key: "Credit_card_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información comercial de los perfiles de consumo, referencia" do |t|
-    t.integer "Bank_id",                comment: "Codigo unico del banco."
-    t.integer "Btc_id",                 comment: "Codigo unico para la marca de la tarjeta de credito"
-    t.integer "Consumer_id",            comment: "Codigo unico de consumidor."
-    t.string  "Card_number", limit: 25, comment: "Numero de tarjeta"
-    t.index ["Bank_id"], name: "FK_Creditcard_Bank", using: :btree
-    t.index ["Btc_id"], name: "FK_bank_brandct", using: :btree
-    t.index ["Consumer_id"], name: "FK_Reference_37", using: :btree
+  create_table "credit_card", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información comercial de los perfiles de consumo, referencia" do |t|
+    t.integer "bank_id",                         comment: "Codigo unico del banco."
+    t.integer "credit_card_brand_id",            comment: "Codigo unico para la marca de la tarjeta de credito"
+    t.integer "consumer_id",                     comment: "Codigo unico de consumidor."
+    t.string  "card_number",          limit: 25, comment: "Numero de tarjeta"
+    t.index ["bank_id"], name: "FK_Creditcard_Bank", using: :btree
+    t.index ["consumer_id"], name: "FK_Reference_37", using: :btree
+    t.index ["credit_card_brand_id"], name: "FK_bank_brandct", using: :btree
   end
 
-  create_table "DebitCard", primary_key: "Debit_card_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información comercial de los perfiles de consumo, referencia" do |t|
-    t.integer "Bank_id",                comment: "Codigo unico del banco."
-    t.integer "Btc_id",                 comment: "Codigo unico para la marca de la tarjeta de credito"
-    t.integer "Consumer_id",            comment: "Codigo unico de consumidor."
-    t.string  "Card_number", limit: 25, comment: "Numero de tarjeta"
-    t.index ["Bank_id"], name: "FK_DebitCard_Bank", using: :btree
-    t.index ["Btc_id"], name: "FK_DebitCard_BrandCT", using: :btree
-    t.index ["Consumer_id"], name: "FK_Reference_36", using: :btree
+  create_table "credit_card_brand", id: :integer, comment: "Codigo unico para la marca de la tarjeta de credito", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Marca de la tarjeta de credito con la cual operan los perfil" do |t|
+    t.string "name", limit: 35, comment: "Nombre de la marca para la tarjeta de credito"
   end
 
-  create_table "Inventory", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Referencia a entidad de conteo frente a los productos y por " do |t|
-    t.integer "Product_id",  comment: "Codigo unico del producto."
-    t.integer "Provider_id", comment: "Codigo unico de distribuidor."
-    t.integer "Quantity",    comment: "Cantidad del producto a comercializar."
-    t.integer "Price",       comment: "Precio de venta del producto."
-    t.index ["Product_id"], name: "FK_Inventory_Product", using: :btree
-    t.index ["Provider_id"], name: "FK_Inventory_Provider", using: :btree
+  create_table "debit_card", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información comercial de los perfiles de consumo, referencia" do |t|
+    t.integer "bank_id",                         comment: "Codigo unico del banco."
+    t.integer "credit_card_brand_id",            comment: "Codigo unico para la marca de la tarjeta de credito"
+    t.integer "consumer_id",                     comment: "Codigo unico de consumidor."
+    t.string  "card_number",          limit: 25, comment: "Numero de tarjeta"
+    t.index ["bank_id"], name: "FK_DebitCard_Bank", using: :btree
+    t.index ["consumer_id"], name: "FK_Reference_36", using: :btree
+    t.index ["credit_card_brand_id"], name: "FK_DebitCard_BrandCT", using: :btree
   end
 
-  create_table "Location", primary_key: "Tracing_id", id: :string, limit: 10, comment: "Sesión de perfil", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Referencia a entidad de seguimiento, en la cual se estructur" do |t|
-    t.integer "Store_id",             comment: "Codigo unico de local"
-    t.string  "Latitude",  limit: 20, comment: "Latitud de la geolocalizacion"
-    t.string  "Longitude", limit: 20, comment: "Longitud de la geolocalizacion"
-    t.index ["Store_id"], name: "FK_Reference_40", using: :btree
+  create_table "inventory", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Referencia a entidad de conteo frente a los productos y por " do |t|
+    t.integer "product_id",  comment: "Codigo unico del producto."
+    t.integer "provider_id", comment: "Codigo unico de distribuidor."
+    t.integer "quantity",    comment: "Cantidad del producto a comercializar."
+    t.integer "price",       comment: "Precio de venta del producto."
+    t.index ["product_id"], name: "FK_Inventory_Product", using: :btree
+    t.index ["provider_id"], name: "FK_Inventory_Provider", using: :btree
   end
 
-  create_table "OrderSale", primary_key: "Order_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Instancia de generación de venta, referencia a entidad gener" do |t|
-    t.integer  "Total",                         comment: "Monto total del pedido."
-    t.datetime "Date",                          comment: "Fecha de pedido."
-    t.integer  "Provider_id",                   comment: "Codigo unico de distribuidor."
-    t.integer  "Consumer_id",      null: false, comment: "Codigo unico de consumidor foraneo"
-    t.integer  "PaymentMethod_id",              comment: "Codigo unico para la relacion de metodos de pago para ejecucion de logicas del negocio."
-    t.integer  "Order_status",                  comment: "Flag de entrega con factor de verificacion (3= Orden entregada ,2= Orden en reparto ,1= Orden rechazada, 0= Solicitud de orden)."
-    t.integer  "Ticket_number",                 comment: "Numero de boleta extendida."
-    t.index ["Consumer_id"], name: "FK_Consumer_order", using: :btree
-    t.index ["PaymentMethod_id"], name: "FK_OrderSale_PaymentMEthod", using: :btree
-    t.index ["Provider_id"], name: "fk_Pedido_Distribuidor1", using: :btree
+  create_table "location", id: :string, limit: 10, comment: "Sesión de perfil", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Referencia a entidad de seguimiento, en la cual se estructur" do |t|
+    t.integer "store_id",             comment: "Codigo unico de local"
+    t.string  "latitude",  limit: 20, comment: "Latitud de la geolocalizacion"
+    t.string  "longitude", limit: 20, comment: "Longitud de la geolocalizacion"
+    t.index ["store_id"], name: "FK_Reference_40", using: :btree
   end
 
-  create_table "PaymentMethod", primary_key: "PaymentMethod_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Metodos de pago para que acepta el perfilado de distribución" do |t|
-    t.integer "MCash",   comment: "Metodo de pago en efectivo (1= metodo de pago activado, 0= metodo de pago desactivo)."
-    t.integer "MDebit",  comment: "Metodo de pago en debito (1= metodo de pago activado, 0= metodo de pago desactivo)."
-    t.integer "MCredit", comment: "Metodo de pago en Credito (1= metodo de pago activado, 0= metodo de pago desactivo)."
+  create_table "order_sale", primary_key: "order_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Instancia de generación de venta, referencia a entidad gener" do |t|
+    t.integer  "total",                          comment: "Monto total del pedido."
+    t.datetime "date",                           comment: "Fecha de pedido."
+    t.integer  "provider_id",                    comment: "Codigo unico de distribuidor."
+    t.integer  "consumer_id",       null: false, comment: "Codigo unico de consumidor foraneo"
+    t.integer  "payment_method_id",              comment: "Codigo unico para la relacion de metodos de pago para ejecucion de logicas del negocio."
+    t.integer  "order_status",                   comment: "Flag de entrega con factor de verificacion (3= Orden entregada ,2= Orden en reparto ,1= Orden rechazada, 0= Solicitud de orden)."
+    t.integer  "ticket_number",                  comment: "Numero de boleta extendida."
+    t.index ["consumer_id"], name: "FK_Consumer_order", using: :btree
+    t.index ["payment_method_id"], name: "FK_OrderSale_PaymentMEthod", using: :btree
+    t.index ["provider_id"], name: "fk_Pedido_Distribuidor1", using: :btree
   end
 
-  create_table "Product", primary_key: "Product_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Tabla de entidad producto, referente a la instancia de objet" do |t|
-    t.integer "Category_id",                comment: "Codigo unico de la categoría de los productos."
-    t.string  "Name",           limit: 30,  comment: "Nombre del producto."
-    t.string  "Description",    limit: 500, comment: "Descripción del producto."
-    t.string  "Image",          limit: 100, comment: "Imagen del producto definido."
-    t.integer "Store_id"
-    t.string  "File_in_server"
-    t.index ["Category_id"], name: "FK_Product_Category", using: :btree
+  create_table "payment_method", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Metodos de pago para que acepta el perfilado de distribución" do |t|
+    t.integer "cash",   comment: "Metodo de pago en efectivo (1= metodo de pago activado, 0= metodo de pago desactivo)."
+    t.integer "debit",  comment: "Metodo de pago en debito (1= metodo de pago activado, 0= metodo de pago desactivo)."
+    t.integer "credit", comment: "Metodo de pago en Credito (1= metodo de pago activado, 0= metodo de pago desactivo)."
   end
 
-  create_table "ProductQuantifier", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Contador relacional m a m de las entidades de pedido y produ" do |t|
-    t.integer "order_id", comment: "Codigo unico del pedido."
-    t.integer "IdProd",   comment: "Codigo unico del producto."
-    t.integer "Quantity", comment: "Cantidad del produto determinado"
-    t.index ["IdProd"], name: "FK_Proped_Product", using: :btree
+  create_table "product", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Tabla de entidad producto, referente a la instancia de objet" do |t|
+    t.integer "category_id",                comment: "Codigo unico de la categoría de los productos."
+    t.string  "name",           limit: 30,  comment: "Nombre del producto."
+    t.string  "description",    limit: 500, comment: "Descripción del producto."
+    t.string  "image",          limit: 100, comment: "Imagen del producto definido."
+    t.string  "file_in_server",             comment: "Nombre del archivo de imágen en servidor"
+    t.integer "store_id"
+    t.index ["category_id"], name: "FK_Product_Category", using: :btree
+  end
+
+  create_table "product_quantifier", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Contador relacional m a m de las entidades de pedido y produ" do |t|
+    t.integer "order_id",   comment: "Codigo unico del pedido."
+    t.integer "product_id", comment: "Codigo unico del producto."
+    t.integer "quantity",   comment: "Cantidad del produto determinado"
     t.index ["order_id"], name: "FK_Prodped_Order", using: :btree
+    t.index ["product_id"], name: "FK_Proped_Product", using: :btree
   end
 
-  create_table "Provider", primary_key: "Provider_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Perfil proveedor o distribuidor, entidad relacionada a los a" do |t|
-    t.integer "Vehicle_id",                  comment: "codigo unico de vehiculo"
-    t.integer "Store_id",                    comment: "Codigo unico de local"
-    t.integer "Address_id",                  comment: "Codigo unico de direccion"
-    t.integer "PaymentMethod_id",            comment: "Codigo unico para la relacion de metodos de pago para ejecucion de logicas del negocio."
-    t.integer "Bank_account_id",             comment: "Codigo unico de cuenta bancaria"
-    t.string  "Rut",              limit: 10, comment: "Rut del distribuidor."
-    t.string  "EMail",            limit: 40, comment: "Correo electrónico de distribuidor."
-    t.string  "Password",         limit: 50, comment: "Password de acceso log in para perfil distribuidor."
-    t.string  "First_name",       limit: 30, comment: "Nombre del distribuidor."
-    t.string  "Last_name",        limit: 30, comment: "Apellido del distribuidor."
-    t.index ["Address_id"], name: "FK_Provider_address", using: :btree
-    t.index ["Bank_account_id"], name: "FK_BankAccount_Provider", using: :btree
-    t.index ["PaymentMethod_id"], name: "FK_PaymentMethod_Provider", using: :btree
-    t.index ["Store_id"], name: "FK_Provider_Store", using: :btree
-    t.index ["Vehicle_id"], name: "FK_Vehicle_Provider", using: :btree
+  create_table "provider", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Perfil proveedor o distribuidor, entidad relacionada a los a" do |t|
+    t.integer "vehicle_id",                   comment: "codigo unico de vehiculo"
+    t.integer "store_id",                     comment: "Codigo unico de local"
+    t.integer "address_id",                   comment: "Codigo unico de direccion"
+    t.integer "payment_method_id",            comment: "Codigo unico para la relacion de metodos de pago para ejecucion de logicas del negocio."
+    t.integer "bank_account_id",              comment: "Codigo unico de cuenta bancaria"
+    t.string  "rut",               limit: 10, comment: "Rut del distribuidor."
+    t.string  "email",             limit: 40, comment: "Correo electrónico de distribuidor."
+    t.string  "password",          limit: 50, comment: "Password de acceso log in para perfil distribuidor."
+    t.string  "first_name",        limit: 30, comment: "Nombre del distribuidor."
+    t.string  "last_name",         limit: 30, comment: "Apellido del distribuidor."
+    t.index ["address_id"], name: "FK_Provider_address", using: :btree
+    t.index ["bank_account_id"], name: "FK_BankAccount_Provider", using: :btree
+    t.index ["payment_method_id"], name: "FK_PaymentMethod_Provider", using: :btree
+    t.index ["store_id"], name: "FK_Provider_Store", using: :btree
+    t.index ["vehicle_id"], name: "FK_Vehicle_Provider", using: :btree
   end
 
-  create_table "Province", primary_key: "Province_id", id: :integer, comment: "Codigo de provincia", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información de localización, referencia a la entidad de las " do |t|
-    t.string "Name", limit: 23, comment: "Nombre de provincia"
+  create_table "province", id: :integer, comment: "Codigo de provincia", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información de localización, referencia a la entidad de las " do |t|
+    t.string "name", limit: 23, comment: "Nombre de provincia"
   end
 
-  create_table "Punishment", primary_key: "Punishment_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información de consecuencia de incumplimiento de normativas " do |t|
-    t.string  "Reason",           limit: 100, comment: "Motivo de penalizacion"
-    t.integer "Duration",                     comment: "Inactividad en horas"
-    t.integer "Denegate_service",             comment: "Denegación de servicio o baneo de la plataforma."
-    t.integer "Count",                        comment: "Contador de incidencias de perfiles"
+  create_table "punishment", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información de consecuencia de incumplimiento de normativas " do |t|
+    t.string  "reason",           limit: 100, comment: "Motivo de penalizacion"
+    t.integer "duration",                     comment: "Inactividad en horas"
+    t.integer "denegate_service",             comment: "Denegación de servicio o baneo de la plataforma."
+    t.integer "count",                        comment: "Contador de incidencias de perfiles"
   end
 
-  create_table "Request", primary_key: "Request_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Entidad de peticion o contacto con los gestionadores de KRT " do |t|
-    t.integer "Rc_id",                     comment: "Codigo unico de categoria de peticion o contacto"
-    t.integer "Consumer_id",               comment: "Codigo unico de consumidor."
-    t.integer "Provider_id",               comment: "Codigo unico de distribuidor."
-    t.string  "Message",      limit: 1000, comment: "Mensaje de la petición o contacto."
-    t.string  "Name",         limit: 60,   comment: "Nombre de la persona que genera el contacto como NN."
-    t.string  "Email",        limit: 20,   comment: "Dirección de correo electronico de la persona que genera el contacto como NN."
-    t.string  "Phone_number", limit: 15,   comment: "Número telefonico de la persona que genera el contacto como NN."
-    t.index ["Consumer_id"], name: "FK_Request_Consumer", using: :btree
-    t.index ["Provider_id"], name: "FK_Request_Provider", using: :btree
-    t.index ["Rc_id"], name: "FK_Request_Request_category", using: :btree
+  create_table "request", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Entidad de peticion o contacto con los gestionadores de KRT " do |t|
+    t.integer "request_category_id",              comment: "Codigo unico de categoria de peticion o contacto"
+    t.integer "consumer_id",                      comment: "Codigo unico de consumidor."
+    t.integer "provider_id",                      comment: "Codigo unico de distribuidor."
+    t.string  "message",             limit: 1000, comment: "Mensaje de la petición o contacto."
+    t.string  "name",                limit: 60,   comment: "Nombre de la persona que genera el contacto como NN."
+    t.string  "email",               limit: 20,   comment: "Dirección de correo electronico de la persona que genera el contacto como NN."
+    t.string  "phone_number",        limit: 15,   comment: "Número telefonico de la persona que genera el contacto como NN."
+    t.index ["consumer_id"], name: "FK_Request_Consumer", using: :btree
+    t.index ["provider_id"], name: "FK_Request_Provider", using: :btree
+    t.index ["request_category_id"], name: "FK_Request_Request_category", using: :btree
   end
 
-  create_table "Request_category", primary_key: "Rc_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Categoría de contacto, Entidad independiente de la clasifica" do |t|
-    t.string "Name",        limit: 30,  comment: "Nombre de categoría de solicitud"
-    t.string "Description", limit: 500, comment: "Descripción de la categoría a definir."
+  create_table "request_category", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Categoría de contacto, Entidad independiente de la clasifica" do |t|
+    t.string "name",        limit: 30,  comment: "Nombre de categoría de solicitud"
+    t.string "description", limit: 500, comment: "Descripción de la categoría a definir."
   end
 
-  create_table "SaleHistorical", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Entidad de acumulación de ventas por proveedor." do |t|
-    t.integer  "Provider_id", comment: "Codigo unico de distribuidor."
-    t.integer  "Amount",      comment: "Monto de registro"
-    t.datetime "Date",        comment: "Fecha de registro"
-    t.integer  "Segment_id",  comment: "Código único de segmento comercial."
-    t.index ["Provider_id"], name: "FK_Reference_38", using: :btree
-    t.index ["Segment_id"], name: "FK_Reference_39", using: :btree
+  create_table "sale_historical", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Entidad de acumulación de ventas por proveedor." do |t|
+    t.integer  "provider_id", comment: "Codigo unico de distribuidor."
+    t.integer  "amount",      comment: "Monto de registro"
+    t.datetime "date",        comment: "Fecha de registro"
+    t.integer  "segment_id",  comment: "Código único de segmento comercial."
+    t.index ["provider_id"], name: "FK_Reference_38", using: :btree
+    t.index ["segment_id"], name: "FK_Reference_39", using: :btree
   end
 
-  create_table "Score", primary_key: "Score_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Entidad encargada de la información de comportamiento de los" do |t|
-    t.integer "Punishment_id",            comment: "Codigo unico de penalizacion"
-    t.integer "Consumer_id",              comment: "Codigo unico de consumidor."
-    t.integer "Provider_id",              comment: "Codigo unico de distribuidor."
-    t.integer "Puntuation",               comment: "Puntuacion"
-    t.string  "Comment",       limit: 70, comment: "Comentario"
-    t.string  "Suggest",       limit: 70, comment: "Recomendacion"
-    t.string  "Claim",         limit: 70, comment: "Reclamo"
-    t.index ["Consumer_id"], name: "FK_Score_Consumer", using: :btree
-    t.index ["Provider_id"], name: "FK_Score_Provider", using: :btree
-    t.index ["Punishment_id"], name: "FK_Score_Punishment", using: :btree
+  create_table "score", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Entidad encargada de la información de comportamiento de los" do |t|
+    t.integer "punishment_id",            comment: "Codigo unico de penalizacion"
+    t.integer "consumer_id",              comment: "Codigo unico de consumidor."
+    t.integer "provider_id",              comment: "Codigo unico de distribuidor."
+    t.integer "puntuation",               comment: "Puntuacion"
+    t.string  "comment",       limit: 70, comment: "Comentario"
+    t.string  "suggest",       limit: 70, comment: "Recomendacion"
+    t.string  "claim",         limit: 70, comment: "Reclamo"
+    t.index ["consumer_id"], name: "FK_Score_Consumer", using: :btree
+    t.index ["provider_id"], name: "FK_Score_Provider", using: :btree
+    t.index ["punishment_id"], name: "FK_Score_Punishment", using: :btree
   end
 
-  create_table "Segment", primary_key: "Segment_id", id: :integer, comment: "Codigo de segmento comercial", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Entidad por concepto de segmento comercial referente a la en" do |t|
-    t.integer "Amount",                            comment: "Monto del segmento"
-    t.decimal "Comission", precision: 4, scale: 2, comment: "Comision del segmento"
+  create_table "segment", id: :integer, comment: "Codigo de segmento comercial", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Entidad por concepto de segmento comercial referente a la en" do |t|
+    t.integer "amount",                             comment: "Monto del segmento"
+    t.decimal "commission", precision: 4, scale: 2, comment: "Comision del segmento"
   end
 
-  create_table "Store", primary_key: "Store_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información referente a la entidad Comercio o establecimient" do |t|
-    t.integer "Address_id",              comment: "Codigo unico de direccion"
-    t.string  "Name",        limit: 35,  comment: "Nombre de local"
-    t.string  "Description", limit: 200, comment: "Descripcion de local"
-    t.integer "users_id"
-    t.index ["Address_id"], name: "FK_Store_Adress", using: :btree
-    t.index ["users_id"], name: "index_Store_on_users_id", using: :btree
+  create_table "store", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información referente a la entidad Comercio o establecimient" do |t|
+    t.integer "address_id",              comment: "Codigo unico de direccion"
+    t.string  "name",        limit: 35,  comment: "Nombre de local"
+    t.string  "description", limit: 200, comment: "Descripcion de local"
+    t.integer "user_id"
+    t.index ["address_id"], name: "FK_Store_Adress", using: :btree
+    t.index ["user_id"], name: "index_store_on_user_id", using: :btree
   end
 
-  create_table "Tracing", primary_key: "Sesion", id: :string, limit: 10, comment: "Sesión de perfil", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Referencia a entidad de seguimiento, en la cual se estructur" do |t|
-    t.integer "Consumer_id",            comment: "Codigo unico de consumidor."
-    t.integer "Provider_id",            comment: "Codigo unico de distribuidor."
-    t.string  "Latitude",    limit: 20, comment: "Latitud de la geolocalizacion"
-    t.string  "Longitude",   limit: 20, comment: "Longitud de la geolocalizacion"
-    t.integer "Flag_Purge",             comment: "Flag de purga"
-    t.index ["Consumer_id"], name: "FK_Tracing_Consumer", using: :btree
-    t.index ["Provider_id"], name: "FK_Tracing_Provider", using: :btree
+  create_table "tracing", primary_key: "sesion", id: :string, limit: 10, comment: "Sesión de perfil", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Referencia a entidad de seguimiento, en la cual se estructur" do |t|
+    t.integer "consumer_id",            comment: "Codigo unico de consumidor."
+    t.integer "provider_id",            comment: "Codigo unico de distribuidor."
+    t.string  "latitude",    limit: 20, comment: "Latitud de la geolocalizacion"
+    t.string  "longitude",   limit: 20, comment: "Longitud de la geolocalizacion"
+    t.integer "flag_Purge",             comment: "Flag de purga"
+    t.index ["consumer_id"], name: "FK_Tracing_Consumer", using: :btree
+    t.index ["provider_id"], name: "FK_Tracing_Provider", using: :btree
   end
 
-  create_table "Type_account", primary_key: "Ta_id", id: :integer, comment: "Codigo unico para el tipo de cuenta", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Tipo de cuenta para uso del perfilado de distribucion, infor" do |t|
-    t.string "Name", limit: 35, comment: "Nombre del tipo de cuenta"
+  create_table "type_account", id: :integer, comment: "Codigo unico para el tipo de cuenta", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Tipo de cuenta para uso del perfilado de distribucion, infor" do |t|
+    t.string "name", limit: 35, comment: "Nombre del tipo de cuenta"
   end
 
-  create_table "Vehicle", primary_key: "Vehicle_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información referente a la marca, todo distribuidor debe reg" do |t|
-    t.integer "Vehicle_brand_id",            comment: "Codigo unico de marca de vehiculo"
-    t.string  "Model_name",       limit: 15, comment: "Modelo del vehiculo"
-    t.string  "Licence_plate",    limit: 6,  comment: "Matricula o patente del vehiculo"
-    t.string  "Color",            limit: 20, comment: "Color del vehiculo"
-    t.index ["Vehicle_brand_id"], name: "FK_Vehiclebrand_Vehicle", using: :btree
-  end
-
-  create_table "VehicleBrand", primary_key: "Vehicle_brand_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información referente a la marca, todo distribuidor debe reg" do |t|
-    t.string "Name", limit: 15, comment: "Nombre de marca de vehiculo"
-  end
-
-  create_table "consumer", primary_key: "Consumer_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Perfil consumidor ejecutor de las compras, entidad relaciona" do |t|
-    t.integer "Address_id",                comment: "Codigo unico de direccion"
-    t.string  "Rut",            limit: 10, comment: "Rut del consumidor."
-    t.string  "Email",          limit: 40, comment: "Direccion del correo electronico del consumidor."
-    t.string  "Password",       limit: 50, comment: "clave unica de acceso log in para ingreso a KRT Driver"
-    t.string  "Facebook_Token",            comment: "Token de facebook para acceso a KRT Driver."
-    t.string  "Google_Token",              comment: "Token de google para acceso a KRT Driver."
-    t.string  "First_name",     limit: 30, comment: "Nombre de consumidor."
-    t.string  "Last_name",      limit: 30, comment: "Apellido de consumidor."
-    t.index ["Address_id"], name: "FK_Consumer_Address", using: :btree
-  end
-
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "user", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "",   null: false
     t.string   "encrypted_password",     default: "",   null: false
     t.string   "reset_password_token"
@@ -263,46 +251,58 @@ ActiveRecord::Schema.define(version: 20170705235028) do
     t.string   "street_name"
     t.string   "store_description"
     t.string   "owner_name"
-    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["email"], name: "index_user_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_user_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "Address", "Commune", primary_key: "Commune_id", name: "FK_Address_Comune"
-  add_foreign_key "BankAccount", "Bank", primary_key: "Bank_id", name: "FK_Bankaccount_Bank"
-  add_foreign_key "BankAccount", "Type_account", column: "Ta_id", primary_key: "Ta_id", name: "FK_taccount_Bankaccount"
-  add_foreign_key "Commune", "Province", primary_key: "Province_id", name: "FK_Commune_Province"
-  add_foreign_key "CreditCard", "Bank", primary_key: "Bank_id", name: "FK_Creditcard_Bank"
-  add_foreign_key "CreditCard", "Brand_ct", column: "Btc_id", primary_key: "Btc_id", name: "FK_bank_brandct"
-  add_foreign_key "CreditCard", "consumer", column: "Consumer_id", primary_key: "Consumer_id", name: "FK_Reference_37"
-  add_foreign_key "DebitCard", "Bank", primary_key: "Bank_id", name: "FK_DebitCard_Bank"
-  add_foreign_key "DebitCard", "Brand_ct", column: "Btc_id", primary_key: "Btc_id", name: "FK_DebitCard_BrandCT"
-  add_foreign_key "DebitCard", "consumer", column: "Consumer_id", primary_key: "Consumer_id", name: "FK_Reference_36"
-  add_foreign_key "Inventory", "Product", primary_key: "Product_id", name: "FK_Inventory_Product"
-  add_foreign_key "Inventory", "Provider", primary_key: "Provider_id", name: "FK_Inventory_Provider"
-  add_foreign_key "Location", "Store", primary_key: "Store_id", name: "FK_Reference_40"
-  add_foreign_key "OrderSale", "PaymentMethod", primary_key: "PaymentMethod_id", name: "FK_OrderSale_PaymentMEthod"
-  add_foreign_key "OrderSale", "Provider", primary_key: "Provider_id", name: "fk_Pedido_Distribuidor1"
-  add_foreign_key "OrderSale", "consumer", column: "Consumer_id", primary_key: "Consumer_id", name: "FK_Consumer_order"
-  add_foreign_key "Product", "Category", primary_key: "Category_id", name: "FK_Product_Category"
-  add_foreign_key "ProductQuantifier", "OrderSale", column: "order_id", primary_key: "Order_id", name: "FK_Prodped_Order"
-  add_foreign_key "ProductQuantifier", "Product", column: "IdProd", primary_key: "Product_id", name: "FK_Proped_Product"
-  add_foreign_key "Provider", "Address", primary_key: "Address_id", name: "FK_Provider_address"
-  add_foreign_key "Provider", "BankAccount", column: "Bank_account_id", primary_key: "Bank_account_id", name: "FK_BankAccount_Provider"
-  add_foreign_key "Provider", "PaymentMethod", primary_key: "PaymentMethod_id", name: "FK_PaymentMethod_Provider"
-  add_foreign_key "Provider", "Store", primary_key: "Store_id", name: "FK_Provider_Store"
-  add_foreign_key "Provider", "Vehicle", primary_key: "Vehicle_id", name: "FK_Vehicle_Provider"
-  add_foreign_key "Request", "Provider", primary_key: "Provider_id", name: "FK_Request_Provider"
-  add_foreign_key "Request", "Request_category", column: "Rc_id", primary_key: "Rc_id", name: "FK_Request_Request_category"
-  add_foreign_key "Request", "consumer", column: "Consumer_id", primary_key: "Consumer_id", name: "FK_Request_Consumer"
-  add_foreign_key "SaleHistorical", "Provider", primary_key: "Provider_id", name: "FK_Reference_38"
-  add_foreign_key "SaleHistorical", "Segment", primary_key: "Segment_id", name: "FK_Reference_39"
-  add_foreign_key "Score", "Provider", primary_key: "Provider_id", name: "FK_Score_Provider"
-  add_foreign_key "Score", "Punishment", primary_key: "Punishment_id", name: "FK_Score_Punishment"
-  add_foreign_key "Score", "consumer", column: "Consumer_id", primary_key: "Consumer_id", name: "FK_Score_Consumer"
-  add_foreign_key "Store", "Address", primary_key: "Address_id", name: "FK_Store_Adress"
-  add_foreign_key "Store", "users", column: "users_id"
-  add_foreign_key "Tracing", "Provider", primary_key: "Provider_id", name: "FK_Tracing_Provider"
-  add_foreign_key "Tracing", "consumer", column: "Consumer_id", primary_key: "Consumer_id", name: "FK_Tracing_Consumer"
-  add_foreign_key "Vehicle", "VehicleBrand", column: "Vehicle_brand_id", primary_key: "Vehicle_brand_id", name: "FK_Vehiclebrand_Vehicle"
-  add_foreign_key "consumer", "Address", primary_key: "Address_id", name: "FK_Consumer_Address"
+  create_table "vehicle", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información referente a la marca, todo distribuidor debe reg" do |t|
+    t.integer "vehicle_brand_id",            comment: "Codigo unico de marca de vehiculo"
+    t.string  "model_name",       limit: 15, comment: "Modelo del vehiculo"
+    t.string  "licence_plate",    limit: 6,  comment: "Matricula o patente del vehiculo"
+    t.string  "color",            limit: 20, comment: "Color del vehiculo"
+    t.index ["vehicle_brand_id"], name: "FK_Vehiclebrand_Vehicle", using: :btree
+  end
+
+  create_table "vehicle_brand", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información referente a la marca, todo distribuidor debe reg" do |t|
+    t.string "name", limit: 15, comment: "Nombre de marca de vehiculo"
+  end
+
+  add_foreign_key "address", "commune", name: "FK_Address_Comune"
+  add_foreign_key "bank_account", "bank", name: "FK_Bankaccount_Bank"
+  add_foreign_key "bank_account", "type_account", name: "FK_taccount_Bankaccount"
+  add_foreign_key "commune", "province", name: "FK_Commune_Province"
+  add_foreign_key "consumer", "address", name: "FK_Consumer_Address"
+  add_foreign_key "credit_card", "bank", name: "FK_Creditcard_Bank"
+  add_foreign_key "credit_card", "consumer", name: "FK_Reference_37"
+  add_foreign_key "credit_card", "credit_card_brand", name: "FK_bank_brandct"
+  add_foreign_key "debit_card", "bank", name: "FK_DebitCard_Bank"
+  add_foreign_key "debit_card", "consumer", name: "FK_Reference_36"
+  add_foreign_key "debit_card", "credit_card_brand", name: "FK_DebitCard_BrandCT"
+  add_foreign_key "inventory", "product", name: "FK_Inventory_Product"
+  add_foreign_key "inventory", "provider", name: "FK_Inventory_Provider"
+  add_foreign_key "location", "store", name: "FK_Reference_40"
+  add_foreign_key "order_sale", "consumer", name: "FK_Consumer_order"
+  add_foreign_key "order_sale", "payment_method", name: "FK_OrderSale_PaymentMEthod"
+  add_foreign_key "order_sale", "provider", name: "fk_Pedido_Distribuidor1"
+  add_foreign_key "product", "category", name: "FK_Product_Category"
+  add_foreign_key "product_quantifier", "order_sale", column: "order_id", primary_key: "order_id", name: "FK_Prodped_Order"
+  add_foreign_key "product_quantifier", "product", name: "FK_Proped_Product"
+  add_foreign_key "provider", "address", name: "FK_Provider_address"
+  add_foreign_key "provider", "bank_account", name: "FK_BankAccount_Provider"
+  add_foreign_key "provider", "payment_method", name: "FK_PaymentMethod_Provider"
+  add_foreign_key "provider", "store", name: "FK_Provider_Store"
+  add_foreign_key "provider", "vehicle", name: "FK_Vehicle_Provider"
+  add_foreign_key "request", "consumer", name: "FK_Request_Consumer"
+  add_foreign_key "request", "provider", name: "FK_Request_Provider"
+  add_foreign_key "request", "request_category", name: "FK_Request_Request_category"
+  add_foreign_key "sale_historical", "provider", name: "FK_Reference_38"
+  add_foreign_key "sale_historical", "segment", name: "FK_Reference_39"
+  add_foreign_key "score", "consumer", name: "FK_Score_Consumer"
+  add_foreign_key "score", "provider", name: "FK_Score_Provider"
+  add_foreign_key "score", "punishment", name: "FK_Score_Punishment"
+  add_foreign_key "store", "address", name: "FK_Store_Adress"
+  add_foreign_key "store", "user"
+  add_foreign_key "tracing", "consumer", name: "FK_Tracing_Consumer"
+  add_foreign_key "tracing", "provider", name: "FK_Tracing_Provider"
+  add_foreign_key "vehicle", "vehicle_brand", name: "FK_Vehiclebrand_Vehicle"
 end

@@ -1,4 +1,4 @@
 class PaymentMethod < ApplicationRecord
-  self.table_name = "PaymentMethod"
-  self.primary_key = "Payment_method_id"
+  self.table_name = 'payment_method'
+  self.primary_key = 'payment_method_id'
 end

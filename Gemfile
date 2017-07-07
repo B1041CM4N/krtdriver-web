@@ -56,7 +56,6 @@ gem 'i18n', '~> 0.8.1'
 
 # GENERACION DE REPORTES - XLSX
 gem 'axlsx'
-gem 'axlsx_rails'
 
 gem 'annotate'
 

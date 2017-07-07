@@ -1,29 +1,26 @@
 # == Schema Information
 #
-# Table name: Address
+# Table name: address
 #
-#  Address_id    :integer          not null, primary key
-#  Commune_id    :integer
-#  Street_name   :string(35)
-#  Street_number :string(7)
-#  Block_number  :string(5)
-#  Town_name     :string(20)
+#  id            :integer          not null, primary key
+#  commune_id    :integer
+#  street_name   :string(35)
+#  street_number :string(7)
+#  block_number  :string(5)
+#  town_name     :string(20)
 #
 # Indexes
 #
-#  FK_Address_Comune  (Commune_id)
+#  FK_Address_Comune  (commune_id)
 #
 # Foreign Keys
 #
-#  FK_Address_Comune  (Commune_id => Commune.Commune_id)
+#  FK_Address_Comune  (commune_id => commune.id)
 #
 
 class Address < ApplicationRecord
-  self.table_name = "Address"
-  self.primary_key = "Address_id"
+  self.table_name = 'address'
+  self.primary_key = 'address_id'
   
-  attr_accessor :Address_id
-  attr_accessor :address_id
-  
-  has_many :Stores
+  has_many :store
 end
