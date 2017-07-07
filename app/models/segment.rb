@@ -9,5 +9,5 @@
 
 class Segment < ApplicationRecord
   self.table_name = 'segment'
-  self.primary_id = 'segment_id'
+  self.primary_key = 'segment_id'
 end
