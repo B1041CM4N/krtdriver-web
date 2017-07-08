@@ -2,7 +2,7 @@
 #
 # Table name: score
 #
-#  id            :integer          not null, primary key
+#  score_id      :integer          not null, primary key
 #  punishment_id :integer
 #  consumer_id   :integer
 #  provider_id   :integer
@@ -19,9 +19,9 @@
 #
 # Foreign Keys
 #
-#  FK_Score_Consumer    (consumer_id => consumer.id)
-#  FK_Score_Provider    (provider_id => provider.id)
-#  FK_Score_Punishment  (punishment_id => punishment.id)
+#  FK_Score_Consumer    (consumer_id => consumer.consumer_id)
+#  FK_Score_Provider    (provider_id => provider.provider_id)
+#  FK_Score_Punishment  (punishment_id => punishment.punishment_id)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

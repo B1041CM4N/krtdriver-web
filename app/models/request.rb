@@ -2,7 +2,7 @@
 #
 # Table name: request
 #
-#  id                  :integer          not null, primary key
+#  request_id          :integer          not null, primary key
 #  request_category_id :integer
 #  consumer_id         :integer
 #  provider_id         :integer
@@ -19,12 +19,15 @@
 #
 # Foreign Keys
 #
-#  FK_Request_Consumer          (consumer_id => consumer.id)
-#  FK_Request_Provider          (provider_id => provider.id)
-#  FK_Request_Request_category  (request_category_id => request_category.id)
+#  FK_Request_Consumer          (consumer_id => consumer.consumer_id)
+#  FK_Request_Provider          (provider_id => provider.provider_id)
+#  FK_Request_Request_category  (request_category_id => request_category.request_category_id)
 #
 
 class Request < ApplicationRecord
   self.table_name = 'request'
   self.primary_key = 'request_id'
+
+  belongs_to :consumer, foreign_key: :consumer_id, class_name: 'Consumer'
+  belongs_to :request_category, foreign_key: :rc_id, class_name: 'RequestCategory'
 end

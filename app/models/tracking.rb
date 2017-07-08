@@ -20,6 +20,8 @@
 #  FK_Tracing_Provider  (provider_id => provider.id)
 #
 
-class Tracing < ApplicationRecord
-  self.table_name = 'tracing'
+class Tracking < ApplicationRecord
+  self.table_name = 'tracking'
+
+  belongs_to :provider, foreign_key: :provider_id, class_name: 'Provider'
 end

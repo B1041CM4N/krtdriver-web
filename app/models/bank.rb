@@ -2,7 +2,7 @@
 #
 # Table name: bank
 #
-#  id          :integer          not null, primary key
+#  bank_id     :integer          not null, primary key
 #  name        :string(50)
 #  description :string(500)
 #

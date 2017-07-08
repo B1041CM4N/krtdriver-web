@@ -2,7 +2,7 @@
 #
 # Table name: vehicle
 #
-#  id               :integer          not null, primary key
+#  vehicle_id       :integer          not null, primary key
 #  vehicle_brand_id :integer
 #  model_name       :string(15)
 #  licence_plate    :string(6)
@@ -14,10 +14,12 @@
 #
 # Foreign Keys
 #
-#  FK_Vehiclebrand_Vehicle  (vehicle_brand_id => vehicle_brand.id)
+#  FK_Vehiclebrand_Vehicle  (vehicle_brand_id => vehicle_brand.vehicle_brand_id)
 #
 
 class Vehicle < ApplicationRecord
   self.table_name = 'vehicle'
   self.primary_key = 'vehicle_id'
+
+  belongs_to :vehicle_brand_id, foreign_key: :vehicle_brand_id, class_name: 'VehicleBrand'
 end

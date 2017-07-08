@@ -2,7 +2,7 @@
 #
 # Table name: vehicle
 #
-#  id               :integer          not null, primary key
+#  vehicle_id       :integer          not null, primary key
 #  vehicle_brand_id :integer
 #  model_name       :string(15)
 #  licence_plate    :string(6)
@@ -14,7 +14,7 @@
 #
 # Foreign Keys
 #
-#  FK_Vehiclebrand_Vehicle  (vehicle_brand_id => vehicle_brand.id)
+#  FK_Vehiclebrand_Vehicle  (vehicle_brand_id => vehicle_brand.vehicle_brand_id)
 #
 
 require 'test_helper'

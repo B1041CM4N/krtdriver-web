@@ -2,7 +2,7 @@
 #
 # Table name: address
 #
-#  id            :integer          not null, primary key
+#  address_id    :integer          not null, primary key
 #  commune_id    :integer
 #  street_name   :string(35)
 #  street_number :string(7)
@@ -15,12 +15,13 @@
 #
 # Foreign Keys
 #
-#  FK_Address_Comune  (commune_id => commune.id)
+#  FK_Address_Comune  (commune_id => commune.commune_id)
 #
 
 class Address < ApplicationRecord
   self.table_name = 'address'
   self.primary_key = 'address_id'
   
+  belongs_to :commune, foreign_key: :commune_id, class_name: 'Commune'
   has_many :store
 end

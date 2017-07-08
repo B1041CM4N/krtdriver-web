@@ -2,9 +2,9 @@
 #
 # Table name: request_category
 #
-#  id          :integer          not null, primary key
-#  name        :string(30)
-#  description :string(500)
+#  request_category_id :integer          not null
+#  name                :string(30)
+#  description         :string(500)
 #
 
 require 'test_helper'

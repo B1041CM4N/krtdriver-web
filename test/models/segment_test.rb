@@ -2,7 +2,7 @@
 #
 # Table name: segment
 #
-#  id         :integer          not null, primary key
+#  segment_id :integer          not null, primary key
 #  amount     :integer
 #  commission :decimal(4, 2)
 #

@@ -2,7 +2,7 @@
 #
 # Table name: category
 #
-#  id          :integer          not null, primary key
+#  category_id :integer          not null, primary key
 #  name        :string(35)
 #  description :string(500)
 #

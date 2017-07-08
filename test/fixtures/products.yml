@@ -2,13 +2,12 @@
 #
 # Table name: product
 #
-#  id             :integer          not null, primary key
+#  product_id     :integer          not null, primary key
 #  category_id    :integer
 #  name           :string(30)
 #  description    :string(500)
 #  image          :string(100)
 #  file_in_server :string(255)
-#  store_id       :integer
 #
 # Indexes
 #
@@ -16,7 +15,7 @@
 #
 # Foreign Keys
 #
-#  FK_Product_Category  (category_id => category.id)
+#  FK_Product_Category  (category_id => category.category_id)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

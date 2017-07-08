@@ -2,13 +2,12 @@
 #
 # Table name: product
 #
-#  id             :integer          not null, primary key
+#  product_id     :integer          not null, primary key
 #  category_id    :integer
 #  name           :string(30)
 #  description    :string(500)
 #  image          :string(100)
 #  file_in_server :string(255)
-#  store_id       :integer
 #
 # Indexes
 #
@@ -16,7 +15,7 @@
 #
 # Foreign Keys
 #
-#  FK_Product_Category  (category_id => category.id)
+#  FK_Product_Category  (category_id => category.category_id)
 #
 
 require 'carrierwave/orm/activerecord'
@@ -28,13 +27,12 @@ class Product < ApplicationRecord
   mount_uploader :file_in_server, ProductUploader
 
   paginates_per 10
-  belongs_to :category, foreign_key: :category_id
-  belongs_to :store, foreign_key: :store_id
-  has_many :inventory, dependent: :destroy
+  belongs_to :category, foreign_key: :category_id, class_name: 'Category'
+  # has_many :inventory, dependent: :destroy
 
   # has_and_belongs_to_many :Inventory
 
-  validates :name, :description, :category_id, presence: true
+  # validates :name, :description, :category_id, presence: true
   # validates :name, :description, :price, presence: true
   # validates :price, numericality: true
   # validates :store_id, presence: true

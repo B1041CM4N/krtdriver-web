@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: Inventory
+# Table name: inventory
 #
 #  product_id  :integer
 #  provider_id :integer
@@ -14,12 +14,13 @@
 #
 # Foreign Keys
 #
-#  FK_Inventory_Product   (product_id => product.id)
-#  FK_Inventory_Provider  (provider_id => provider.id)
+#  FK_Inventory_Product   (product_id => product.product_id)
+#  FK_Inventory_Provider  (provider_id => provider.provider_id)
 #
 
 class Inventory < ApplicationRecord
   self.table_name = 'inventory'
-  belongs_to :product, foreign_key: :product_id
-  belongs_to :provider, foreign_key: :provider_id
+
+  belongs_to :product, foreign_key: :product_id, class_name: 'Product'
+  belongs_to :store, foreign_key: :store_id, class_name: 'Store'
 end

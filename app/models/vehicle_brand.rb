@@ -7,6 +7,6 @@
 #
 
 class VehicleBrand < ApplicationRecord
-  self.table_name = 'vehicle_brand'
+  self.table_name = 'vehiclebrand'
   self.primary_key = 'vehicle_brand_id'
 end

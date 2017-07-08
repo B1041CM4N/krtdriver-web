@@ -2,7 +2,7 @@
 #
 # Table name: commune
 #
-#  id          :integer          not null, primary key
+#  commune_id  :integer          not null, primary key
 #  province_id :integer
 #  name        :string(20)
 #
@@ -12,7 +12,7 @@
 #
 # Foreign Keys
 #
-#  FK_Commune_Province  (province_id => province.id)
+#  FK_Commune_Province  (province_id => province.province_id)
 #
 
 require 'test_helper'

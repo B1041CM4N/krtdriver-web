@@ -2,7 +2,7 @@
 #
 # Table name: address
 #
-#  id            :integer          not null, primary key
+#  address_id    :integer          not null, primary key
 #  commune_id    :integer
 #  street_name   :string(35)
 #  street_number :string(7)
@@ -15,7 +15,7 @@
 #
 # Foreign Keys
 #
-#  FK_Address_Comune  (commune_id => commune.id)
+#  FK_Address_Comune  (commune_id => commune.commune_id)
 #
 
 require 'test_helper'

@@ -2,7 +2,7 @@
 #
 # Table name: score
 #
-#  id            :integer          not null, primary key
+#  score_id      :integer          not null, primary key
 #  punishment_id :integer
 #  consumer_id   :integer
 #  provider_id   :integer
@@ -19,12 +19,16 @@
 #
 # Foreign Keys
 #
-#  FK_Score_Consumer    (consumer_id => consumer.id)
-#  FK_Score_Provider    (provider_id => provider.id)
-#  FK_Score_Punishment  (punishment_id => punishment.id)
+#  FK_Score_Consumer    (consumer_id => consumer.consumer_id)
+#  FK_Score_Provider    (provider_id => provider.provider_id)
+#  FK_Score_Punishment  (punishment_id => punishment.punishment_id)
 #
 
 class Score < ApplicationRecord
   self.table_name = 'score'
   self.primary_key = 'score_id'
+
+  belongs_to :punishment, foreign_key: :punishment_id, class_name: 'Punishment'
+  belongs_to :consumer, foreign_key: :consumer_id, class_name: 'Consumer'
+  belongs_to :store, foreign_key: :store_id, class_name: 'Store'
 end

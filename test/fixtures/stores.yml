@@ -2,7 +2,7 @@
 #
 # Table name: store
 #
-#  id          :integer          not null, primary key
+#  store_id    :integer          not null, primary key
 #  address_id  :integer
 #  name        :string(35)
 #  description :string(200)
@@ -15,8 +15,7 @@
 #
 # Foreign Keys
 #
-#  FK_Store_Adress  (address_id => address.id)
-#  fk_rails_...     (user_id => user.id)
+#  FK_Store_Adress  (address_id => address.address_id)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

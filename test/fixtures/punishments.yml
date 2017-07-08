@@ -2,7 +2,7 @@
 #
 # Table name: punishment
 #
-#  id               :integer          not null, primary key
+#  punishment_id    :integer          not null, primary key
 #  reason           :string(100)
 #  duration         :integer
 #  denegate_service :integer

@@ -2,8 +2,8 @@
 #
 # Table name: province
 #
-#  id   :integer          not null, primary key
-#  name :string(23)
+#  province_id :integer          not null, primary key
+#  name        :string(23)
 #
 
 class Province < ApplicationRecord

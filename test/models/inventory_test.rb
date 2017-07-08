@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: Inventory
+# Table name: inventory
 #
 #  product_id  :integer
 #  provider_id :integer
@@ -14,8 +14,8 @@
 #
 # Foreign Keys
 #
-#  FK_Inventory_Product   (product_id => product.id)
-#  FK_Inventory_Provider  (provider_id => provider.id)
+#  FK_Inventory_Product   (product_id => product.product_id)
+#  FK_Inventory_Provider  (provider_id => provider.provider_id)
 #
 
 require 'test_helper'

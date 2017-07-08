@@ -2,7 +2,7 @@
 #
 # Table name: consumer
 #
-#  id             :integer          not null, primary key
+#  consumer_id    :integer          not null, primary key
 #  address_id     :integer
 #  rut            :string(10)
 #  email          :string(40)
@@ -18,7 +18,7 @@
 #
 # Foreign Keys
 #
-#  FK_Consumer_Address  (address_id => address.id)
+#  FK_Consumer_Address  (address_id => address.address_id)
 #
 
 require 'test_helper'
