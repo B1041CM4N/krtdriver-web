@@ -20,7 +20,7 @@ default: &default
 development:
   <<: *default
   # database: krtdriver_web_development
-  database: KRTDrivervF
+  database: KRTDriver
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -29,7 +29,7 @@ development:
 test:
   <<: *default
   # database: krtdriver_web_test
-  database: KRTDrivervF
+  database: KRTDriver
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -62,8 +62,8 @@ production:
 adapter: mysql2
 encoding: utf8
 # database: krtdriver_web_production
-database: KRTDrivervF
-database_url: "mysql2://gabo:inacap123@138.197.40.153:3306/krtdriver_web_production"
+database: KRTDriver
+database_url: "mysql2://gabo:inacap123@138.197.40.153:3306/KRTDriver"
 
 username: gabo
 password: inacap123
