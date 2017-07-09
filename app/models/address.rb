@@ -8,6 +8,8 @@
 #  street_number :string(7)
 #  block_number  :string(5)
 #  town_name     :string(20)
+#  latitude      :string(20)
+#  longitude     :string(20)
 #
 # Indexes
 #
@@ -21,7 +23,7 @@
 class Address < ApplicationRecord
   self.table_name = 'address'
   self.primary_key = 'address_id'
-  
   belongs_to :commune, foreign_key: :commune_id, class_name: 'Commune'
-  has_many :store
+  has_many :stores, class_name: 'Store'
+  has_many :consumer, class_name: 'Consumer'
 end

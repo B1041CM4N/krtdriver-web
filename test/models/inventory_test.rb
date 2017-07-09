@@ -2,20 +2,20 @@
 #
 # Table name: inventory
 #
-#  product_id  :integer
-#  provider_id :integer
-#  quantity    :integer
-#  price       :integer
+#  product_id :integer
+#  store_id   :integer
+#  quantity   :integer
+#  price      :integer
 #
 # Indexes
 #
 #  FK_Inventory_Product   (product_id)
-#  FK_Inventory_Provider  (provider_id)
+#  FK_Inventory_Provider  (store_id)
 #
 # Foreign Keys
 #
 #  FK_Inventory_Product   (product_id => product.product_id)
-#  FK_Inventory_Provider  (provider_id => provider.provider_id)
+#  FK_Inventory_Provider  (store_id => store.store_id)
 #
 
 require 'test_helper'

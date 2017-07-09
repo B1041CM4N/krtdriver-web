@@ -6,8 +6,8 @@
 #  category_id    :integer
 #  name           :string(30)
 #  description    :string(500)
-#  image          :string(100)
-#  file_in_server :string(255)
+#  image          :string(256)
+#  file_in_server :string(256)
 #
 # Indexes
 #
@@ -28,7 +28,8 @@ class Product < ApplicationRecord
 
   paginates_per 10
   belongs_to :category, foreign_key: :category_id, class_name: 'Category'
-  # has_many :inventory, dependent: :destroy
+  has_many :inventories, class_name: 'Inventory'
+  has_many :product_quantifiers, class_name: 'ProductQuantifier'
 
   # has_and_belongs_to_many :Inventory
 

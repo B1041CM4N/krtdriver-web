@@ -1,18 +1,26 @@
 <%= form_for :store, method: method, url: url do |f| %>
   <div class="col-xs-12 col-md-6">
     <div class="form-group">
-      <%= f.label "Nombre" %>
+      <%= f.label :name, "Nombre" %>
       <%= f.text_field :name, class: "form-control" %>
     </div>
     <div class="form-group">
-      <%= f.label "Dirección" %>
+      <%= f.label :address_id, "Dirección" %>
       <%= f.collection_select :address_id, Address.all.order(street_name: :asc), :id, :street_name, {}, class: "form-control" %>
     </div>
     <div class="form-group">
-      <%= f.label "Descripción" %>
+      <%= f.label :description, "Descripción" %>
       <%= f.text_area :description, min: 10, max: 1000, class: "form-control" %>
     </div>
+    <div class="form-group">
+      <%= f.label :paymentmethod_id, "Medios de pago:   " %>
+      <% Store.payment_methods.each do |pm, index| %>
+        <%= label_tag pm %>
+        <%= check_box_tag pm, index, class: 'form-control' %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-12 pull-left">
     <%= f.submit "Enviar", class: "btn btn-primary btn-md" %>
-    <%= link_to "Volver", store_index_url, class: "btn btn-secondary btn-md" %>
   </div>
 <% end %>

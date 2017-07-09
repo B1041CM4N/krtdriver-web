@@ -1,0 +1,14 @@
+<% if @bank_account && @bank_account.errors.any? %>
+  <%= render partial: "base/message_error", 
+  locals: { 
+    message: "No se puede crear la cuenta bancaria debido a los siguientes errores:",
+    model: @bank_account 
+  } 
+  %>
+<% end %>
+<span id="notice"><%= notice %></span>
+<span id="alert"><%= alert %></span>
+<div class="col-xs-12 col-md-12">
+  <h3>Crear Tienda > Crear Cuenta Bancaria</h3>
+</div>
+<%= render partial: "form", locals: { url: bank_account_index_url, method: :post } %>

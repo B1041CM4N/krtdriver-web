@@ -7,8 +7,8 @@
 #  rut            :string(10)
 #  email          :string(40)
 #  password       :string(50)
-#  facebook_Token :string(255)
-#  google_Token   :string(255)
+#  facebook_token :string(255)
+#  google_token   :string(255)
 #  first_name     :string(30)
 #  last_name      :string(30)
 #

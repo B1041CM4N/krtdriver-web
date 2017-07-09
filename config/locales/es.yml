@@ -25,9 +25,12 @@ es:
       Store: "Tienda"
     users:
       email: "Correo Electrónico"
+    store:
+      bank_account: "Cuenta bancaria"
   errors:
+    format: "%{attribute} %{message}"
     taken: " está en uso"
-    
+    exists?: " debe existir"
   users:
     email: "Correo Electrónico"
     password: "Contraseña"

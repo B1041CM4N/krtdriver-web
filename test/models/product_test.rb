@@ -6,8 +6,8 @@
 #  category_id    :integer
 #  name           :string(30)
 #  description    :string(500)
-#  image          :string(100)
-#  file_in_server :string(255)
+#  image          :string(256)
+#  file_in_server :string(256)
 #
 # Indexes
 #

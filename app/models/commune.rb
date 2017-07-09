@@ -20,4 +20,5 @@ class Commune < ApplicationRecord
   self.primary_key = 'commune_id'
 
   belongs_to :province, foreign_key: :province_id, class_name: 'Province'
+  has_many :addresses, class_name: 'Address'
 end

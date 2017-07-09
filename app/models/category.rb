@@ -11,7 +11,7 @@ class Category < ApplicationRecord
   self.table_name = 'category'
   self.primary_key = 'category_id'
 
-  has_many :product, dependent: :destroy
+  has_many :products, class_name: 'Product'
 
   # has_many :categories, dependent: destroy
 end

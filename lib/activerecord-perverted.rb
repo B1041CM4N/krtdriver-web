@@ -8,5 +8,5 @@ module ActiveRecord
     end
   end
 
-  set_primary_key "#{table_name}_id"
+  # set_primary_key "#{table_name}_id"
 end

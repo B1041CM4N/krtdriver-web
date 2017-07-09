@@ -8,6 +8,8 @@
 #  street_number :string(7)
 #  block_number  :string(5)
 #  town_name     :string(20)
+#  latitude      :string(20)
+#  longitude     :string(20)
 #
 # Indexes
 #

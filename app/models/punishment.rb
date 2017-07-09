@@ -12,4 +12,6 @@
 class Punishment < ApplicationRecord
   self.table_name = 'punishment'
   self.primary_key = 'punishment_id'
+
+  has_many :scores, class_name: 'Score'
 end

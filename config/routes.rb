@@ -1,15 +1,20 @@
 Rails.application.routes.draw do
+  # devise_for :users
   root to: 'home#index'
-  devise_for :user, controllers: { registrations: "registrations" }
-  resources :provider
-  resources :product do
-    member { get 'File_in_server' }
-  end
+  devise_for :user, controllers: { registrations: 'registrations' }
   resources :order
-  resources :store
   resources :contact
 
-###BD MYSQL PARA TESTING API
+  resources :bank_account do
+    resources :store do
+      resources :provider
+      resources :product do
+        member { get 'file_in_server' }
+      end
+    end
+  end
+
+### BD MYSQL PARA TESTING API
 =begin
 
   user: inacap
@@ -22,7 +27,7 @@ Rails.application.routes.draw do
 
 
 # http://138.197.40.153/apiKrt/pedidos.php?id_user=1
-#{
+# {
 #  "status": 1,
 #  "data": [
 #    {
@@ -42,13 +47,13 @@ Rails.application.routes.draw do
 #      "medio_pago": "Débito"
 #    }
 #  ]
-#}
+# }
 
-#http://138.197.40.153/apiKrt/login.php?mail=asd@asd.com&pass=Prueba1}
-#{
+# http://138.197.40.153/apiKrt/login.php?mail=asd@asd.com&pass=Prueba1}
+# {
 #  "status": 1,
 #  "nombre": "Prueba"
-#}
+# }
 
   namespace :api do
     resources :order, path: 'pedidos' do

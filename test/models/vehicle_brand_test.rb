@@ -1,9 +1,9 @@
 # == Schema Information
 #
-# Table name: vehicle_brand
+# Table name: vehiclebrand
 #
-#  id   :integer          not null, primary key
-#  name :string(15)
+#  vehicle_brand_id :integer          not null, primary key
+#  name             :string(15)
 #
 
 require 'test_helper'

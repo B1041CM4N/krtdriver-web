@@ -14,7 +14,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar-collapse">
       <ul class="nav navbar-nav navbar-tabs">
-        <% if current_user && current_user.admin? %>
+        <% if user_signed_in? && current_user.admin? %>
           <!-- <li role="presentation", class="<%= set_active(@module) %>">
             <%#= link_to providers_url do %>
               <%#= fa_stacked_icon "car", base: "square-o", text: "Proveedores" %>
@@ -35,24 +35,32 @@
               <%#= fa_stacked_icon "shopping-cart fw", base: "square-o", text: "Compras" %>
             <%# end %>
           </li> -->
-        <% elsif user_signed_in? && current_user.owner? %>
+        <% elsif user_signed_in? && current_user.bank_account.nil? %>
+          <li role="presentation", class="<%= set_active(@module) %>">
+            <%= link_to '#' do %>
+              <%= fa_stacked_icon "vcard", base: "square-o", text: "Crear Cuenta Bancaria" %>
+            <% end %>
+          </li>
+        <% elsif user_signed_in? && !current_user.bank_account.nil? && current_user.store.nil? %>
+          <li role="presentation", class="<%= set_active(@module) %>">
+            <%= link_to '#' do %>
+              <%= fa_stacked_icon "user", base: "square-o", text: "Crear Tienda" %>
+            <% end %>
+          </li>
+        <% elsif user_signed_in? && !current_user.bank_account.nil? && !current_user.store.nil? %>
           <!-- <li role="presentation", class="<%= set_active(@module) %>">
             <%#= link_to provider_index_url do %>
               <%#= fa_stacked_icon "car", base: "square-o", text: "Proveedores" %>
             <%# end %>
           </li> -->
           <li role="presentation", class="<%= set_active(@module) %>">
-            <%= link_to product_index_url do %>
+            <%= link_to bank_account_store_product_index_url(current_user.bank_account.bank_account_id, current_user.store.store_id) do %>
               <%= fa_stacked_icon "beer", base: "square-o", text: "Productos" %>
             <% end %>
           </li>
           <li role="presentation", class="<%= set_active(@module) %>">
-            <%= link_to store_index_url do %>
-            <% end %>
-          </li>
-        <% elsif current_user %>
-          <li role="presentation", class="<%= set_active(@module) %>">
-            <%#= link_to "#", "Comprar" %>
+            <%#= link_to store_index_url do %>
+            <%# end %>
           </li>
         <% end %>
       </ul>

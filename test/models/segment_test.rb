@@ -4,7 +4,7 @@
 #
 #  segment_id :integer          not null, primary key
 #  amount     :integer
-#  commission :decimal(4, 2)
+#  comission  :decimal(4, 2)
 #
 
 require 'test_helper'
