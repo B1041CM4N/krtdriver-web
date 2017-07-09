@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170709035551) do
+ActiveRecord::Schema.define(version: 20170709230144) do
 
   create_table "address", primary_key: "address_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información correspondiente a dirección, comprende la entida" do |t|
     t.integer "commune_id",               comment: "Codigo unico de comunas"
@@ -206,7 +206,6 @@ ActiveRecord::Schema.define(version: 20170709035551) do
     t.index ["address_id"], name: "FK_Store_Adress", using: :btree
     t.index ["bank_account_id"], name: "FK_BankAccount_Provider", using: :btree
     t.index ["paymentmethod_id"], name: "FK_PaymentMethod_Provider", using: :btree
-    t.index ["user_id"], name: "index_store_on_user_id", using: :btree
   end
 
   create_table "tracking", primary_key: "sesion", id: :string, limit: 10, comment: "Sesión de perfil", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Referencia a entidad de seguimiento, en la cual se estructur" do |t|

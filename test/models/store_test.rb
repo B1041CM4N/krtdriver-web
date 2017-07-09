@@ -15,7 +15,6 @@
 #  FK_BankAccount_Provider    (bank_account_id)
 #  FK_PaymentMethod_Provider  (paymentmethod_id)
 #  FK_Store_Adress            (address_id)
-#  index_store_on_user_id     (user_id)
 #
 # Foreign Keys
 #
