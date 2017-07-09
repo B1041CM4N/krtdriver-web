@@ -59,8 +59,6 @@ gem 'axlsx'
 
 gem 'annotate'
 
-gem 'webpacker', '~> 2.0'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
