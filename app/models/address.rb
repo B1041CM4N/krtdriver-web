@@ -23,7 +23,15 @@
 class Address < ApplicationRecord
   self.table_name = 'address'
   self.primary_key = 'address_id'
-  belongs_to :commune, foreign_key: :commune_id, class_name: 'Commune'
+
+  # geocoded_by :full_street_address
+  # after_save :geocode
+
+  # def full_street_address
+  #   address = (street_name.to_s + ' ' + street_number.to_s + ' ,' + commune.name.to_s )
+  # end
+
+  belongs_to :commune, foreign_key: 'commune_id', class_name: 'Commune'
   has_many :stores, class_name: 'Store'
   has_many :consumer, class_name: 'Consumer'
 end

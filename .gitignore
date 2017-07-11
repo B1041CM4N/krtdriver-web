@@ -16,6 +16,7 @@
 /.DS_Store
 /app/.DS_Store
 /public
+public/uploads
 
 # Ignore Byebug command history file.
 .byebug_history

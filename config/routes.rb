@@ -5,12 +5,11 @@ Rails.application.routes.draw do
   resources :order
   resources :contact
 
-  resources :bank_account do
-    resources :store do
-      resources :provider
-      resources :product do
-        member { get 'file_in_server' }
-      end
+  resources :store do
+    resources :bank_account
+    resources :provider
+    resources :product do
+      member { get 'file_in_server' }
     end
   end
 

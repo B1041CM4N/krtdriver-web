@@ -1,4 +1,4 @@
 <div class="col-md-12">
   <h3>Crear Producto</h3>
 </div>
-<%= render partial: 'form', locals: { method: :post, url:  product_index_url } %>
+<%= render partial: 'form', locals: { method: :post, url: store_product_index_url(current_user.store.store_id) } %>

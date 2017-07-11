@@ -7,7 +7,7 @@ class RegistrationsController < Devise::RegistrationsController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
-        format.html { redirect_to new_bank_account_url, notice: 'Un correo de confirmación ha sido enviado a la dirección ingresada' }
+        format.html { redirect_to new_store_url, notice: 'Un correo de confirmación ha sido enviado a la dirección ingresada' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }

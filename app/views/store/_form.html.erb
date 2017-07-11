@@ -1,26 +1,79 @@
 <%= form_for :store, method: method, url: url do |f| %>
-  <div class="col-xs-12 col-md-6">
-    <div class="form-group">
-      <%= f.label :name, "Nombre" %>
-      <%= f.text_field :name, class: "form-control" %>
+  <section class="form-section">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="form-section-title">Datos de tienda</h2>
+      </div>
+      <div class="form-group col-xs-12 col-md-12">
+        <%= f.label :name, "Nombre de la tienda" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="form-group col-xs-12 col-md-12">
+        <%= f.label :description, "Descripción" %>
+        <%= f.text_area :description, min: 10, max: 1000, class: "form-control" %>
+      </div>
     </div>
-    <div class="form-group">
-      <%= f.label :address_id, "Dirección" %>
-      <%= f.collection_select :address_id, Address.all.order(street_name: :asc), :id, :street_name, {}, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :description, "Descripción" %>
-      <%= f.text_area :description, min: 10, max: 1000, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <%= f.label :paymentmethod_id, "Medios de pago:   " %>
-      <% Store.payment_methods.each do |pm, index| %>
-        <%= label_tag pm %>
-        <%= check_box_tag pm, index, class: 'form-control' %>
+  </section>
+  <section class="form-section">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="form-section-title">Ubicación</h2>
+      </div>
+      <%= f.fields_for @address do |ff| %>
+        <div class="form-group col-xs-12 col-md-6">
+          <%= ff.label :commune_id, "Seleccionar comuna" %>
+          <%= ff.collection_select :commune_id, Commune.all.order(name: :asc), :id, :name, {}, class: 'form-control', required: true %>
+        </div>
+        <div class="form-group col-xs-12 col-md-6">
+          <%= ff.label :street_name, "Calle" %>
+          <%= ff.text_field :street_name, class: 'form-control', required: true %>
+        </div>
+        <div class="form-group col-xs-12 col-md-6">
+          <%= ff.label :street_number, "Número de calle" %>
+          <%= ff.number_field :street_number, min: 1, max: 999999, class: 'form-control', required: true %>
+        </div>
+        <div class="form-group col-xs-12 col-md-6">
+          <%= ff.label :block_number, "Número de block (Opcional)" %>
+          <%= ff.number_field :block_number, min: 1, max: 999999, class: 'form-control' %>
+        </div>
+        <div class="form-group col-xs-12 col-md-6">
+          <%= ff.label :town_name, "Villa (Opcional)" %>
+          <%= ff.text_field :town_name, class: 'form-control', required: true %>
+        </div>
       <% end %>
     </div>
-  </div>
-  <div class="col-xs-12 col-md-12 pull-left">
-    <%= f.submit "Enviar", class: "btn btn-primary btn-md" %>
-  </div>
+  </section>
+  <section class="form-section">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="form-section-title">Datos contables</h2>
+      </div>
+      <div class="form-group col-xs-12 col-md-12">
+        <%= f.label :paymentmethod_id, "Medios de pago:   " %>
+        <% Store.payment_methods.each do |pm, index| %>
+          <%= label_tag pm %>
+          <%= check_box_tag pm, index, class: 'form-control' %>
+        <% end %>
+      </div>
+      <%= f.fields_for @bank_account do |ff| %>
+        <div class="form-group col-xs-12 col-md-6">
+          <%= ff.label :bank_id, "Seleccionar banco" %>
+          <%= ff.collection_select :bank_id, Bank.all.order(name: :asc), :id, :name, {}, class: 'form-control' %>
+        </div>
+        <div class="form-group col-xs-12 col-md-6">
+          <%= ff.label :ta_id, "Seleccionar tipo de cuenta" %>
+          <%= ff.collection_select :ta_id, TypeAccount.all.order(name: :asc), :id, :name, {}, class: "form-control" %>
+        </div>
+        <div class="form-group col-xs-12 col-md-6">
+          <%= ff.label :account_number, "Ingresar número de cuenta" %>
+          <%= ff.number_field :account_number, min: 1, max: 999999999999999, class: "form-control" %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+  <section class="form-section">
+    <div class="actions">
+      <%= f.submit "Enviar", class: "btn btn-primary btn-md" %>
+    </div>
+  </section>
 <% end %>

@@ -12,14 +12,14 @@
     <%= f.label :rut, "RUT" %>
     <%= f.text_field :rut, class: "form-control" %>
   </div>
-  <div class="form-group col-xs-12 col-md-6">
-    <%= f.label :store_id, "Tienda" %>
-    <%= f.collection_select(:store_id, :store, Store.all, :id, :name, class: "form-control") %>
+  <!-- <div class="form-group col-xs-12 col-md-6">
+    <%#= f.label :store_id, "Tienda" %> valor automatico
+    <%#= f.collection_select(:store_id, :store, Store.all, :id, :name, class: "form-control") %>
   </div>
   <div class="form-group col-xs-12 col-md-6">
-    <%= f.label :contact_number, "Teléfono de contacto" %>
-    <%= f.text_field :contact_number, class: "form-control" %>
-  </div>
+    <%#= f.label :contact_number, "Teléfono de contacto" %>
+    <%#= f.text_field :contact_number, class: "form-control" %>
+  </div> -->
   <div class="form-group col-xs-12 col-md-6">
     <%= f.label :email, "Correo Electrónico" %>
     <%= f.email_field :email, class: "form-control" %>
@@ -32,6 +32,19 @@
     <%= f.label :sector, "Sector de distribución" %>
     <%= f.text_field :sector, class: "form-control" %>
   </div>
+  <div class="form-group col-xs-12 col-md-6">
+    <%= f.text :password, "Contraseña" %>
+    <%= f.password_field :password, class: 'form-control', required: true %>
+  </div>
+  <div class="form-group col-xs-12 col-md-6">
+    <%= f.text :password_confirmation, "Contraseña" %>
+    <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
+  </div>
+  <!-- FORMULARIO VEHICULO Y MARCA -->
+  <!-- MODELO -->
+  <!-- MARCA -->
+  <!-- PATENTE -->
+  <!-- COLOR -->
   <div class="col-xs-12 col-md-12">
     <%= f.submit "Enviar", class: "btn btn-primary" %>
     <%= link_to "Volver", drivers_url, class: "btn btn-default" %>

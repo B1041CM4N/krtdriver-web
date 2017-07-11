@@ -23,17 +23,29 @@
 #  FK_Store_Adress            (address_id => address.address_id)
 #
 
+require 'google_maps_service'
+
 class Store < ApplicationRecord
   self.table_name = 'store'
   self.primary_key = 'store_id'
 
+  # Setup global parameters
+  GoogleMapsService.configure do |config|
+    config.key = 'AIzaSyBfTzvvp0hvqyEn6JkOmzmq45FzbrbsJZw'
+    config.retry_timeout = 20
+    config.queries_per_second = 10
+  end
+
   paginates_per 10
 
   belongs_to :user, foreign_key: 'user_id', class_name: 'User'
-  belongs_to :address, foreign_key: 'address_id', class_name: 'Address'
-  belongs_to :payment_method, foreign_key: 'paymentmethod_id', class_name: 'PaymentMethod'
+
+  has_one :address, foreign_key: 'address_id', class_name: 'Address'
+  has_one :payment_method, foreign_key: 'paymentmethod_id', class_name: 'PaymentMethod'
   belongs_to :bank_account, foreign_key: 'bank_account_id', class_name: 'BankAccount'
+
   has_many :inventories, class_name: 'Inventory'
+  has_many :products, through: :inventories
   has_many :order_sales, class_name: 'OrderSale'
   has_many :providers, class_name: 'Provider'
   has_many :sale_historicals, class_name: 'SaleHistorical'

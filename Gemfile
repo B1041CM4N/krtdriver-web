@@ -33,7 +33,8 @@ gem 'devise', '~> 4.3'
 gem 'sidekiq', '~> 5.0'
 
 # Retina tag para las imagenes en mayor resolución
-gem 'retina_tag', '~> 1.4', '>= 1.4.1'
+gem 'retina_rails'
+gem 'retina_tag'
 
 # SUBIDA DE ARCHIVOS
 gem 'carrierwave'
@@ -55,7 +56,14 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'i18n', '~> 0.8.1'
 
 # GENERACION DE REPORTES - XLSX
-gem 'axlsx'
+gem 'rubyzip', '~> 1.1.0'
+gem 'axlsx', '2.1.0.pre'
+gem 'axlsx_rails'
+
+# Geocodificación
+
+gem 'geocoder'
+gem 'google_maps_service'
 
 gem 'annotate'
 

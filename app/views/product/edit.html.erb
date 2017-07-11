@@ -1,1 +1,1 @@
-<%= render partial: "form", locals: {product: @product, method: :put, url: product_url(@product) } %>
+<%= render partial: "form", locals: {product: @product, method: :put, url: store_product_url(current_user.store.store_id, @product) } %>

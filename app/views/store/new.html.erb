@@ -1,14 +1,13 @@
-<% if @store && @store.errors.any? %>
-  <%= render partial: "base/message_error", 
+<%# if @store && @store.errors.any? %>
+  <%#= render partial: "base/message_error", 
   locals: { 
     message: "No se puede crear la tienda debido a los siguientes errores:",
     model: @store 
   } 
   %>
-<% end %>
-<span id="notice"><%= notice %></span>
-<span id="alert"><%= alert %></span>
-<div class="col-xs-12 col-md-12">
-  <h3>Crear Tienda</h3>
+<%# end %>
+<div class="row">
+  <span id="notice"><%= notice %></span>
+  <span id="alert"><%= alert %></span>
 </div>
-<%= render partial: "form", locals: { url: bank_account_store_index_url(params[:bank_account_id]), method: :post } %>
+<%= render partial: "form", locals: { url: store_index_url, method: :post } %>

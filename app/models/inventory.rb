@@ -20,7 +20,9 @@
 
 class Inventory < ApplicationRecord
   self.table_name = 'inventory'
+  self.primary_key = 'store_id'
+  self.primary_key = 'product_id'
 
-  belongs_to :product, foreign_key: :product_id, class_name: 'Product'
-  belongs_to :store, foreign_key: :store_id, class_name: 'Store'
+  belongs_to :product, foreign_key: 'product_id', class_name: 'Product'
+  belongs_to :store, foreign_key: 'store_id', class_name: 'Store'
 end

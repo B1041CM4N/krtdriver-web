@@ -1,26 +1,30 @@
-<div class="col-sm-6 col-md-4" id="<%= product.id.to_s %>">
+<div class="col-xs-6 col-md-4" id="<%= product.product_id.to_s %>">
   <div class="thumbnail">
-    <% unless product.file_in_server == nil %>
-      <%= image_tag(product.try(:file_in_server), height: 100, width: 100) %>
-      <div class="caption">
+    <% unless product.file_in_server.nil? %>
+      <%= image_tag(@product.file_in_server.url, alt: 'Image') if @product.file_in_server? %>
+      <%# if product.image.nil? %>
+        <%#= image_tag(product.try(:file_in_server), height: 100, width: 100) %>
+      <%# else %>
+        <%#= image_tag(product.try(:image), height: 100, width: 100) %>
+      <%# end %>
+      <div class="caption align-center">
         <h3><%= product.name[0..50] %></h3>
         <p><%= product.description[0..100] %></p>
         <p>
-          <%= link_to "Editar", edit_product_url(product) %>
-          <%= link_to "Eliminar", product_url(product), data: { confirm: "Está seguro?" }, method: :delete %>
+          <%= link_to "Editar", edit_store_product_url(current_user.store.store_id, product.product_id), class: 'btn btn-primary btn-xs' %>
+          <%= link_to "Eliminar", store_product_url(current_user.store.store_id, product.product_id), class: 'btn btn-default btn-xs', data: { confirm: "Está seguro?" }, method: :delete %>
         </p>
       </div><!-- caption -->
-    </div><!-- thumbnail -->
     <% else %>
       <span>Producto Sin imagen</span>
-      <div class="caption">
+      <div class="caption align-center">
         <h3><%= product.name[0..50] %></h3>
         <p><%= product.description[0..100] %></p>
         <p>
-          <%= link_to "Editar", edit_product_url(product) %>
-          <%= link_to "Eliminar", product_url(product), data: { confirm: "Está seguro?" }, method: :delete %>
+          <%= link_to "Editar", edit_store_product_url(current_user.store.store_id, product.product_id), class: 'btn btn-primary btn-xs' %>
+          <%= link_to "Eliminar", store_product_url(current_user.store.store_id, product.product_id), class: 'btn btn-default btn-xs', data: { confirm: "Está seguro?" }, method: :delete %>
         </p>
       </div>
     <% end %>
-  </div>
+  </div><!-- thumbnail -->
 </div>

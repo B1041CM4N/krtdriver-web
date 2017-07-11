@@ -23,7 +23,9 @@ es:
   models:
     product:
       Store: "Tienda"
-    users:
+    user:
+      password: "Contraseña"
+      password_confirmation: "Confirmación contraseña"
       email: "Correo Electrónico"
     store:
       bank_account: "Cuenta bancaria"

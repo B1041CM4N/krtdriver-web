@@ -1,28 +1,41 @@
 <%= form_for :product, method: method, url: url do |f| %>
-  <div class="col-md-6">
-    <div class="form-group col-xs-12">
-      <%= f.label :name, "Nombre del producto" %>
-      <%= f.text_field :name, class: 'form-control form-control-sm', required: true %>
-    </div>
-    <div class="form-group col-xs-12">
-      <%= f.label :description, "Descripción del producto" %>
-      <%= f.text_area :description, class: 'form-control form-control-sm', min: 100, max: 1000, required: true %>
-    </div>
-    <!-- <div class="form-group col-xs-12 col-md-6">
-      <%#= f.label :price, "Precio de venta" %>
-      <%#= f.number_field :price, class: 'form-control form-control-sm', min: 0, max: 99999, required: true %>
-    </div> -->
-    <div class="form-group col-xs-12">
-      <%= f.label :category_id, "Seleccione la categoría" %>
-      <%= f.collection_select :category_id, Category.all.order(id: :asc), :id, :name, {}, class: "form-control" %>
-    </div>
-    <div class="form-group col-xs-12">
-      <%= f.label :file_in_server, "Imagen del producto" %>
-      <%= f.file_field :file_in_server, class: 'form-control form-control-sm'%>
-    </div>
-    <div class="actions col-xs-12">
-      <%= f.submit 'Crear', class: 'btn btn-primary btn-md' %>
-      <%= link_to 'Volver', product_index_url, class: 'btn btn-default btn-md' %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group col-md-6 col-xs-12">
+        <%= f.label :name, "Nombre del producto" %>
+        <%= f.text_field :name, class: 'form-control form-control-sm', required: true %>
+      </div>
+      <div class="form-group col-md-6 col-xs-12">
+        <%= f.label :description, "Descripción del producto" %>
+        <%= f.text_area :description, class: 'form-control form-control-sm', min: 100, max: 1000, required: true %>
+      </div>
+      <%= fields_for @inventory do |ff| %>
+        <div class="form-group col-xs-12 col-md-6">
+          <%= ff.label :price, "Precio de venta" %>
+          <%= ff.number_field :price, class: 'form-control form-control-sm', min: 1, max: 999999, required: true %>
+        </div>
+        <div class="form-group col-xs-12 col-md-6">
+          <%= ff.label :quantity, "Cantidad" %>
+          <%= ff.number_field :quantity, class: 'form-control form-control-sm', min: 1, max: 999999, required: true %>
+        </div>
+      <% end %>
+      <div class="form-group col-md-6 col-xs-12">
+        <%= f.label :category_id, "Seleccione la categoría" %>
+        <%= f.collection_select :category_id, Category.all.order(category_id: :asc), :id, :name, {}, class: "form-control" %>
+      </div>
+      <div class="form-group col-md-6 col-xs-12">
+        <%= f.label :file_in_server, "Imagen del producto" %>
+        <%= f.file_field :file_in_server, class: 'form-control form-control-sm', required: @product.file_in_server.nil? ? true : false %>
+      </div>
+      <% if action_name == 'edit' %>
+        <div class="well well-sm">
+          <span>Imagen actual: <%= product.file_in_server.to_s %></span>
+        </div>
+      <% end %>
+      <div class="actions col-xs-12">
+        <%= f.submit 'Enviar', class: 'btn btn-primary btn-md' %>
+        <%= link_to 'Volver', store_product_index_url(current_user.store.store_id), class: 'btn btn-default btn-md' %>
+      </div>
     </div>
   </div>
 <% end %>
