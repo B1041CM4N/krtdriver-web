@@ -8,6 +8,6 @@ class HomeController < ApplicationController
   private
 
   def set_module
-    @module = "Home"
+    @module = 'home'
   end
 end

@@ -1,0 +1,49 @@
+<%# if @provider && @provider.errors.any? %>
+  <%#= render partial: "base/message_error", locals: {
+        message: "No se puede guardar el proveedor debido a los siguientes errores:", model: @provider
+  } %>
+<%# end %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-left">
+      <h3>Pedidos (<%= @order_sales.count.to_s %>)</h3> 
+    </div>
+    <div class="pull-right">
+      <%#= link_to "Crear Proveedor", new_store_provider_url(current_user.store.store_id), class: "btn btn-primary btn-md" %>
+    </div>
+  </div>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <theader>
+      <th>ID</th>
+      <th>Total</th>
+      <th>Fecha</th>
+      <th>Cliente</th>
+      <th>Método de pago</th>
+      <th>Estado</th>
+      <th>Número de ticket</th>
+    </theader>
+    <tbody>
+      <% @order_sales.each do |os| %>
+        <tr>
+          <td><%= os.order_id.to_s %></td>
+          <td><%= price_format os.total %></td>
+          <td><%= os.date.strftime('%d/%m/%Y, %H:%S')%></td>
+          <td><%= os.consumer.first_name + ' ' + os.consumer.last_name %></td>
+          <td><%= os.payment_method.paymentmethod_id.to_s %></td>
+          <td><%= os.order_status.to_s %></td>
+          <td><%= os.ticket_number.to_s %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <%= paginate @order_sales %>
+  </div>
+</div>
+<div class="col-md-6 col-md-offset-3">
+  <%#= link_to "Volver", root_url, class: "btn btn-primary btn-md center-block" %>
+</div>

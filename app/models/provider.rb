@@ -26,15 +26,15 @@ class Provider < ApplicationRecord
   self.table_name = 'provider'
   self.primary_key = 'provider_id'
 
-  after_initialize :set_default_payment_method, if: :new_record?
+  # after_initialize :set_default_payment_method, if: :new_record?
 
-  belongs_to :vehicle, foreign_key: :vehicle_id, class_name: 'Vehicle'
-  belongs_to :store, foreign_key: :store_id, class_name: 'Store'
+  belongs_to :vehicle, foreign_key: 'vehicle_id', class_name: 'Vehicle'
+  belongs_to :store, foreign_key: 'store_id', class_name: 'Store'
   has_many :trackings, class_name: 'Tracking'
 
-  def set_default_payment_method
-    self.payment_method_id ||= 7
-  end
+  # def set_default_payment_method
+  #   self.paymentmethod_id ||= 7
+  # end
 
   # self.class.primary_key = "Provider_id"
 

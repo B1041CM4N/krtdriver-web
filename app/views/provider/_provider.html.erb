@@ -1,14 +1,11 @@
-<td><%#= f.first_name.capitalize %></td>
-<td><%#= f.last_name.capitalize %></td>
-<td><%#= f.rut %></td>
-<td><%#= f.store.name %></td>
-<td><%#= f.vehicle.license_plate %></td>
-<td><%#= f.email %></td>
-<td><%#= f.segment.name %></td>
-<td><%#= f.address.direction %></td>
-<td><%#= f.bank_account.name %></td>
+<td><%= f.first_name.capitalize %></td>
+<td><%= f.last_name.capitalize %></td>
+<td><%= f.rut %></td>
+<td><%= f.email %></td>
+<td><%= f.vehicle.licence_plate %></td>
+<td><%= f.vehicle.vehicle_brand.name %></td>
 
 <td class="table-actions">
-  <%= link_to "Editar", edit_provider_url(f) %>
-  <%= link_to "Eliminar", provider_url(f), method: :delete, data: { confirm: "¿Está seguro?" } %>
+  <%= link_to "Editar", edit_store_provider_url(current_user.store, f) %>
+  <%= link_to "Eliminar", store_provider_url(current_user.store, f), method: :delete, data: { confirm: "¿Está seguro?" } %>
 </td>

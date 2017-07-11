@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   # devise_for :users
   root to: 'home#index'
   devise_for :user, controllers: { registrations: 'registrations' }
-  resources :order
   resources :contact
 
   resources :store do
+    resources :order_sale
     resources :bank_account
     resources :provider
     resources :product do

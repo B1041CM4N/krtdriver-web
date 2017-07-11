@@ -7,12 +7,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <% unless user_signed_in? && current_user.store.nil? %>
-        <%= link_to root_url, class: "navbar-brand" do %>
+      <% if user_signed_in? && current_user.store.nil? %>
+        <%= link_to '#', class: "navbar-brand" do %>
           KRT DRIVER
         <% end %>
       <% else %>
-        <%= link_to '#', class: "navbar-brand" do %>
+        <%= link_to root_url, class: "navbar-brand" do %>
           KRT DRIVER
         <% end %>
       <% end %>
@@ -21,26 +21,37 @@
     <div class="collapse navbar-collapse" id="navbar-collapse">
       <ul class="nav navbar-nav navbar-tabs">
         <% if user_signed_in? && current_user.admin? %>
-        <% elsif user_signed_in? && current_user.store.nil? %>
           <li role="presentation", class="<%= set_active(@module) %>">
             <%= link_to '#' do %>
               <%= fa_stacked_icon "user", base: "square-o", text: "Crear Tienda" %>
             <% end %>
           </li>
+        <% elsif user_signed_in? && current_user.store.nil? %>
+          <li role="presentation", class="<%= set_active(@module) if @module == 'home' %>">
+            <%= link_to '#' do %>
+              <%= fa_stacked_icon "user", base: "square-o", text: "Crear Tienda" %>
+            <% end %>
+          </li>
         <% elsif user_signed_in? && !current_user.bank_account.nil? && !current_user.store.nil? %>
-          <!-- <li role="presentation", class="<%= set_active(@module) %>">
-            <%#= link_to provider_index_url do %>
-              <%#= fa_stacked_icon "car", base: "square-o", text: "Proveedores" %>
-            <%# end %>
-          </li> -->
-          <li role="presentation", class="<%= set_active(@module) %>">
+          <li role="presentation", class="<%= set_active(@module) if @module == 'product' %>">
             <%= link_to store_product_index_url(current_user.store.store_id) do %>
               <%= fa_stacked_icon "beer", base: "square-o", text: "Productos" %>
             <% end %>
           </li>
-          <li role="presentation", class="<%= set_active(@module) %>">
-            <%#= link_to store_index_url do %>
-            <%# end %>
+          <li role="presentation", class="<%= set_active(@module) if @module == 'provider' %>">
+            <%= link_to store_provider_index_url(current_user.store.store_id) do %>
+              <%= fa_stacked_icon "car", base: "square-o", text: "Proveedores" %>
+            <% end %>
+          </li>
+          <li role="presentation", class="<%= set_active(@module) if @module == 'ordersale' %>">
+            <%= link_to store_order_sale_index_path(current_user.store.store_id) do %>
+              <%= fa_stacked_icon 'shopping-cart', base: "square-o", text: "Pedidos" %>
+            <% end %>
+          </li>
+          <li role="presentation", class="<%= set_active(@module) if @module == 'store' %>">
+            <%= link_to edit_store_url(current_user.store.store_id) do %>
+              <%= fa_stacked_icon "home", base: "square-o", text: "Datos de tienda" %>
+            <% end %>
           </li>
         <% end %>
       </ul>
@@ -56,14 +67,6 @@
       </ul> -->
       <% if user_signed_in? %>
         <ul class="nav navbar-nav pull-right">
-          <li role="presentation", class="pull-right">
-            <%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete %>
-          </li>
-          <li role="presentation">
-            <% link_to edit_user_password_url(current_user) do %>
-              <%= current_user.email %>              
-            <% end %>
-          </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle dropdown-toggle-profile" data-toggle="dropdown" role="button" aria-expanded="false">
               <%= current_user.email %>
@@ -75,6 +78,14 @@
               <!-- <li><%#= link_to "Salir", destroy_admin_session_url, method: :delete %></li> -->
               <li><%= link_to "Salir", destroy_user_session_path, method: :delete %></li>
             </ul>
+          </li>
+          <li role="presentation">
+            <% link_to edit_user_password_url(current_user) do %>
+              <%= current_user.email %>              
+            <% end %>
+          </li>
+          <li role="presentation", class="pull-right">
+            <%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete %>
           </li>
         </ul>
       <% end %>

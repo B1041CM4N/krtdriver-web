@@ -1,10 +1,8 @@
-<% if @driver.errors.any? %>
-  <span>Se han encontrado los siguientes errores:</span>
-  <% @driver.errors.each do |error| %>
-    <span><%= error.to_s %></span>
-  <% end %>
-<% end %>
-<div class="col-xs-12 col-md-12">
-  <h3>Nuevo Conductor</h3>
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <h3>Nuevo Proveedor</h3>
+    <span id="notice"><%= notice %></span>
+    <span id="alert"><%= alert %></span>
+  </div>
 </div>
-<%= render partial: "form", locals: { url: drivers_url, method: :post } %>
+<%= render partial: "form", locals: { url: store_provider_index_url(current_user.store, @provider), method: :post } %>

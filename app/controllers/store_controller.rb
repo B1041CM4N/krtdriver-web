@@ -31,7 +31,7 @@ class StoreController < ApplicationController
     account_number: params[:store][:bank_account][:account_number], user_id: current_user.user_id)
 
     @store = Store.new(address_id: address.address_id, paymentmethod_id: set_payment_method(mcash, mdebit, mcredit),
-    bank_account_id: bank_account.bank_account_id, name: params[:name], description: params[:description],
+    bank_account_id: bank_account.bank_account_id, name: params[:store][:name], description: params[:store][:description],
     user_id: current_user.user_id)
 
     Rails.logger.info 'NEW STORE::: ' + @store.inspect + ' ****************'
@@ -70,13 +70,40 @@ class StoreController < ApplicationController
 
   def edit
     @store = Store.find(params[:id])
+    @address = @store.address
+    @bank_account = @store.bank_account
   end
 
   def update
+    Rails.logger.info "INCOMMING PARAMS: " + params.inspect + " ********************"
     @store = Store.find(params[:id])
-    if @store.update_attributes(store_params)
+    mcash = params[:efectivo]
+    mdebit = params[:debito]
+    mcredit = params[:credito]
+    # INICIO GEOCODING
+    gmaps = GoogleMapsService::Client.new
+    # Geocoding an address
+    commune = Commune.find(params[:store][:address][:commune_id])
+    results = gmaps.geocode(params[:store][:address][:street_name].to_s + ' ' + params[:store][:address][:street_number].to_s + ', ' + commune.name.to_s )
+    latitude = results.first[:geometry][:location][:lat]
+    longitude = results.first[:geometry][:location][:lng]
+    # FIN GEOCODING
+    address = @store.address
+    bank_account = @store.bank_account
+
+    address.update(commune_id: params[:store][:address][:commune_id],
+    street_name: params[:store][:address][:street_name], street_number: params[:store][:address][:street_number],
+    block_number: params[:store][:address][:block_number], town_name: params[:store][:address][:town_name],
+    latitude: latitude.to_s, longitude: longitude.to_s)
+
+    bank_account.update(bank_id: params[:store][:bank_account][:bank_id], ta_id: params[:store][:bank_account][:ta_id],
+    account_number: params[:store][:bank_account][:account_number], user_id: current_user.user_id)
+
+    if @store.update(address_id: address.address_id, paymentmethod_id: set_payment_method(mcash, mdebit, mcredit),
+    bank_account_id: bank_account.bank_account_id, name: params[:store][:name], description: params[:store][:description],
+    user_id: current_user.user_id)
       flash[:success] = 'Tienda actualizada exitosamente'
-      redirect_to stores_url
+      redirect_to root_path
     else
       flash[:error] = 'Ha ocurrido un problema al tratar de modificar la tienda'
       render :edit
@@ -95,7 +122,7 @@ class StoreController < ApplicationController
   end
 
   def set_module
-    @module = 'Store'
+    @module = 'store'
   end
 
   def store_params

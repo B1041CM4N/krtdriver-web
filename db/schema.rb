@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170709230144) do
+ActiveRecord::Schema.define(version: 20170711223737) do
 
   create_table "address", primary_key: "address_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información correspondiente a dirección, comprende la entida" do |t|
     t.integer "commune_id",               comment: "Codigo unico de comunas"
@@ -29,11 +29,11 @@ ActiveRecord::Schema.define(version: 20170709230144) do
   end
 
   create_table "bankaccount", primary_key: "bank_account_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", comment: "Información comercial de la entidad cuenta bancaria la cual " do |t|
-    t.integer "bank_id",                      comment: "Codigo unico del banco."
-    t.integer "ta_id",                        comment: "Codigo unico para el tipo de cuenta"
-    t.integer "account_number",               comment: "Numero de cuenta bancaria"
-    t.string  "bank_account_type", limit: 20, comment: "Tipo de cuenta bancaria"
+    t.integer "bank_id",                                  comment: "Codigo unico del banco."
+    t.integer "ta_id",                                    comment: "Codigo unico para el tipo de cuenta"
+    t.string  "bank_account_type", limit: 20,             comment: "Tipo de cuenta bancaria"
     t.integer "user_id"
+    t.bigint  "account_number",               default: 0
     t.index ["bank_id"], name: "FK_Bankaccount_Bank", using: :btree
     t.index ["ta_id"], name: "FK_taccount_Bankaccount", using: :btree
   end

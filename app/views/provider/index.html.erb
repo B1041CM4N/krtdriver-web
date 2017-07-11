@@ -9,7 +9,7 @@
       <h3>Proveedores</h3> 
     </div>
     <div class="pull-right">
-      <%= link_to "Crear Proveedor", new_provider_url, class: "btn btn-primary btn-md" %>
+      <%= link_to "Crear Proveedor", new_store_provider_url(current_user.store.store_id), class: "btn btn-primary btn-md" %>
     </div>
   </div>
 </div>
@@ -19,16 +19,14 @@
       <th>Nombre</th>
       <th>Apellido</th>
       <th>RUT</th>
-      <th>Nickname</th>
-      <th>Teléfono</th>
       <th>Correo Electrónico</th>
-      <th>Página Web</th>
-      <th>Área servicio</th>
+      <th>Patente Vehículo</th>
+      <th>Marca Vehículo</th>
       <th></th>
     </theader>
     <tbody>
       <% @providers.each do |provider| %>
-        <tr id="provider_<%= provider.Provider_id.to_s %>">
+        <tr id="provider_<%= provider.provider_id.to_s %>">
           <%= render partial: "provider", locals: { f: provider } %>
         </tr>
       <% end %>

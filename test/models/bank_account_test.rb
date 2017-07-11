@@ -5,9 +5,9 @@
 #  bank_account_id   :integer          not null, primary key
 #  bank_id           :integer
 #  ta_id             :integer
-#  account_number    :integer
 #  bank_account_type :string(20)
 #  user_id           :integer
+#  account_number    :integer          default(0)
 #
 # Indexes
 #

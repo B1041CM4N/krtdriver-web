@@ -16,4 +16,9 @@ module ApplicationHelper
       return 'Hacker'
     end
   end
+
+  def price_format(price)
+    price = number_to_currency(price, unit: '$', separator: ',', delimiter: '.')
+    price
+  end
 end

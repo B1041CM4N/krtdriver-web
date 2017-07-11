@@ -179,8 +179,6 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
-    retina_rails (2.0.4)
-      rails (>= 3.2.0)
     retina_tag (1.4.1)
       rails (>= 3.1)
     retriable (2.1.0)
@@ -262,7 +260,6 @@ DEPENDENCIES
   rails (~> 5.0.2)
   rails_12factor
   rails_serve_static_assets
-  retina_rails
   retina_tag
   rubyzip (~> 1.1.0)
   sass-rails (~> 5.0)

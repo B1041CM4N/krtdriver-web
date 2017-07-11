@@ -74,6 +74,9 @@
   <section class="form-section">
     <div class="actions">
       <%= f.submit "Enviar", class: "btn btn-primary btn-md" %>
+      <% if action_name == 'edit' %>
+        <%= link_to "Volver", store_provider_index_url(current_user.store), class: "btn btn-default btn-md" %>
+      <% end %>
     </div>
   </section>
 <% end %>

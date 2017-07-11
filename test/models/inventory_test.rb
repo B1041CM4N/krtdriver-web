@@ -2,7 +2,7 @@
 #
 # Table name: inventory
 #
-#  product_id :integer
+#  product_id :integer          primary key
 #  store_id   :integer
 #  quantity   :integer
 #  price      :integer

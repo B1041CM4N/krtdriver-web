@@ -1,7 +1,7 @@
 <div class="col-xs-6 col-md-4" id="<%= product.product_id.to_s %>">
   <div class="thumbnail">
     <% unless product.file_in_server.nil? %>
-      <%= image_tag(@product.file_in_server.url, alt: 'Image') if @product.file_in_server? %>
+      <%#= image_tag('http://images.memes.com/meme/902655', alt: 'Image') if !product.file_in_server.nil? %>
       <%# if product.image.nil? %>
         <%#= image_tag(product.try(:file_in_server), height: 100, width: 100) %>
       <%# else %>

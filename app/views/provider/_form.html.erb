@@ -1,52 +1,64 @@
 <%= form_for :provider, method: method, url: url do |f| %>
-
-  <div class="form-group col-xs-12 col-md-6">
-    <%= f.label :first_name, "Nombre" %>
-    <%= f.text_field :first_name, class: "form-control" %>
-  </div>
-  <div class="form-group col-xs-12 col-md-6">
-    <%= f.label :last_name, "Apellido" %>
-    <%= f.text_field :last_name, class: "form-control" %>
-  </div>
-  <div class="form-group col-xs-12 col-md-6">
-    <%= f.label :rut, "RUT" %>
-    <%= f.text_field :rut, class: "form-control" %>
-  </div>
-  <!-- <div class="form-group col-xs-12 col-md-6">
-    <%#= f.label :store_id, "Tienda" %> valor automatico
-    <%#= f.collection_select(:store_id, :store, Store.all, :id, :name, class: "form-control") %>
-  </div>
-  <div class="form-group col-xs-12 col-md-6">
-    <%#= f.label :contact_number, "Teléfono de contacto" %>
-    <%#= f.text_field :contact_number, class: "form-control" %>
-  </div> -->
-  <div class="form-group col-xs-12 col-md-6">
-    <%= f.label :email, "Correo Electrónico" %>
-    <%= f.email_field :email, class: "form-control" %>
-  </div>
-  <div class="form-group col-xs-12 col-md-6">
-    <%= f.label :web, "Sitio Web" %>
-    <%= f.text_field :web, class: "form-control" %>
-  </div>
-  <div class="form-group col-xs-12 col-md-6">
-    <%= f.label :sector, "Sector de distribución" %>
-    <%= f.text_field :sector, class: "form-control" %>
-  </div>
-  <div class="form-group col-xs-12 col-md-6">
-    <%= f.text :password, "Contraseña" %>
-    <%= f.password_field :password, class: 'form-control', required: true %>
-  </div>
-  <div class="form-group col-xs-12 col-md-6">
-    <%= f.text :password_confirmation, "Contraseña" %>
-    <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
-  </div>
-  <!-- FORMULARIO VEHICULO Y MARCA -->
-  <!-- MODELO -->
-  <!-- MARCA -->
-  <!-- PATENTE -->
-  <!-- COLOR -->
-  <div class="col-xs-12 col-md-12">
-    <%= f.submit "Enviar", class: "btn btn-primary" %>
-    <%= link_to "Volver", drivers_url, class: "btn btn-default" %>
+  <section class="form-section">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="form-section-title">Datos de proveedor</h2>
+      </div>
+      <div class="form-group col-xs-12 col-md-6">
+        <%= f.label :first_name, "Nombre" %>
+        <%= f.text_field :first_name, class: "form-control", required: true %>
+      </div>
+      <div class="form-group col-xs-12 col-md-6">
+        <%= f.label :last_name, "Apellido" %>
+        <%= f.text_field :last_name, class: "form-control", required: true %>
+      </div>
+      <div class="form-group col-xs-12 col-md-6">
+        <%= f.label :rut, "RUT" %>
+        <%= f.text_field :rut, min: 10, max: 12, class: "form-control", required: true %>
+      </div>
+      <div class="form-group col-xs-12 col-md-6">
+        <%= f.label :email, "Correo Electrónico" %>
+        <%= f.email_field :email, class: "form-control", required: true %>
+      </div>
+      <div class="form-group col-xs-12 col-md-6">
+        <%= f.label :password, "Contraseña (6 caracteres mínimo)" %>
+        <%= f.password_field :password, min: 6, class: 'form-control', required: true %>
+      </div>
+      <div class="form-group col-xs-12 col-md-6">
+        <%= f.label :password_confirmation, "Confirmar contraseña" %>
+        <%= f.password_field :password_confirmation, min: 6, class: 'form-control', required: true %>
+      </div>
+    </div>
+  </section>
+  <section class="form-section">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="form-section-title">Datos de vehículo</h2>
+      </div>
+      <%= fields_for @vehicle do |ff| %>
+        <div class="form-group col-xs-12 col-md-6">
+          <%= ff.label :vehicle_model, "Modelo" %>
+          <%= ff.text_field :vehicle_model, class: 'form-control', required: true %>
+        </div>
+        <div class="form-group col-xs-12 col-md-6">
+          <%= ff.label :vehicle_brand_id, "Marca" %>
+          <%= ff.collection_select(:vehicle_brand_id, VehicleBrand.all.order(name: :asc), :id, :name, {}, class: 'form-control', required: true) %>
+        </div>
+        <div class="form-group col-xs-12 col-md-6">
+          <%= ff.label :licence_plate, "Patente" %>
+          <%= ff.text_field :licence_plate, min: 6, max: 8, class: 'form-control', required: true %>
+        </div>
+        <div class="form-group col-xs-12 col-md-6">
+          <%= ff.label :color, "Color" %>
+          <%= ff.text_field :color, class: 'form-control', required: true %>
+        </div>
+      <% end %>
+    </div>
+  </section>
+  <div class="form-section">
+    <div class="actions">
+      <%= f.submit "Enviar", class: "btn btn-primary btn-md" %>
+      <%= link_to "Volver", store_provider_index_url(current_user.store), class: "btn btn-default btn-md" %>
+    </div>
   </div>
 <% end %>

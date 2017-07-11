@@ -33,7 +33,7 @@ gem 'devise', '~> 4.3'
 gem 'sidekiq', '~> 5.0'
 
 # Retina tag para las imagenes en mayor resolución
-gem 'retina_rails'
+# gem 'retina_rails'
 gem 'retina_tag'
 
 # SUBIDA DE ARCHIVOS
