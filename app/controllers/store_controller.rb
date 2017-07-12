@@ -60,7 +60,7 @@ class StoreController < ApplicationController
         end
       else
         format.html { render :new }
-        format.json { render :json, @address.errors, status: :unprocessable_entity }
+        format.json { render :json, @addresss.errors, status: :unprocessable_entity }
       end
     end
   end

@@ -30,11 +30,11 @@
         </div>
         <div class="form-group col-xs-12 col-md-6">
           <%= ff.label :street_number, "Número de calle" %>
-          <%= ff.number_field :street_number, min: 1, max: 999999, class: 'form-control', required: true %>
+          <%= ff.number_field :street_number, maxlength: 99999, class: 'form-control', required: true %>
         </div>
         <div class="form-group col-xs-12 col-md-6">
           <%= ff.label :block_number, "Número de block (Opcional)" %>
-          <%= ff.number_field :block_number, min: 1, max: 999999, class: 'form-control' %>
+          <%= ff.number_field :block_number, maxlength: 999999, class: 'form-control' %>
         </div>
         <div class="form-group col-xs-12 col-md-6">
           <%= ff.label :town_name, "Villa (Opcional)" %>
@@ -66,7 +66,7 @@
         </div>
         <div class="form-group col-xs-12 col-md-6">
           <%= ff.label :account_number, "Ingresar número de cuenta" %>
-          <%= ff.number_field :account_number, min: 1, max: 999999999999999, class: "form-control" %>
+          <%= ff.number_field :account_number, maxlength: 12, class: 'form-control' %>
         </div>
       <% end %>
     </div>

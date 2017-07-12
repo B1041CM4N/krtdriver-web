@@ -9,7 +9,8 @@ class ProductController < ApplicationController
     respond_to do |format|
       format.html {
         # @products = Product.all.order(product_id: :asc).page params[:page]
-        @products.order(product_id: :asc).page(params[:page]).per(5)
+        # @products.order(product_id: :asc).page(params[:page]).per(5)
+        @products.order(product_id: :asc)
         # @products = Product.joins(:inventories).where(store_id: params[:store_id]).all.order(product_id: :asc).page params[:page]
       }
       format.xlsx {

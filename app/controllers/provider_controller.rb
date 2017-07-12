@@ -32,12 +32,13 @@ class ProviderController < ApplicationController
         format.html { redirect_to root_url, notice: 'El proveedor ha sido creada exitosamente' }
         format.json { render :show, status: :created, location: @provider }
       else
-        format.html { render :new }
+        @provider = Provider.new
+        @vehicle.destroy
+        format.html { redirect_to action: :new }
         format.json { render :json, @provider.errors, status: :unprocessable_entity }
       end
     else
-      @vehicle
-      format.html { render :new }
+      format.html { redirect_to action: :new }
       format.json { render :json, @vehicle.errors, status: :unprocessable_entity }
     end
   end
@@ -57,12 +58,12 @@ class ProviderController < ApplicationController
         format.html { redirect_to root_url, notice: 'El proveedor ha sido creada exitosamente' }
         format.json { render :show, status: :created, location: @provider }
       else
-        format.html { render :new }
+        format.html { redirect_to action: :edit }
         format.json { render :json, @provider.errors, status: :unprocessable_entity }
       end
     else
       @vehicle = @provider.vehicle
-      format.html { render :new }
+      format.html { redirect_to action: :edit }
       format.json { render :json, @provider.vehicle.errors, status: :unprocessable_entity }
     end
   end
