@@ -21,15 +21,15 @@ class StoreController < ApplicationController
     commune = Commune.find(params[:store][:address][:commune_id])
     results = gmaps.geocode(params[:store][:address][:street_name].to_s + ' ' + params[:store][:address][:street_number].to_s + ', ' + commune.name.to_s )
     Rails.logger.info 'results: ' + results.inspect + ' **************'
-    unless results.count.zero?
+    if results.count.zero?
+      latitude = ''
+      longitude = ''
+    else
       latitude = results.first[:geometry][:location][:lat]
       longitude = results.first[:geometry][:location][:lng]
-    else
-      latitude = ""
-      longitude = ""
     end
     
-    @address = Address.new(commune_id: params[:store][:address][:commune_id],
+    @addresss = Address.new(commune_id: params[:store][:address][:commune_id],
     street_name: params[:store][:address][:street_name], street_number: params[:store][:address][:street_number],
     block_number: params[:store][:address][:block_number], town_name: params[:store][:address][:town_name],
     latitude: latitude.to_s, longitude: longitude.to_s)
@@ -37,19 +37,20 @@ class StoreController < ApplicationController
     @bank_account = BankAccount.new(bank_id: params[:store][:bank_account][:bank_id], ta_id: params[:store][:bank_account][:ta_id],
     account_number: params[:store][:bank_account][:account_number], user_id: current_user.user_id)
 
-    Rails.logger.info 'ADRESS: ' + @address.inspect + ' **********'
-    Rails.logger.info 'BankAccount: ' + @bank_account.inspect + ' *********'
     respond_to do |format|
-      if @address.save
+      if @addresss.save
+        Rails.logger.info 'ADRESS: ' + @addresss.inspect + ' **********'
         if @bank_account.save
-          @store = Store.new(address_id: @address.address_id, paymentmethod_id: payment_method_setter(mcash, mdebit, mcredit),
+          Rails.logger.info 'BankAccount: ' + @bank_account.inspect + ' *********'
+          @store = Store.new(address_id: @addresss.address_id, paymentmethod_id: payment_method_setter(mcash, mdebit, mcredit),
           bank_account_id: @bank_account.bank_account_id, name: params[:store][:name], description: params[:store][:description],
           user_id: current_user.user_id)
           if @store.save
+            Rails.logger.info 'STORE::: ' + @store.inspect + ' *******'
             format.html { redirect_to root_path, notice: 'La tienda ha sido creada exitosamente' }
             format.json { render :show, status: :created, location: @store }
           else
-            Rails.logger.info "STORE::: " +@store.inspect + " *******"
+            Rails.logger.info 'STORE::: ' + @store.inspect + ' *******'
             format.html { render :new }
             format.json { render :json, @store.errors, status: :unprocessable_entity }
           end
@@ -91,7 +92,7 @@ class StoreController < ApplicationController
   end
 
   def update
-    Rails.logger.info "INCOMMING PARAMS: " + params.inspect + " ********************"
+    Rails.logger.info 'INCOMMING PARAMS: ' + params.inspect + ' ********************'
     @store = Store.find(params[:id])
     mcash = params[:efectivo]
     mdebit = params[:debito]
