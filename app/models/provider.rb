@@ -26,6 +26,8 @@ class Provider < ApplicationRecord
   self.table_name = 'provider'
   self.primary_key = 'provider_id'
 
+  paginates_per 10
+
   # after_initialize :set_default_payment_method, if: :new_record?
 
   belongs_to :vehicle, foreign_key: 'vehicle_id', class_name: 'Vehicle'

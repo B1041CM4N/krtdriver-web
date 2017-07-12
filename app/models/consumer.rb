@@ -25,7 +25,7 @@ class Consumer < ApplicationRecord
   self.table_name = 'consumer'
   self.primary_key = 'consumer_id'
 
-  belongs_to :address, foreign_key: :address_id, class_name: 'Address'
+  belongs_to :address, foreign_key: 'address_id', class_name: 'Address'
   has_many :credit_cards, class_name: 'CreditCard'
   has_many :debit_cards, class_name: 'DebitCard'
   has_many :order_sales, class_name: 'OrderSale'

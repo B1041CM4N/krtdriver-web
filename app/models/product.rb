@@ -27,7 +27,8 @@ class Product < ApplicationRecord
   mount_uploader :file_in_server, ProductUploader
 
   paginates_per 10
-  belongs_to :category, foreign_key: :category_id, class_name: 'Category'
+  
+  belongs_to :category, foreign_key: 'category_id', class_name: 'Category'
   has_many :inventories, class_name: 'Inventory', dependent: :destroy
   has_many :stores, through: :inventories
   has_many :product_quantifiers, class_name: 'ProductQuantifier'

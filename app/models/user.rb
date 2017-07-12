@@ -58,7 +58,7 @@ class User < ApplicationRecord
 
   has_one :store, class_name: 'Store'
   has_one :bank_account, class_name: 'BankAccount'
-  has_many :addresses, class_name: 'Address'
+  # has_many :addresses, class_name: 'Address'
 
   # alias_attribute "Name", "name"
 

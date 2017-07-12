@@ -28,10 +28,28 @@ class OrderSale < ApplicationRecord
   self.table_name = 'ordersale'
   self.primary_key = 'order_id'
 
-  enum order_status: []
+  paginates_per 10
 
-  belongs_to :consumer, foreign_key: :consumer_id, class_name: 'Consumer'
-  belongs_to :payment_method, foreign_key: :paymentmethod_id, class_name: 'PaymentMethod'
-  belongs_to :store, foreign_key: :store_id, class_name: 'Store'
+  # def order_status(order_status)
+  #   stat_name = ''
+  #   if order_status == 3
+  #     stat_name = 'Orden Entregada'
+  #   elsif order_status == 2
+  #     stat_name = 'Orden en reparto'
+  #   elsif order_status == 1
+  #     stat_name = 'Orden rechazada'
+  #   elsif order_status == 0
+  #     stat_name = 'Solicitud en Orden'
+  #   elsif order_status.nil?
+  #     stat_name = 'No tiene estado'
+  #   end
+  #   stat_name
+  # end
+
+  enum order_status: [:pending, :rejected, :moving, :accepted]
+
+  belongs_to :consumer, foreign_key: 'consumer_id', class_name: 'Consumer'
+  belongs_to :payment_method, foreign_key: 'paymentmethod_id', class_name: 'PaymentMethod'
+  belongs_to :store, foreign_key: 'store_id', class_name: 'Store'
   has_many :product_quantifiers, class_name: 'ProductQuantifier'
 end

@@ -1,5 +1,7 @@
 <div class="row">
-  <span id="notice"><%= notice %></span>
-  <span id="alert"><%= alert %></span>
+  <div class="col-xs-12">
+    <span id="notice"><%= notice %></span>
+    <span id="alert"><%= alert %></span>
+  </div>
 </div>
 <%= render partial: "form", locals: { url: store_index_url, method: :post } %>

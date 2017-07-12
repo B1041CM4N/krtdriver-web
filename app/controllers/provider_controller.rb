@@ -4,8 +4,15 @@ class ProviderController < ApplicationController
   respond_to :js, :html
 
   def index
-    @provider = Provider.new
-    @providers = Provider.where(store_id: params[:store_id]).order(provider_id: :asc).page params[:page]
+    respond_to do |format|
+      format.html {
+        @provider = Provider.new
+        @providers = Provider.where(store_id: params[:store_id]).order(provider_id: :asc).page params[:page]
+      }
+      format.xlsx {
+        @providers = Provider.where(store_id: params[:store_id]).order(provider_id: :asc)
+      }
+    end
   end
 
   def new
@@ -72,6 +79,8 @@ class ProviderController < ApplicationController
   def destroy
     @provider = Provider.find(params[:id])
     @provider.destroy
+    flash[:notice] = 'Proveedor ha sido eliminado exitosamente'
+    redirect_to root_url
   end
 
   private

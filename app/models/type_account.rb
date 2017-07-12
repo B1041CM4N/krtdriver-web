@@ -10,5 +10,5 @@ class TypeAccount < ApplicationRecord
   self.table_name = 'type_account'
   self.primary_key = 'ta_id'
 
-  has_many :bank_account
+  has_many :bank_accounts, class_name: 'BankAccount'
 end

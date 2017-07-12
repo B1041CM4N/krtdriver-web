@@ -3,6 +3,9 @@ class HomeController < ApplicationController
   before_action :set_module
   
   def index
+    if current_user.store.nil?
+      redirect_to new_store_url
+    end
   end
 
   private

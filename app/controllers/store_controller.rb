@@ -20,8 +20,15 @@ class StoreController < ApplicationController
     # Geocoding an address
     commune = Commune.find(params[:store][:address][:commune_id])
     results = gmaps.geocode(params[:store][:address][:street_name].to_s + ' ' + params[:store][:address][:street_number].to_s + ', ' + commune.name.to_s )
-    latitude = results.first[:geometry][:location][:lat]
-    longitude = results.first[:geometry][:location][:lng]
+    Rails.logger.info 'results: ' + results.inspect + ' **************'
+    unless results.count.zero?
+      latitude = results.first[:geometry][:location][:lat]
+      longitude = results.first[:geometry][:location][:lng]
+    else
+      latitude = ""
+      longitude = ""
+    end
+    
     address = Address.create(commune_id: params[:store][:address][:commune_id],
     street_name: params[:store][:address][:street_name], street_number: params[:store][:address][:street_number],
     block_number: params[:store][:address][:block_number], town_name: params[:store][:address][:town_name],
@@ -85,8 +92,14 @@ class StoreController < ApplicationController
     # Geocoding an address
     commune = Commune.find(params[:store][:address][:commune_id])
     results = gmaps.geocode(params[:store][:address][:street_name].to_s + ' ' + params[:store][:address][:street_number].to_s + ', ' + commune.name.to_s )
-    latitude = results.first[:geometry][:location][:lat]
-    longitude = results.first[:geometry][:location][:lng]
+    Rails.logger.info 'results: ' + results.inspect + ' **************'
+    unless results.count.zero?
+      latitude = results.first[:geometry][:location][:lat]
+      longitude = results.first[:geometry][:location][:lng]
+    else
+      latitude = ''
+      longitude = ''
+    end
     # FIN GEOCODING
     address = @store.address
     bank_account = @store.bank_account

@@ -6,9 +6,12 @@
 <div class="row">
   <div class="col-md-12">
     <div class="pull-left">
-      <h3>Proveedores</h3> 
+      <h3>Proveedores (<%= @providers.count.to_s %>)</h3> 
     </div>
     <div class="pull-right">
+      <%= link_to url_for(params.except(:action, :controller, :page).permit!.merge(format: :xlsx)), class: "btn btn-success btn-md" do %>
+        <%= fa_icon "file-excel-o" %> Exportar
+      <% end %>
       <%= link_to "Crear Proveedor", new_store_provider_url(current_user.store.store_id), class: "btn btn-primary btn-md" %>
     </div>
   </div>

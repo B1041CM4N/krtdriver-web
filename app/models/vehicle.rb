@@ -21,6 +21,6 @@ class Vehicle < ApplicationRecord
   self.table_name = 'vehicle'
   self.primary_key = 'vehicle_id'
 
-  belongs_to :vehicle_brand, foreign_key: :vehicle_brand_id, class_name: 'VehicleBrand'
+  belongs_to :vehicle_brand, foreign_key: 'vehicle_brand_id', class_name: 'VehicleBrand'
   has_many :providers, class_name: 'Provider'
 end

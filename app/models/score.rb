@@ -28,7 +28,7 @@ class Score < ApplicationRecord
   self.table_name = 'score'
   self.primary_key = 'score_id'
 
-  belongs_to :punishment, foreign_key: :punishment_id, class_name: 'Punishment'
-  belongs_to :consumer, foreign_key: :consumer_id, class_name: 'Consumer'
-  belongs_to :store, foreign_key: :store_id, class_name: 'Store'
+  belongs_to :punishment, foreign_key: 'punishment_id', class_name: 'Punishment'
+  belongs_to :consumer, foreign_key: 'consumer_id', class_name: 'Consumer'
+  belongs_to :store, foreign_key: 'store_id', class_name: 'Store'
 end

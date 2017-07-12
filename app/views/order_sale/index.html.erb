@@ -1,14 +1,18 @@
-<%# if @provider && @provider.errors.any? %>
-  <%#= render partial: "base/message_error", locals: {
-        message: "No se puede guardar el proveedor debido a los siguientes errores:", model: @provider
-  } %>
-<%# end %>
 <div class="row">
   <div class="col-md-12">
     <div class="pull-left">
       <h3>Pedidos (<%= @order_sales.count.to_s %>)</h3> 
     </div>
     <div class="pull-right">
+      <%#= form_tag store_order_sale_index_url, method: :get, turboboost: true do %>
+        <%#= select_tag :order_status, OrderSale.order_statuses.map { |k, v| [k.humanize, v] } %>
+        <%#= date_tag('created_at_range', params[:created_at_range]) %>
+        <%#= text_field_tag "query", params[:query], id: "navbar-search", class: "form-control", placeholder: "" %>
+      <%# end %>
+      <%#= form_for @order_sale, url: store_order_sale_index_url(current_user.store.store_id), method: :get do |f| %>
+        <%#= f.select :order_status, OrderSale.order_statuses.map { |k, v| [k.humanize, v] }, class: 'form-control' %>
+        <%#= f.submit 'Enviar' %>
+      <%# end %>
       <%#= link_to "Crear Proveedor", new_store_provider_url(current_user.store.store_id), class: "btn btn-primary btn-md" %>
     </div>
   </div>

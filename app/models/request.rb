@@ -25,6 +25,6 @@ class Request < ApplicationRecord
   self.table_name = 'request'
   self.primary_key = 'request_id'
 
-  belongs_to :consumer, foreign_key: :consumer_id, class_name: 'Consumer'
-  belongs_to :request_category, foreign_key: :rc_id, class_name: 'RequestCategory'
+  belongs_to :consumer, foreign_key: 'consumer_id', class_name: 'Consumer'
+  belongs_to :request_category, foreign_key: 'rc_id', class_name: 'RequestCategory'
 end
