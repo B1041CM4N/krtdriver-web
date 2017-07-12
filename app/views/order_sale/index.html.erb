@@ -4,15 +4,25 @@
       <h3>Pedidos (<%= @order_sales.count.to_s %>)</h3> 
     </div>
     <div class="pull-right">
-      <%#= form_tag store_order_sale_index_url, method: :get, turboboost: true do %>
-        <%#= select_tag :order_status, OrderSale.order_statuses.map { |k, v| [k.humanize, v] } %>
-        <%#= date_tag('created_at_range', params[:created_at_range]) %>
-        <%#= text_field_tag "query", params[:query], id: "navbar-search", class: "form-control", placeholder: "" %>
-      <%# end %>
-      <%#= form_for @order_sale, url: store_order_sale_index_url(current_user.store.store_id), method: :get do |f| %>
-        <%#= f.select :order_status, OrderSale.order_statuses.map { |k, v| [k.humanize, v] }, class: 'form-control' %>
-        <%#= f.submit 'Enviar' %>
-      <%# end %>
+      <div class="col-xs-12 col-md-12 well well-sm">
+        <%= form_tag store_order_sale_index_url(current_user.store.store_id), method: :get do %>
+          <div class="form-group col-xs-12 col-md-5">
+            <%= label_tag "Estado de la orden:" %><br/>
+            <%= collection_select @order_sale.order_status, :order_status, OrderSale.order_statuses, :first, Proc.new { |key, num| enum_i18n(OrderSale, :order_status, key) }, {}, { class: 'form-control col-md-4' } %>
+          </div>
+          <div class="form-group col-xs-12 col-md-5">
+            <%= label_tag "Fecha: " %><br/>
+            <%= date_field_tag('date', params[:date], class: 'form-control col-md-4') %>
+          </div>
+          <div class="form-group col-xs-12 col-md-2">
+            <%= link_to url_for(params.except(:action, :controller, :page).permit!.merge(format: :xlsx)), class: "btn btn-success btn-xs" do %>
+              <%= fa_icon "file-excel-o" %> Exportar
+            <% end %>
+            <%= link_to 'Borrar', store_order_sale_index_url, class: 'btn btn-info btn-xs' %>
+            <%= submit_tag 'Enviar', class: "btn btn-info btn-xs" %>
+          </div>
+        <% end %>
+      </div>
       <%#= link_to "Crear Proveedor", new_store_provider_url(current_user.store.store_id), class: "btn btn-primary btn-md" %>
     </div>
   </div>
@@ -47,7 +57,7 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-    <%= paginate @order_sales %>
+    <%#= paginate @order_sales %>
   </div>
 </div>
 <div class="col-md-6 col-md-offset-3">

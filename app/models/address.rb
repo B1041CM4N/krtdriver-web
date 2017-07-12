@@ -31,6 +31,8 @@ class Address < ApplicationRecord
   #   address = (street_name.to_s + ' ' + street_number.to_s + ' ,' + commune.name.to_s )
   # end
 
+  validates :commune_id, :street_name, :street_number, :latitude, :longitude, presence: true
+
   belongs_to :commune, foreign_key: 'commune_id', class_name: 'Commune'
   has_many :stores, class_name: 'Store'
   has_many :consumer, class_name: 'Consumer'

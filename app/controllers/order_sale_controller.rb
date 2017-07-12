@@ -3,8 +3,37 @@ class OrderSaleController < ApplicationController
   before_action :set_module
   
   def index
-    @order_sale = OrderSale.new
-    @order_sales = OrderSale.where(store_id: params[:store_id]).order(order_id: :asc).page params[:page]
+    unless (params[:order_status].present? || params[:date].present?)
+      @order_sale = OrderSale.new
+      @order_sales = OrderSale.where(store_id: params[:store_id]).order(order_id: :asc).page params[:page]
+    else
+      @order_sale = OrderSale.new
+      if (params[:order_status].present? && !params[:date].present?)
+        @order_sales = OrderSale.where('ordersale.store_id = ? AND ordersale.order_status = ?', params[:store_id], order_statuses_integer(params[:order_status]))
+      else
+        @order_sales = OrderSale.where('ordersale.store_id = ? AND ordersale.order_status = ? AND ordersale.date <= ?', params[:store_id], order_statuses_integer(params[:order_status]), params[:date])
+      end
+    end
+    respond_to do |format|
+      format.html {
+        @order_sales.order(order_id: :asc).page params[:page]
+      }
+      format.xlsx {
+        @order_sales.order(order_id: :asc)
+      }
+    end
+  end
+
+  def order_statuses_integer(opt)
+    osi = 0
+    if opt == 'rejected'
+      osi = 1
+    elsif opt == 'in_route'
+      osi = 2
+    elsif opt == 'deliver'
+      osi = 3
+    end
+    osi
   end
 
   def order_cancellation

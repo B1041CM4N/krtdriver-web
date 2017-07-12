@@ -77,7 +77,7 @@ gem 'rabl' # Templates para JSON, XML, etc. https://github.com/nesquena/rabl
 gem 'faker', '~> 1.7', '>= 1.7.3'
 
 # Paginación
-gem 'kaminari', '~> 1.0', '>= 1.0.1'
+gem 'kaminari'
 
 
 group :development, :test do

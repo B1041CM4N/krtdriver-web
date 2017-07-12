@@ -29,6 +29,17 @@ es:
       email: "Correo Electrónico"
     store:
       bank_account: "Cuenta bancaria"
+    order_sale:
+      order_statuses:
+        pending: "Pendiente"
+        rejected: "Rechazado"
+        in_route: "Reparto"
+        deliver: "Entregada"
+  views:
+    pagination:
+      next: 'Siguiente'
+      previous: 'Anterior'
+      truncate: '...'
   errors:
     format: "%{attribute} %{message}"
     taken: " está en uso"

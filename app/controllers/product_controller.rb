@@ -9,7 +9,7 @@ class ProductController < ApplicationController
     respond_to do |format|
       format.html {
         # @products = Product.all.order(product_id: :asc).page params[:page]
-        @products.order(product_id: :asc).page params[:page]
+        @products.order(product_id: :asc).page(params[:page]).per(5)
         # @products = Product.joins(:inventories).where(store_id: params[:store_id]).all.order(product_id: :asc).page params[:page]
       }
       format.xlsx {
@@ -25,14 +25,16 @@ class ProductController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    if @product.save
-      inventory = Inventory.create(product_id: @product.product_id, store_id: params[:store_id], quantity: params[:inventory][:quantity], price: params[:inventory][:price])
-      flash[:success] = 'Producto creado correctamente!'
-      redirect_to root_url
-    else
-      flash[:alert] = 'Error al intentar crear el producto'
-      return @product
-      render :new
+    respond_to do |format|
+      if @product.save
+        inventory = Inventory.create(product_id: @product.product_id, store_id: params[:store_id], quantity: params[:inventory][:quantity], price: params[:inventory][:price])
+        format.html { redirect_to root_url, notice: 'La tienda ha sido creada exitosamente' }
+        format.json { render :show, status: :created, location: @product }
+      else
+        @inventory = Inventory.new
+        format.html { render :new }
+        format.json { render :json, @product.errors, status: :unprocessable_entity }
+      end
     end
   end
 

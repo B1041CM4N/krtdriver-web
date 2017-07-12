@@ -27,6 +27,8 @@ class Product < ApplicationRecord
   mount_uploader :file_in_server, ProductUploader
 
   paginates_per 10
+
+  validates :category_id, :name, :description, :file_in_server, presence: true
   
   belongs_to :category, foreign_key: 'category_id', class_name: 'Category'
   has_many :inventories, class_name: 'Inventory', dependent: :destroy

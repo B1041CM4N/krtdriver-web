@@ -21,6 +21,9 @@ class Vehicle < ApplicationRecord
   self.table_name = 'vehicle'
   self.primary_key = 'vehicle_id'
 
+  validates :vehicle_brand_id, :vehicle_model, :licence_plate, :color, presence: true
+  validates_length_of :licence_plate, :minimum => 6, :maximum => 6, :allow_blank => false
+
   belongs_to :vehicle_brand, foreign_key: 'vehicle_brand_id', class_name: 'VehicleBrand'
   has_many :providers, class_name: 'Provider'
 end

@@ -5,4 +5,9 @@
     <h3>Editar Tienda - <%= @store.name.capitalize %></h3>
   </div>
 </div>
+<% if @store && @store.errors.any? %>
+    <%= render partial: "base/message_error",
+    locals: { message: "No se puede guardar la tienda debido a los siguientes errores:",
+    model: @store } %>
+<% end %>
 <%= render partial: "form", locals: { url: store_url, method: :put} %>

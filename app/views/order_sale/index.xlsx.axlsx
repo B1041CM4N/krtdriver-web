@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: 'Pedidos') do |sheet|
+  sheet.add_row ['ID', 'Total', 'Fecha', 'Cliente', 'Medio de pago', 'Estado', 'Ticket']
+  @order_sales.each do |os|
+    sheet.add_row [os.order_id.to_s, os.total, os.date.strftime('%d/%m/%Y, %H:%S Hrs.'), os.consumer.first_name + ' ' + os.consumer.last_name, payment_methods(os.paymentmethod_id), order_status(os.order_status), os.ticket_number.to_s]
+  end
+end

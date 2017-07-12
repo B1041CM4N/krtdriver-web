@@ -46,10 +46,14 @@ class OrderSale < ApplicationRecord
   #   stat_name
   # end
 
-  enum order_status: [:pending, :rejected, :moving, :accepted]
+  enum order_status: [:pending, :rejected, :in_route, :deliver]
 
   belongs_to :consumer, foreign_key: 'consumer_id', class_name: 'Consumer'
   belongs_to :payment_method, foreign_key: 'paymentmethod_id', class_name: 'PaymentMethod'
   belongs_to :store, foreign_key: 'store_id', class_name: 'Store'
   has_many :product_quantifiers, class_name: 'ProductQuantifier'
+
+  scope :by_status, ->(order_status) { where(order_status: order_status) }
+  scope :by_date, ->(date) { where(date: date) }
+
 end

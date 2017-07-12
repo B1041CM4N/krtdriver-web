@@ -30,6 +30,10 @@ class Provider < ApplicationRecord
 
   # after_initialize :set_default_payment_method, if: :new_record?
 
+  validates :vehicle_id, :store_id, :rut, :email, :password, :first_name, :last_name, presence: true
+  validates_length_of :rut, :minimum => 10, :maximum => 12, :allow_blank => false
+  validates_length_of :password, :minimum => 6, :maximum => 20, :allow_blank => false
+
   belongs_to :vehicle, foreign_key: 'vehicle_id', class_name: 'Vehicle'
   belongs_to :store, foreign_key: 'store_id', class_name: 'Store'
   has_many :trackings, class_name: 'Tracking'

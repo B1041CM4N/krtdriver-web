@@ -1,8 +1,5 @@
 <div class="col-md-6 col-md-offset-3">
   <h2>Registro - Tiendas</h2>
-  <%= devise_error_messages! %>
-  <span id="notice"><%= notice %></span>
-  <span id="alert"><%= alert %></span>
   <% if @user && @user.errors.any? %>
     <%= render partial: "base/message_error",
     locals: { message: "No se puede guardar el producto debido a los siguientes errores:",

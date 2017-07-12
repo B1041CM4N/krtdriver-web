@@ -22,27 +22,23 @@ class ProviderController < ApplicationController
 
   def create
     Rails.logger.info 'PARAMS: ' + params.inspect + ' *********'
-
-    vehicle = Vehicle.create(vehicle_brand_id: params[:vehicle][:vehicle_brand_id], vehicle_model: params[:vehicle][:vehicle_model],
+    @vehicle = Vehicle.new(vehicle_brand_id: params[:vehicle][:vehicle_brand_id], vehicle_model: params[:vehicle][:vehicle_model],
     licence_plate: params[:vehicle][:licence_plate], color: params[:vehicle][:color])
-
-    @provider = Provider.new(first_name: params[:provider][:first_name], last_name: params[:provider][:last_name],
-    rut: params[:provider][:rut], email: params[:provider][:email], password: params[:provider][:password],
-    store_id: params[:store_id], vehicle_id: vehicle.vehicle_id)
-
-    if @provider.password == params[:provider][:password_confirmation]
+    if @vehicle.save
+      @provider = Provider.new(first_name: params[:provider][:first_name], last_name: params[:provider][:last_name],
+      rut: params[:provider][:rut], email: params[:provider][:email], password: params[:provider][:password],
+      store_id: params[:store_id], vehicle_id: @vehicle.vehicle_id)
       if @provider.save
-        flash[:success] = 'Proveedor creado exitosamente!'
-        redirect_to root_url
+        format.html { redirect_to root_url, notice: 'El proveedor ha sido creada exitosamente' }
+        format.json { render :show, status: :created, location: @provider }
       else
-        flash[:alert] = "Ha ocurrido un problema al tratar de crear al proveedor y/o sus datos asociados"
-        # @providers = Provider.all.order(provider_id: :asc)
-        return @provider, @vehicle
-        render :new
+        format.html { render :new }
+        format.json { render :json, @provider.errors, status: :unprocessable_entity }
       end
     else
-      flash[:alert] = "Las contraseñas ingresadas no coinciden"
-      redirect_to @provider
+      @vehicle
+      format.html { render :new }
+      format.json { render :json, @vehicle.errors, status: :unprocessable_entity }
     end
   end
 
@@ -53,22 +49,21 @@ class ProviderController < ApplicationController
 
   def update
     @provider = Provider.find(params[:id])
-    @provider.vehicle = Vehicle.update(vehicle_brand_id: params[:vehicle][:vehicle_brand_id], vehicle_model: params[:vehicle][:vehicle_model],
-    licence_plate: params[:vehicle][:licence_plate], color: params[:vehicle][:color])
-
-    if params[:provider][:password] == params[:provider][:password_confirmation]
+    if @provider.vehicle = Vehicle.update(vehicle_brand_id: params[:vehicle][:vehicle_brand_id], vehicle_model: params[:vehicle][:vehicle_model],
+      licence_plate: params[:vehicle][:licence_plate], color: params[:vehicle][:color])
       if @provider.update(first_name: params[:provider][:first_name], last_name: params[:provider][:last_name],
-      rut: params[:provider][:rut], email: params[:provider][:email], password: params[:provider][:password],
-      store_id: params[:store_id], vehicle_id: vehicle.vehicle_id)
-        flash[:success] = 'Proveedor modificado exitosamente'
-        redirect_to root_url
+        rut: params[:provider][:rut], email: params[:provider][:email], password: params[:provider][:password],
+        store_id: params[:store_id], vehicle_id: vehicle.vehicle_id)
+        format.html { redirect_to root_url, notice: 'El proveedor ha sido creada exitosamente' }
+        format.json { render :show, status: :created, location: @provider }
       else
-        @providers = Provider.all.order(provider_id: :asc)
-        redirect_to action: :index
+        format.html { render :new }
+        format.json { render :json, @provider.errors, status: :unprocessable_entity }
       end
     else
-      flash[:alert] = "Las contraseñas ingresadas no coinciden"
-      redirect_to :back
+      @vehicle = @provider.vehicle
+      format.html { render :new }
+      format.json { render :json, @provider.vehicle.errors, status: :unprocessable_entity }
     end
   end
 

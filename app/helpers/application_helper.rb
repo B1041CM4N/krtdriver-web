@@ -22,13 +22,13 @@ module ApplicationHelper
   def order_status(order_status)
     stat_name = ''
     if order_status == 3
-      stat_name = 'Orden Entregada'
+      stat_name = 'Entregada'
     elsif order_status == 2
-      stat_name = 'Orden en reparto'
+      stat_name = 'Reparto'
     elsif order_status == 1
-      stat_name = 'Orden rechazada'
+      stat_name = 'Rechazada'
     elsif order_status == 0
-      stat_name = 'Solicitud en Orden'
+      stat_name = 'Pendiente'
     elsif order_status.nil?
       stat_name = 'No tiene estado'
     end

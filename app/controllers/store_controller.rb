@@ -29,33 +29,42 @@ class StoreController < ApplicationController
       longitude = ""
     end
     
-    address = Address.create(commune_id: params[:store][:address][:commune_id],
+    @address = Address.new(commune_id: params[:store][:address][:commune_id],
     street_name: params[:store][:address][:street_name], street_number: params[:store][:address][:street_number],
     block_number: params[:store][:address][:block_number], town_name: params[:store][:address][:town_name],
     latitude: latitude.to_s, longitude: longitude.to_s)
 
-    bank_account = BankAccount.create(bank_id: params[:store][:bank_account][:bank_id], ta_id: params[:store][:bank_account][:ta_id],
+    @bank_account = BankAccount.new(bank_id: params[:store][:bank_account][:bank_id], ta_id: params[:store][:bank_account][:ta_id],
     account_number: params[:store][:bank_account][:account_number], user_id: current_user.user_id)
 
-    @store = Store.new(address_id: address.address_id, paymentmethod_id: set_payment_method(mcash, mdebit, mcredit),
-    bank_account_id: bank_account.bank_account_id, name: params[:store][:name], description: params[:store][:description],
-    user_id: current_user.user_id)
-
-    Rails.logger.info 'NEW STORE::: ' + @store.inspect + ' ****************'
-    Rails.logger.info 'ADRESS: ' + address.inspect + ' **********'
-    Rails.logger.info 'BankAccount: ' + bank_account.inspect + ' *********'
+    Rails.logger.info 'ADRESS: ' + @address.inspect + ' **********'
+    Rails.logger.info 'BankAccount: ' + @bank_account.inspect + ' *********'
     respond_to do |format|
-      if @store.save
-        format.html { redirect_to root_path, notice: 'La tienda ha sido creada exitosamente' }
-        format.json { render :show, status: :created, location: @store }
+      if @address.save
+        if @bank_account.save
+          @store = Store.new(address_id: @address.address_id, paymentmethod_id: payment_method_setter(mcash, mdebit, mcredit),
+          bank_account_id: @bank_account.bank_account_id, name: params[:store][:name], description: params[:store][:description],
+          user_id: current_user.user_id)
+          if @store.save
+            format.html { redirect_to root_path, notice: 'La tienda ha sido creada exitosamente' }
+            format.json { render :show, status: :created, location: @store }
+          else
+            Rails.logger.info "STORE::: " +@store.inspect + " *******"
+            format.html { render :new }
+            format.json { render :json, @store.errors, status: :unprocessable_entity }
+          end
+        else
+          format.html { render :new }
+          format.json { render :json, @bank_account.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render :new }
-        format.json { render :json, @store.errors, status: :unprocessable_entity }
+        format.json { render :json, @address.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  def set_payment_method(mcash, mdebit, mcredit)
+  def payment_method_setter(mcash, mdebit, mcredit)
     if (mcash.present? && mdebit.present? && mcredit.present?)
       payment_method_id = 7
     elsif (mcash.present? && mdebit.present? && !mcredit.present?)
@@ -101,25 +110,33 @@ class StoreController < ApplicationController
       longitude = ''
     end
     # FIN GEOCODING
-    address = @store.address
-    bank_account = @store.bank_account
+    @address = @store.address
+    @bank_account = @store.bank_account
 
-    address.update(commune_id: params[:store][:address][:commune_id],
-    street_name: params[:store][:address][:street_name], street_number: params[:store][:address][:street_number],
-    block_number: params[:store][:address][:block_number], town_name: params[:store][:address][:town_name],
-    latitude: latitude.to_s, longitude: longitude.to_s)
-
-    bank_account.update(bank_id: params[:store][:bank_account][:bank_id], ta_id: params[:store][:bank_account][:ta_id],
-    account_number: params[:store][:bank_account][:account_number], user_id: current_user.user_id)
-
-    if @store.update(address_id: address.address_id, paymentmethod_id: set_payment_method(mcash, mdebit, mcredit),
-    bank_account_id: bank_account.bank_account_id, name: params[:store][:name], description: params[:store][:description],
-    user_id: current_user.user_id)
-      flash[:success] = 'Tienda actualizada exitosamente'
-      redirect_to root_path
-    else
-      flash[:alert] = 'Ha ocurrido un problema al tratar de modificar la tienda'
-      render :edit
+    respond_to do |format|
+      if @address.update(commune_id: params[:store][:address][:commune_id],
+      street_name: params[:store][:address][:street_name], street_number: params[:store][:address][:street_number],
+      block_number: params[:store][:address][:block_number], town_name: params[:store][:address][:town_name],
+      latitude: latitude.to_s, longitude: longitude.to_s)
+        if @bank_account.update(bank_id: params[:store][:bank_account][:bank_id], ta_id: params[:store][:bank_account][:ta_id],
+        account_number: params[:store][:bank_account][:account_number], user_id: current_user.user_id)
+          if @store.update(address_id: address.address_id, paymentmethod_id: set_payment_method(mcash, mdebit, mcredit),
+          bank_account_id: bank_account.bank_account_id, name: params[:store][:name], description: params[:store][:description],
+          user_id: current_user.user_id)
+            format.html { redirect_to root_path, notice: 'La tienda ha sido actualizada exitosamente' }
+            format.json { render :show, status: :created, location: @store }
+          else
+            format.html { render :new }
+            format.json { render :json, @store.errors, status: :unprocessable_entity }
+          end
+        else
+          format.html { render :new }
+          format.json { render :json, @bank_account.errors, status: :unprocessable_entity }
+        end
+      else
+        format.html { render :new }
+        format.json { render :json, @address.errors, status: :unprocessable_entity }
+      end
     end
   end
 

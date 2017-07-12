@@ -51,6 +51,8 @@ class Store < ApplicationRecord
   has_many :sale_historicals, class_name: 'SaleHistorical'
   has_many :scores, class_name: 'Score'
 
+  validates :address_id, :paymentmethod_id, :bank_account_id, :name, :description, :user_id, presence: true
+
   enum payment_method: [:efectivo, :debito, :credito]
   # has_many :orders, dependent: :destroy
   # has_many :products, dependent: :destroy

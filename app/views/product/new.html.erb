@@ -1,4 +1,12 @@
-<div class="col-md-12">
-  <h3>Crear Producto</h3>
+<div class="row">
+  <div class="col-xs-12">
+    <span id="notice"><%= notice %></span>
+    <span id="alert"><%= alert %></span>
+  </div>
 </div>
+<% if @product && @product.errors.any? %>
+    <%= render partial: "base/message_error",
+    locals: { message: "No se puede guardar el producto debido a los siguientes errores:",
+    model: @product } %>
+<% end %>
 <%= render partial: 'form', locals: { method: :post, url: store_product_index_url(current_user.store.store_id) } %>

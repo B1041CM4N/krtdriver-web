@@ -22,11 +22,7 @@
       </div>
       <div class="form-group col-xs-12 col-md-6">
         <%= f.label :password, "Contraseña (6 caracteres mínimo)" %>
-        <%= f.password_field :password, min: 6, class: 'form-control', required: true %>
-      </div>
-      <div class="form-group col-xs-12 col-md-6">
-        <%= f.label :password_confirmation, "Confirmar contraseña" %>
-        <%= f.password_field :password_confirmation, min: 6, class: 'form-control', required: true %>
+        <%= f.password_field :password, min: 6, max: 10, class: 'form-control', required: true %>
       </div>
     </div>
   </section>
@@ -46,7 +42,7 @@
         </div>
         <div class="form-group col-xs-12 col-md-6">
           <%= ff.label :licence_plate, "Patente" %>
-          <%= ff.text_field :licence_plate, min: 6, max: 8, class: 'form-control', required: true %>
+          <%= ff.text_field :licence_plate, maxlenght: 6, class: 'form-control', required: true %>
         </div>
         <div class="form-group col-xs-12 col-md-6">
           <%= ff.label :color, "Color" %>
