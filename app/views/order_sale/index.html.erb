@@ -23,17 +23,19 @@
       <th>Método de pago</th>
       <th>Estado</th>
       <th>Número de ticket</th>
+      <th></th>
     </theader>
     <tbody>
       <% @order_sales.each do |os| %>
         <tr>
           <td><%= os.order_id.to_s %></td>
           <td><%= price_format os.total %></td>
-          <td><%= os.date.strftime('%d/%m/%Y, %H:%S')%></td>
+          <td><%= os.date.strftime('%d/%m/%Y, %H:%S Hrs.')%></td>
           <td><%= os.consumer.first_name + ' ' + os.consumer.last_name %></td>
-          <td><%= os.payment_method.paymentmethod_id.to_s %></td>
-          <td><%= os.order_status.to_s %></td>
+          <td><%= payment_methods(os.payment_method.paymentmethod_id) %></td>
+          <td><%= order_status(os.order_status) %></td>
           <td><%= os.ticket_number.to_s %></td>
+          <td><%= link_to "Cancelar Pedido", order_cancellation_store_order_sale_url(current_user.store.store_id, os.order_id), class: 'btn btn-default btn-xs', data: { confirm: "¿Está seguro?" } %></td>
         </tr>
       <% end %>
     </tbody>

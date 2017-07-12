@@ -105,7 +105,7 @@ class StoreController < ApplicationController
       flash[:success] = 'Tienda actualizada exitosamente'
       redirect_to root_path
     else
-      flash[:error] = 'Ha ocurrido un problema al tratar de modificar la tienda'
+      flash[:alert] = 'Ha ocurrido un problema al tratar de modificar la tienda'
       render :edit
     end
   end

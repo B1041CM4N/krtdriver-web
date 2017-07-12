@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resources :contact
 
   resources :store do
-    resources :order_sale
+    resources :order_sale do
+      member { put 'order_cancellation' }
+    end
     resources :bank_account
     resources :provider
     resources :product do

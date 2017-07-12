@@ -43,9 +43,9 @@
               <%= fa_stacked_icon "car", base: "square-o", text: "Proveedores" %>
             <% end %>
           </li>
-          <li role="presentation", class="<%= set_active(@module) if @module == 'ordersale' %>">
+          <li role="presentation", class="<%= set_active(@module) if @module == 'order_sale' %>">
             <%= link_to store_order_sale_index_path(current_user.store.store_id) do %>
-              <%= fa_stacked_icon 'shopping-cart', base: "square-o", text: "Pedidos" %>
+              <%= fa_stacked_icon "shopping-cart", base: "square-o", text: "Pedidos" %>
             <% end %>
           </li>
           <li role="presentation", class="<%= set_active(@module) if @module == 'store' %>">

@@ -2,6 +2,7 @@ class ProductController < ApplicationController
   before_action :authenticate_user!
   before_action :set_module
   respond_to :js, :html
+  
   def index
     store = Store.find(params[:store_id])
     @products = store.products
@@ -30,8 +31,8 @@ class ProductController < ApplicationController
       redirect_to root_url
     else
       flash[:alert] = 'Error al intentar crear el producto'
-      @products = Product.all.page
-      render :index
+      return @product
+      render :new
     end
   end
 
