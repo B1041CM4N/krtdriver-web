@@ -23,6 +23,7 @@ es:
   models:
     product:
       Store: "Tienda"
+      file_in_server: "Imagen"
     user:
       password: "Contraseña"
       password_confirmation: "Confirmación contraseña"

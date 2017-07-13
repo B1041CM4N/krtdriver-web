@@ -1,9 +1,9 @@
 {
-    "client_id": "787796505119-f03vacqjojj49liadhpc0u3pdq4vmhu8.apps.googleusercontent.com",
-    "client_secret": "eSFIP1UsLOlzLLY0RkeldInI",
-    "scope": [
-        "https://www.googleapis.com/auth/drive",
-        "https://spreadsheets.google.com/feeds/"
-    ],
-    "refresh_token": "1/ms5Nq-WfrXFv4r66RZyY6_wU8dMspPVlQDRO2bH9glc"
+  "client_id": "787796505119-f03vacqjojj49liadhpc0u3pdq4vmhu8.apps.googleusercontent.com",
+  "client_secret": "eSFIP1UsLOlzLLY0RkeldInI",
+  "scope": [
+    "https://www.googleapis.com/auth/drive",
+    "https://spreadsheets.google.com/feeds/"
+  ],
+  "refresh_token": "1/ms5Nq-WfrXFv4r66RZyY6_wU8dMspPVlQDRO2bH9glc"
 }

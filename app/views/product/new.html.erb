@@ -1,9 +1,9 @@
-<div class="row">
+<!-- <div class="row">
   <div class="col-xs-12">
-    <span id="notice"><%= notice %></span>
-    <span id="alert"><%= alert %></span>
+    <span id="notice"><%#= notice %></span>
+    <span id="alert"><%#= alert %></span>
   </div>
-</div>
+</div> -->
 <% if @product && @product.errors.any? %>
     <%= render partial: "base/message_error",
     locals: { message: "No se puede guardar el producto debido a los siguientes errores:",

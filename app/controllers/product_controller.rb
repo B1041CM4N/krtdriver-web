@@ -27,19 +27,22 @@ class ProductController < ApplicationController
     @product = Product.new(product_params)
     session = GoogleDrive::Session.from_config('config.json')
     Rails.logger.info 'SESSION: ' + session.inspect + ' **************'
-    respond_to do |format|
-      if @product.save
-        inventory = Inventory.create(product_id: @product.product_id, store_id: params[:store_id], quantity: params[:inventory][:quantity], price: params[:inventory][:price])
+    # respond_to do |format|
+    if @product.save
+      inventory = Inventory.create(product_id: @product.product_id, store_id: params[:store_id], quantity: params[:inventory][:quantity], price: params[:inventory][:price])
+      if params[:product][:file_in_server].present?
         # Uploads a local file.
-        session.upload_from_file(Rails.root.to_s + "/public/#{@product.file_in_server.url}", "#{@product.file_in_server}", convert: false)
-        @product.update_attributes(image: 'https://krtdriver-web.herokuapp.com' + '' + '#{@product.file_in_server.url.to_s}')
-        format.html { redirect_to root_url, notice: 'La tienda ha sido creada exitosamente' }
-        format.json { render :show, status: :created, location: @product }
-      else
-        @inventory = Inventory.new
-        format.html { redirect_to action: :new }
-        format.json { render :json, @product.errors, status: :unprocessable_entity }
+        session.upload_from_file(Rails.root.to_s + "/public/#{@product.file_in_server.url}", @product.file_in_server.file.filename.to_s, convert: false)
+        # @product.update_attributes(image: session[web_view_link].to_s)
+        # @product.update_attributes(image: 'https://krtdriver-web.herokuapp.com' + @product.file_in_server.url.to_s)
       end
+      flash[:success] = 'Producto creado exitosamente'
+      redirect_to root_url
+    else
+      @product
+      flash[:alert] = "Ha ocurrido un error al tratar de crear el producto"
+      @inventory = Inventory.new
+      render :new
     end
   end
 
@@ -61,8 +64,10 @@ class ProductController < ApplicationController
       flash[:success] = 'Producto modificado exitosamente!'
       redirect_to root_url
     else
+      @product
+      @inventory = Inventory.new
       flash[:alert] = 'Error al tratar de modificar el producto'
-      redirect_to @product
+      render :edit
     end
   end
 

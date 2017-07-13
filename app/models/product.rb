@@ -28,7 +28,8 @@ class Product < ApplicationRecord
 
   paginates_per 10
 
-  validates :category_id, :name, :description, :file_in_server, presence: true
+  validates :category_id, :name, :description, presence: true
+  validates_presence_of :file_in_server, message: ' debe ser ingresada para continuar'
   
   belongs_to :category, foreign_key: 'category_id', class_name: 'Category'
   has_many :inventories, class_name: 'Inventory', dependent: :destroy

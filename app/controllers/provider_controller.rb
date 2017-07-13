@@ -30,19 +30,17 @@ class ProviderController < ApplicationController
       store_id: params[:store_id], vehicle_id: @vehicle.vehicle_id)
       Rails.logger.info 'Provider: ' + @provider.inspect + ' **********************'
       if @provider.save
-        format.html { redirect_to root_url, notice: 'El proveedor ha sido creada exitosamente' }
-        format.json { render :show, status: :created, location: @provider }
+        flash[:notice] = 'El proveedor ha sido creado exitosamente!'
+        redirect_to root_url
       else
         @provider
         @vehicle.destroy
         @vehicle = Vehicle.new
         render :new
-        # format.html { render :new, @provider.errors, @vehicle.errors, alert: 'eerroor' }
-        # format.json { render :json, @provider.errors, status: :unprocessable_entity }
       end
     else
-      format.html { redirect_to action: 'new'}
-      format.json { render :json, @vehicle.errors, status: :unprocessable_entity }
+      @provider = Provider.new
+      @vehicle = Vehicle.new
     end
   end
 
@@ -61,8 +59,9 @@ class ProviderController < ApplicationController
         format.html { redirect_to root_url, @providers = Provider.where(store_id: params[:store_id]).order(provider_id: :asc), notice: 'El proveedor ha sido creada exitosamente' }
         format.json { render :show, status: :created, location: @provider }
       else
-        format.html { redirect_to action: :edit }
-        format.json { render :json, @provider.errors, status: :unprocessable_entity }
+        @provider
+        @vehicle = @provider.vehicle
+        render :edit
       end
     else
       @vehicle = @provider.vehicle
