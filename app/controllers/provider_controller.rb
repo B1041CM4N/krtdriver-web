@@ -28,6 +28,7 @@ class ProviderController < ApplicationController
       @provider = Provider.new(first_name: params[:provider][:first_name], last_name: params[:provider][:last_name],
       rut: params[:provider][:rut], email: params[:provider][:email], password: params[:provider][:password],
       store_id: params[:store_id], vehicle_id: @vehicle.vehicle_id)
+      Rails.logger.info 'Provider: ' + @provider.inspect + ' **********************'
       if @provider.save
         format.html { redirect_to root_url, notice: 'El proveedor ha sido creada exitosamente' }
         format.json { render :show, status: :created, location: @provider }
@@ -75,7 +76,6 @@ class ProviderController < ApplicationController
   def destroy
     @provider = Provider.find(params[:id])
     @provider.destroy
-    flash[:notice] = 'Proveedor ha sido eliminado exitosamente'
     redirect_to root_url
   end
 

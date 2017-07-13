@@ -1,3 +1,5 @@
+require 'google_drive'
+
 class ProductController < ApplicationController
   before_action :authenticate_user!
   before_action :set_module
@@ -8,10 +10,7 @@ class ProductController < ApplicationController
     @products = store.products
     respond_to do |format|
       format.html {
-        # @products = Product.all.order(product_id: :asc).page params[:page]
-        # @products.order(product_id: :asc).page(params[:page]).per(5)
         @products.order(product_id: :asc)
-        # @products = Product.joins(:inventories).where(store_id: params[:store_id]).all.order(product_id: :asc).page params[:page]
       }
       format.xlsx {
         @products = @products.order(product_id: :asc)
@@ -26,14 +25,19 @@ class ProductController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    session = GoogleDrive::Session.from_config('config.json')
+    Rails.logger.info 'SESSION: ' + session.inspect + ' **************'
     respond_to do |format|
       if @product.save
         inventory = Inventory.create(product_id: @product.product_id, store_id: params[:store_id], quantity: params[:inventory][:quantity], price: params[:inventory][:price])
+        # Uploads a local file.
+        session.upload_from_file(Rails.root.to_s + "/public/#{@product.file_in_server.url}", "#{@product.file_in_server}", convert: false)
+        @product.update_attributes(image: 'https://krtdriver-web.herokuapp.com' + '' + '#{@product.file_in_server.url.to_s}')
         format.html { redirect_to root_url, notice: 'La tienda ha sido creada exitosamente' }
         format.json { render :show, status: :created, location: @product }
       else
         @inventory = Inventory.new
-        format.html { render :new }
+        format.html { redirect_to action: :new }
         format.json { render :json, @product.errors, status: :unprocessable_entity }
       end
     end
@@ -51,7 +55,7 @@ class ProductController < ApplicationController
   def update
     @product = Product.find(params[:id])
     inventory = Inventory.find_by(product_id: @product.product_id)
-    Rails.logger.info "inventario::::: " + inventory.inspect + " **************"
+    Rails.logger.info 'inventario::::: ' + inventory.inspect + ' **************'
     if @product.update_attributes(product_params)
       inventory.update_attributes(price: params[:inventory][:price], quantity: params[:inventory][:quantity])
       flash[:success] = 'Producto modificado exitosamente!'

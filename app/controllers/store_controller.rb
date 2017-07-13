@@ -87,7 +87,7 @@ class StoreController < ApplicationController
 
   def edit
     @store = Store.find(params[:id])
-    @address = @store.address
+    @address = Address.find(@store.address_id)
     @bank_account = @store.bank_account
   end
 
@@ -127,15 +127,15 @@ class StoreController < ApplicationController
             format.html { redirect_to root_path, notice: 'La tienda ha sido actualizada exitosamente' }
             format.json { render :show, status: :created, location: @store }
           else
-            format.html { render :new }
+            format.html { redirect_to action: :edit }
             format.json { render :json, @store.errors, status: :unprocessable_entity }
           end
         else
-          format.html { render :new }
+          format.html { redirect_to action: :edit }
           format.json { render :json, @bank_account.errors, status: :unprocessable_entity }
         end
       else
-        format.html { render :new }
+        format.html { redirect_to action: :edit }
         format.json { render :json, @address.errors, status: :unprocessable_entity }
       end
     end
@@ -144,6 +144,7 @@ class StoreController < ApplicationController
   def destroy
     @store = Store.find(params[:id])
     @store.destroy
+    redirect_to root_url
   end
 
   private
