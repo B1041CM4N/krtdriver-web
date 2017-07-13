@@ -22,6 +22,8 @@
 #  FK_Vehicle_Provider  (vehicle_id => vehicle.vehicle_id)
 #
 
+require 'run_cl'
+include RunCl::ActAsRun
 class Provider < ApplicationRecord
   self.table_name = 'provider'
   self.primary_key = 'provider_id'
@@ -30,8 +32,11 @@ class Provider < ApplicationRecord
 
   # after_initialize :set_default_payment_method, if: :new_record?
 
+  validates :rut, presence: true, uniqueness: true
+  has_run_cl :rut
+
   validates :vehicle_id, :store_id, :rut, :email, :password, :first_name, :last_name, presence: true
-  validates_length_of :rut, minimum: 10, maximum: 12, allow_blank: false
+  # validates_length_of :rut, minimum: 9, maximum: 12, allow_blank: false, 
   validates_length_of :password, minimum: 6, maximum: 20, allow_blank: false
 
   belongs_to :vehicle, foreign_key: 'vehicle_id', class_name: 'Vehicle'

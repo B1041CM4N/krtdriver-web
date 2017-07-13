@@ -38,7 +38,9 @@ gem 'retina_tag'
 
 # SUBIDA DE ARCHIVOS
 gem 'carrierwave'
-# gem 'carrierwave-activerecord-store-in-model'
+
+# Validar RUT Chileno
+gem 'run_cl'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -52,7 +54,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 
 # TRADUCCIONES
-
 gem 'i18n', '~> 0.8.1'
 
 # GENERACION DE REPORTES - XLSX
@@ -60,19 +61,20 @@ gem 'rubyzip', '~> 1.1.0'
 gem 'axlsx', '2.1.0.pre'
 gem 'axlsx_rails'
 
-# Geocodificación
+# Validaciones
+gem 'client_side_validations'
 
+# Geocodificación
 gem 'geocoder'
 gem 'google_maps_service'
 
 gem 'annotate'
 
 # Subir y leer de Google Drive
-
 gem 'google_drive'
 
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'capistrano-rails', group: :development
 
 # == JSON
 gem 'oj', require: false # JSON optimizado. https://github.com/ohler55/oj

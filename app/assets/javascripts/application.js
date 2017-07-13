@@ -14,4 +14,7 @@
 //= require jquery_ujs
 //= require retina_tag
 //= require turbolinks
+//= require rails.validations
+//= clientsidevalidation.run
+//= run-formatter
 //= require_tree .
