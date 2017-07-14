@@ -39,7 +39,7 @@ class OrderSaleController < ApplicationController
   def order_cancellation
     order_sale = OrderSale.find(params[:id])
     order_sale.update(order_status: 3)
-    redirect_to 
+    redirect_to root_url
   end
 
   private
