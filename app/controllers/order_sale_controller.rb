@@ -5,8 +5,8 @@ class OrderSaleController < ApplicationController
   def index
     unless (params[:order_status].present? || params[:date].present?)
       @order_sale = OrderSale.new
-      # @order_sales = OrderSale.where(store_id: params[:store_id]).order(date: :desc).page params[:page]
-      @order_sales = OrderSale.all.order(date: :desc).page params[:page]
+      @order_sales = OrderSale.where(store_id: params[:store_id]).order(date: :desc).page params[:page]
+      # @order_sales = OrderSale.all.order(date: :desc).page params[:page]
     else
       @order_sale = OrderSale.new
       if (params[:order_status].present? && !params[:date].present?)
