@@ -5,11 +5,13 @@ class OrderSaleController < ApplicationController
   def index
     unless (params[:order_status].present? || params[:date].present?)
       @order_sale = OrderSale.new
-      @order_sales = OrderSale.where(store_id: params[:store_id]).order(order_id: :asc).page params[:page]
+      # @order_sales = OrderSale.where(store_id: params[:store_id]).order(date: :desc).page params[:page]
+      @order_sales = OrderSale.all.order(date: :desc).page params[:page]
     else
       @order_sale = OrderSale.new
       if (params[:order_status].present? && !params[:date].present?)
-        @order_sales = OrderSale.where('ordersale.store_id = ? AND ordersale.order_status = ?', params[:store_id], order_statuses_integer(params[:order_status]))
+        # @order_sales = OrderSale.where('ordersale.store_id = ? AND ordersale.order_status = ?', params[:store_id], order_statuses_integer(params[:order_status]))
+        @order_sales = OrderSale.where('ordersale.order_status = ?', order_statuses_integer(params[:order_status]))
       else
         @order_sales = OrderSale.where('ordersale.store_id = ? AND ordersale.order_status = ? AND ordersale.date <= ?', params[:store_id], order_statuses_integer(params[:order_status]), params[:date])
       end
@@ -24,9 +26,12 @@ class OrderSaleController < ApplicationController
     end
   end
 
+  # enum order_status: [:pending, :rejected, :in_route, :deliver]
+
   def order_statuses_integer(opt)
-    osi = 0
-    if opt == 'rejected'
+    if opt == 'pending'
+      osi = 0
+    elsif opt == 'rejected'
       osi = 1
     elsif opt == 'in_route'
       osi = 2
@@ -38,7 +43,7 @@ class OrderSaleController < ApplicationController
 
   def order_cancellation
     order_sale = OrderSale.find(params[:id])
-    order_sale.update_attributes(order_status: 3)
+    order_sale.update_attributes(order_status: 1)
     redirect_to root_url
   end
 

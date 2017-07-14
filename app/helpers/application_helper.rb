@@ -21,22 +21,39 @@ module ApplicationHelper
   end
 
   # Flag de entrega con factor de verificacion (3= Orden entregada ,2= Orden en reparto ,1= Orden rechazada, 0= Solicitud de orden).
+  # enum order_status: [:pending, :rejected, :in_route, :deliver]
 
   def order_status(order_status)
     stat_name = ''
-    if order_status == 3
+    if order_status == 'deliver'
       stat_name = 'Entregada'
-    elsif order_status == 2
+    elsif order_status == 'in_route'
       stat_name = 'Reparto'
-    elsif order_status == 1
+    elsif order_status == 'rejected'
       stat_name = 'Rechazada'
-    elsif order_status == 0
+    elsif order_status == 'pending'
       stat_name = 'Pendiente'
     elsif order_status.nil?
       stat_name = 'No tiene estado'
     end
     stat_name
   end
+
+  # def order_status(order_status)
+  #   stat_name = ''
+  #   if order_status == 3
+  #     stat_name = 'Entregada'
+  #   elsif order_status == 2
+  #     stat_name = 'Reparto'
+  #   elsif order_status == 1
+  #     stat_name = 'Rechazada'
+  #   elsif order_status == 0
+  #     stat_name = 'Pendiente'
+  #   elsif order_status.nil?
+  #     stat_name = 'No tiene estado'
+  #   end
+  #   stat_name
+  # end
   
   def payment_methods(paymentmethod_id)
     pay_methods = ''
