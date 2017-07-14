@@ -1,8 +1,8 @@
 <td><%= f.first_name.capitalize %></td>
 <td><%= f.last_name.capitalize %></td>
-<td><%= f.rut %></td>
+<td><%= rut_formatter(f.rut) %></td>
 <td><%= f.email %></td>
-<td><%= f.vehicle.licence_plate %></td>
+<td><%= f.vehicle.licence_plate.upcase %></td>
 <td><%= f.vehicle.vehicle_brand.name %></td>
 
 <td class="table-actions">

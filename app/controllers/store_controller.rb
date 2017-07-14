@@ -121,8 +121,8 @@ class StoreController < ApplicationController
       latitude: latitude.to_s, longitude: longitude.to_s)
         if @bank_account.update(bank_id: params[:store][:bank_account][:bank_id], ta_id: params[:store][:bank_account][:ta_id],
         account_number: params[:store][:bank_account][:account_number], user_id: current_user.user_id)
-          if @store.update(address_id: address.address_id, paymentmethod_id: set_payment_method(mcash, mdebit, mcredit),
-          bank_account_id: bank_account.bank_account_id, name: params[:store][:name], description: params[:store][:description],
+          if @store.update(address_id: @address.address_id, paymentmethod_id: payment_method_setter(mcash, mdebit, mcredit),
+          bank_account_id: @bank_account.bank_account_id, name: params[:store][:name], description: params[:store][:description],
           user_id: current_user.user_id)
             format.html { redirect_to root_path, notice: 'La tienda ha sido actualizada exitosamente' }
             format.json { render :show, status: :created, location: @store }

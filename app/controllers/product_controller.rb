@@ -25,17 +25,17 @@ class ProductController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    session = GoogleDrive::Session.from_config('config.json')
-    Rails.logger.info 'SESSION: ' + session.inspect + ' **************'
+    # session = GoogleDrive::Session.from_config('config.json')
+    # Rails.logger.info 'SESSION: ' + session.inspect + ' **************'
     # respond_to do |format|
     if @product.save
       inventory = Inventory.create(product_id: @product.product_id, store_id: params[:store_id], quantity: params[:inventory][:quantity], price: params[:inventory][:price])
-      if params[:product][:file_in_server].present?
+      # if params[:product][:file_in_server].present?
         # Uploads a local file.
-        session.upload_from_file(Rails.root.to_s + "/public/#{@product.file_in_server.url}", @product.file_in_server.file.filename.to_s, convert: false)
+        # session.upload_from_file(Rails.root.to_s + "/public/#{@product.file_in_server.url}", @product.file_in_server.file.filename.to_s, convert: false)
         # @product.update_attributes(image: session[web_view_link].to_s)
         # @product.update_attributes(image: 'https://krtdriver-web.herokuapp.com' + @product.file_in_server.url.to_s)
-      end
+      # end
       flash[:success] = 'Producto creado exitosamente'
       redirect_to root_url
     else

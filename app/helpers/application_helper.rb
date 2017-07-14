@@ -1,3 +1,6 @@
+require 'run_cl'
+include RunCl::ActAsRun
+
 module ApplicationHelper
   def set_active(opt)
     if controller_name == opt
@@ -55,6 +58,10 @@ module ApplicationHelper
       pay_methods = 'Desconocido'
     end
     pay_methods
+  end
+
+  def rut_formatter(rut)
+    Run.format(rut)
   end
 
   def price_format(price)

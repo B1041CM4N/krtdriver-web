@@ -24,12 +24,13 @@ class Product < ApplicationRecord
   self.table_name = 'product'
   self.primary_key = 'product_id'
   
-  mount_uploader :file_in_server, ProductUploader
+  # mount_uploader :file_in_server, ProductUploader
 
-  paginates_per 10
+  paginates_per 25
 
   validates :category_id, :name, :description, presence: true
-  validates_presence_of :file_in_server, message: ' debe ser ingresada para continuar'
+  validates_presence_of :image, message: ' debe ser ingresada para continuar'
+  # validates_presence_of :file_in_server, message: ' debe ser ingresada para continuar'
   
   belongs_to :category, foreign_key: 'category_id', class_name: 'Category'
   has_many :inventories, class_name: 'Inventory', dependent: :destroy

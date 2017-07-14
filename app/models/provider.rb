@@ -32,8 +32,9 @@ class Provider < ApplicationRecord
 
   # after_initialize :set_default_payment_method, if: :new_record?
 
+  validates_length_of :rut, minimum: 8, maximum: 10, message: 'El RUT ingresado no es valido'
   validates :rut, presence: true, uniqueness: true
-  has_run_cl :rut
+  has_run_cl :rut, skip_db_format_clear: true
 
   validates :vehicle_id, :store_id, :rut, :email, :password, :first_name, :last_name, presence: true
   # validates_length_of :rut, minimum: 9, maximum: 12, allow_blank: false, 

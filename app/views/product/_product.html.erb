@@ -1,7 +1,8 @@
 <div class="col-xs-6 col-md-4" id="<%= product.product_id.to_s %>">
   <div class="thumbnail">
-    <% unless product.file_in_server.nil? %>
-      <%= image_tag(product.file_in_server.to_s, alt: product.name.capitalize) %>
+    <%# unless product.file_in_server.nil? %>
+      <%#= image_tag(product.file_in_server.to_s, alt: product.name.capitalize) %>
+      <%= image_tag(product.image.to_s, alt: product.name.capitalize) %>
       <div class="caption align-center">
         <h3><%= product.name[0..50] %></h3>
         <p><%= product.description[0..100] %></p>
@@ -10,8 +11,8 @@
           <%= link_to "Eliminar", store_product_url(current_user.store.store_id, product.product_id), class: 'btn btn-default btn-xs', data: { confirm: "Está seguro?" }, method: :delete %>
         </p>
       </div><!-- caption -->
-    <% else %>
-      <span>Producto Sin imagen</span>
+    <%# else %>
+      <!-- <span>Producto Sin imagen</span>
       <div class="caption align-center">
         <h3><%= product.name[0..50] %></h3>
         <p><%= product.description[0..100] %></p>
@@ -19,7 +20,7 @@
           <%= link_to "Editar", edit_store_product_url(current_user.store.store_id, product.product_id), class: 'btn btn-primary btn-xs' %>
           <%= link_to "Eliminar", store_product_url(current_user.store.store_id, product.product_id), class: 'btn btn-default btn-xs', data: { confirm: "Está seguro?" }, method: :delete %>
         </p>
-      </div>
-    <% end %>
+      </div>-->
+    <%# end %>
   </div><!-- thumbnail -->
 </div>
