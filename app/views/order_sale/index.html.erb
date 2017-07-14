@@ -45,7 +45,7 @@
           <td><%= os.order_id.to_s %></td>
           <td><%= price_format os.total %></td>
           <td><%= os.date.strftime('%d/%m/%Y, %H:%S Hrs.')%></td>
-          <td><%= os.consumer.first_name + ' ' + os.consumer.last_name %></td>
+          <td><%= os.consumer.try(:first_name) + ' ' + os.consumer.try(:last_name) %></td>
           <td><%= payment_methods(os.payment_method.paymentmethod_id) %></td>
           <% Rails.logger.info 'ORDER_STATUS_ID: ' + os.order_status.to_s + ' **********' %>
           <td><%= order_status(os.order_status) %></td>
