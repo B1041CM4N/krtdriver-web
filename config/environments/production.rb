@@ -69,6 +69,7 @@ Rails.application.configure do
   #   :authentication => :cram_md5
   # }
 
+  config.action_mailer.default_url_options = { host: 'krtdriver-web.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
 
