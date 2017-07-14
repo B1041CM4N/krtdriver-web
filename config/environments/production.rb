@@ -57,16 +57,29 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "krtdriver-web_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
-  ##DEFAULT URL FOR DEVISE
-  config.action_mailer.default_url_options = { host: 'krtdriver-web.herokuapp.com' }
+  ## DEFAULT URL FOR DEVISE
+  # config.action_mailer.default_url_options = { host: 'krtdriver-web.herokuapp.com' }
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   :user_name => 'a7e4f61aa8844f',
+  #   :password => '4aa64641901e3f',
+  #   :address => 'smtp.mailtrap.io',
+  #   :domain => 'smtp.mailtrap.io',
+  #   :port => '2525',
+  #   :authentication => :cram_md5
+  # }
+
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+
   config.action_mailer.smtp_settings = {
-    :user_name => 'a7e4f61aa8844f',
-    :password => '4aa64641901e3f',
-    :address => 'smtp.mailtrap.io',
-    :domain => 'smtp.mailtrap.io',
-    :port => '2525',
-    :authentication => :cram_md5
+    address: 'smtp.gmail.com',
+    port: 587,
+    authentication: 'plain',
+    user_name: 'contactokrtdriver@gmail.com',
+    password: 'CONTACTOkrt123',
+    enable_starttls_auto: true,
+    domain: 'gmail.com'
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
