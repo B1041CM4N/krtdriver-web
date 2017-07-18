@@ -20,7 +20,6 @@ class StoreController < ApplicationController
     # Geocoding an address
     commune = Commune.find(params[:store][:address][:commune_id])
     results = gmaps.geocode(params[:store][:address][:street_name].to_s + ' ' + params[:store][:address][:street_number].to_s + ', ' + commune.name.to_s )
-    Rails.logger.info 'results: ' + results.inspect + ' **************'
     if results.count.zero?
       latitude = ''
       longitude = ''
@@ -39,18 +38,14 @@ class StoreController < ApplicationController
 
     respond_to do |format|
       if @addresss.save
-        Rails.logger.info 'ADRESS: ' + @addresss.inspect + ' **********'
         if @bank_account.save
-          Rails.logger.info 'BankAccount: ' + @bank_account.inspect + ' *********'
           @store = Store.new(address_id: @addresss.address_id, paymentmethod_id: payment_method_setter(mcash, mdebit, mcredit),
           bank_account_id: @bank_account.bank_account_id, name: params[:store][:name], description: params[:store][:description],
           user_id: current_user.user_id)
           if @store.save
-            Rails.logger.info 'STORE::: ' + @store.inspect + ' *******'
             format.html { redirect_to root_path, notice: 'La tienda ha sido creada exitosamente' }
             format.json { render :show, status: :created, location: @store }
           else
-            Rails.logger.info 'STORE::: ' + @store.inspect + ' *******'
             format.html { render :new }
             format.json { render :json, @store.errors, status: :unprocessable_entity }
           end
@@ -81,7 +76,6 @@ class StoreController < ApplicationController
     elsif(!mcash.present? && !mdebit.present? && mcredit.present?)
       payment_method_id = 1
     end
-    Rails.logger.info 'PAYMENT_METHOD: ' + payment_method_id.inspect + ' **********'
     payment_method_id.to_i
   end
 
@@ -92,7 +86,6 @@ class StoreController < ApplicationController
   end
 
   def update
-    Rails.logger.info 'INCOMMING PARAMS: ' + params.inspect + ' ********************'
     @store = Store.find(params[:id])
     mcash = params[:efectivo]
     mdebit = params[:debito]
@@ -102,7 +95,6 @@ class StoreController < ApplicationController
     # Geocoding an address
     commune = Commune.find(params[:store][:address][:commune_id])
     results = gmaps.geocode(params[:store][:address][:street_name].to_s + ' ' + params[:store][:address][:street_number].to_s + ', ' + commune.name.to_s )
-    Rails.logger.info 'results: ' + results.inspect + ' **************'
     unless results.count.zero?
       latitude = results.first[:geometry][:location][:lat]
       longitude = results.first[:geometry][:location][:lng]

@@ -10,8 +10,8 @@ class OrderSaleController < ApplicationController
     else
       @order_sale = OrderSale.new
       if (params[:order_status].present? && !params[:date].present?)
-        # @order_sales = OrderSale.where('ordersale.store_id = ? AND ordersale.order_status = ?', params[:store_id], order_statuses_integer(params[:order_status]))
-        @order_sales = OrderSale.where('ordersale.order_status = ?', order_statuses_integer(params[:order_status]))
+        @order_sales = OrderSale.where('ordersale.store_id = ? AND ordersale.order_status = ?', params[:store_id], order_statuses_integer(params[:order_status]))
+        # @order_sales = OrderSale.where('ordersale.order_status = ?', order_statuses_integer(params[:order_status]))
       else
         @order_sales = OrderSale.where('ordersale.store_id = ? AND ordersale.order_status = ? AND ordersale.date <= ?', params[:store_id], order_statuses_integer(params[:order_status]), params[:date])
       end

@@ -8,7 +8,6 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <% Rails.logger.info "CURRENT_USER_DATA: " + current_user.inspect + "***************************"%>
     <%= render partial: "layouts/navbar" %>
     <div class="container-fluid">
       <section>
@@ -27,15 +26,12 @@
 
 <%= javascript_tag do %>
   <% if flash[:success].present? %>
-    <% Rails.logger.info "SUCCESS!!! **********************" %>
     Message.success("<%= flash[:success] %>")
   <% end %>
   <% if flash[:error].present? %>
-    <% Rails.logger.info "ERROR!!! **********************" %>
     Message.error("<%= flash[:error] %>")
   <% end %>
   <% if flash[:alert].present? %>
-    <% Rails.logger.info "ALERT!!! **********************" %>
     Message.error("<%= flash[:alert] %>")
   <% end %>
 <% end %>

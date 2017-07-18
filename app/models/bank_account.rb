@@ -25,7 +25,6 @@ class BankAccount < ApplicationRecord
   self.primary_key = 'bank_account_id'
 
   validates :bank_id, :ta_id, :user_id, :account_number, presence: true
-  
   belongs_to :bank, foreign_key: 'bank_id', class_name: 'Bank'
   belongs_to :type_account, foreign_key: 'ta_id', class_name: 'TypeAccount'
   belongs_to :user, foreign_key: 'user_id', class_name: 'User'

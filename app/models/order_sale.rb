@@ -29,23 +29,6 @@ class OrderSale < ApplicationRecord
   self.primary_key = 'order_id'
 
   paginates_per 10
-
-  # def order_status(order_status)
-  #   stat_name = ''
-  #   if order_status == 3
-  #     stat_name = 'Orden Entregada'
-  #   elsif order_status == 2
-  #     stat_name = 'Orden en reparto'
-  #   elsif order_status == 1
-  #     stat_name = 'Orden rechazada'
-  #   elsif order_status == 0
-  #     stat_name = 'Solicitud en Orden'
-  #   elsif order_status.nil?
-  #     stat_name = 'No tiene estado'
-  #   end
-  #   stat_name
-  # end
-
   enum order_status: [:pending, :rejected, :in_route, :deliver]
 
   belongs_to :consumer, foreign_key: 'consumer_id', class_name: 'Consumer'

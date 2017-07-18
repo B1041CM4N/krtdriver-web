@@ -26,7 +26,6 @@ class ProductController < ApplicationController
   def create
     @product = Product.new(product_params)
     # session = GoogleDrive::Session.from_config('config.json')
-    # Rails.logger.info 'SESSION: ' + session.inspect + ' **************'
     # respond_to do |format|
     if @product.save
       inventory = Inventory.create(product_id: @product.product_id, store_id: params[:store_id], quantity: params[:inventory][:quantity], price: params[:inventory][:price])
@@ -58,7 +57,6 @@ class ProductController < ApplicationController
   def update
     @product = Product.find(params[:id])
     inventory = Inventory.find_by(product_id: @product.product_id)
-    Rails.logger.info 'inventario::::: ' + inventory.inspect + ' **************'
     if @product.update_attributes(product_params)
       inventory.update_attributes(price: params[:inventory][:price], quantity: params[:inventory][:quantity])
       flash[:success] = 'Producto modificado exitosamente!'

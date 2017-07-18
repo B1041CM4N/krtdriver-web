@@ -31,7 +31,7 @@ class Store < ApplicationRecord
 
   # Setup global parameters
   GoogleMapsService.configure do |config|
-    config.key = 'AIzaSyBfTzvvp0hvqyEn6JkOmzmq45FzbrbsJZw'
+    config.key = ENV['geocode_api_key'].to_s
     config.retry_timeout = 20
     config.queries_per_second = 10
   end

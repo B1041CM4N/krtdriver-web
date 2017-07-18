@@ -21,14 +21,12 @@ class ProviderController < ApplicationController
   end
 
   def create
-    Rails.logger.info 'PARAMS: ' + params.inspect + ' *********'
     @vehicle = Vehicle.new(vehicle_brand_id: params[:vehicle][:vehicle_brand_id], vehicle_model: params[:vehicle][:vehicle_model],
     licence_plate: params[:vehicle][:licence_plate], color: params[:vehicle][:color])
     if @vehicle.save
       @provider = Provider.new(first_name: params[:provider][:first_name], last_name: params[:provider][:last_name],
       rut: params[:provider][:rut].gsub('.', ''), email: params[:provider][:email], password: params[:provider][:password],
       store_id: params[:store_id], vehicle_id: @vehicle.vehicle_id)
-      Rails.logger.info 'Provider: ' + @provider.inspect + ' **********************'
       if @provider.save
         flash[:notice] = 'El proveedor ha sido creado exitosamente!'
         redirect_to root_url

@@ -62,12 +62,12 @@ production:
 adapter: mysql2
 encoding: utf8
 # database: krtdriver_web_production
-database: KRTDrivervF
-database_url: "mysql2://gabo:inacap123@138.197.40.153:3306/KRTDrivervF"
+database: <%= ENV[db_name] %>
+database_url: <%= ENV[db_url] %>
 
-username: gabo
-password: inacap123
-host: 138.197.40.153
+username: <%= ENV[database_user] %>
+password: <%= ENV[database_password] %>
+host: <%= ENV[db_host] %>
 port: 3306
 flags:
   - -COMPRESS
