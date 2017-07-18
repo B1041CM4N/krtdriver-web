@@ -62,12 +62,11 @@ production:
 adapter: mysql2
 encoding: utf8
 # database: krtdriver_web_production
-database: <%= ENV[db_name] %>
-database_url: <%= ENV[db_url] %>
-
-username: <%= ENV[database_user] %>
-password: <%= ENV[database_password] %>
-host: <%= ENV[db_host] %>
+database: <%= ENV[DB_NAME] %>
+database_url: <%= ENV[DB_URL] %>
+username: <%= ENV[DB_USER] %>
+password: <%= ENV[DB_KEY] %>
+host: <%= ENV[DB_HOST] %>
 port: 3306
 flags:
   - -COMPRESS
