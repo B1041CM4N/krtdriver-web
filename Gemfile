@@ -39,6 +39,8 @@ gem 'retina_tag'
 # SUBIDA DE ARCHIVOS
 gem 'carrierwave'
 
+gem 'figaro', '~> 1.1', '>= 1.1.1'
+
 # Validar RUT Chileno
 gem 'run_cl'
 

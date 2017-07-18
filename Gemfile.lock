@@ -105,6 +105,8 @@ GEM
     faraday (0.12.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
+    figaro (1.1.1)
+      thor (~> 0.14)
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
     geocoder (1.4.4)
@@ -318,6 +320,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise (~> 4.3)
   faker (~> 1.7, >= 1.7.3)
+  figaro (~> 1.1, >= 1.1.1)
   font-awesome-rails (~> 4.7, >= 4.7.0.2)
   geocoder
   google_drive
